@@ -1,0 +1,13 @@
+### Red rectangles (cf. thesis figure 3.6)
+
+SELECT count(filename) from public.ride 
+where st_intersects(start, st_setsrid( st_makebox2d( st_makepoint(13.2907,52.5128), st_makepoint(13.2951,52.5139)), 4326))
+OR st_intersects(start, st_setsrid( st_makebox2d( st_makepoint(13.3042,52.5149), st_makepoint(13.3074,52.5184)), 4326))
+OR st_intersects(start, st_setsrid( st_makebox2d( st_makepoint(13.3151,52.5178), st_makepoint(13.319,52.5202)), 4326))
+OR st_intersects(start, st_setsrid( st_makebox2d( st_makepoint(13.3194,52.5114), st_makepoint(13.322,52.5136)), 4326))
+OR st_intersects(start, st_setsrid( st_makebox2d( st_makepoint(13.3058,52.5056), st_makepoint(13.31,52.5074)), 4326))
+OR st_intersects(start, st_setsrid( st_makebox2d( st_makepoint(13.2994,52.5027), st_makepoint(13.3018,52.5054)), 4326))
+OR st_intersects(start, st_setsrid( st_makebox2d( st_makepoint(13.3121,52.5056), st_makepoint(13.3159,52.5069)), 4326))
+
+### Map section from Charlottenburg (cf. thesis figure 3.6)
+SELECT count(filename) FROM public.ride WHERE st_intersects(start, st_setsrid( st_makebox2d( st_makepoint(13.2863,52.5), st_makepoint(13.3219,52.5214)), 4326))

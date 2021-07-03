@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on Fr 19 Mär 2021 10:25:00 CET by Eclipse SUMO netedit Version v1_7_0+1228-0b1a97d77e
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/netconvertConfiguration.xsd">
+
+    <input>
+        <sumo-net-file value="osm.net.xml"/>
+    </input>
+
+    <output>
+        <output-file value="/home/kons/GIT/sumo/parameterization_evaluation/prinzenstr_default/prinzenstr.net.xml"/>
+    </output>
+
+    <processing>
+        <geometry.min-radius.fix.railways value="false"/>
+        <geometry.max-grade.fix value="false"/>
+        <offset.disable-normalization value="true"/>
+        <lefthand value="false"/>
+    </processing>
+
+    <junctions>
+        <no-turnarounds value="true"/>
+        <junctions.corner-detail value="5"/>
+        <junctions.limit-turn-speed value="5.5"/>
+        <rectangular-lane-cut value="false"/>
+    </junctions>
+
+    <pedestrian>
+        <walkingareas value="false"/>
+    </pedestrian>
+
+    <netedit>
+        <route-files value="/home/kons/GIT/sumo/parameterization_evaluation/prinzenstr_default/route.rou.xml"/>
+    </netedit>
+
+    <report>
+        <aggregate-warnings value="5"/>
+    </report>
+
+</configuration>
+-->
+
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/routes_file.xsd">
+    <route edges="-4612431#2 -4612431#1 -328426213#1 -328426213#0 -195418554#4 -195418554#3 -195418554#2 -195418554#1 -195418554#0 -902297515#2 -902297515#1 -902297515#0 -455097481#3 -455097481#2 -455097481#1 -455097481#0 -4612432 -4619374#2 -4619374#1 -4619374#0 31909839#0 31909839#1 262117177 51661483 53357051#0 53357051#1 53357051#2 53357051#3 53357051#4 53357051#5 -4612696#7 -4612696#6 -4612696#5 -4612696#3 -4612696#2 4686356#1 4686356#2 4686356#3 663193499#0 663193499#1" color="yellow" id="route_0"/>
+</routes>

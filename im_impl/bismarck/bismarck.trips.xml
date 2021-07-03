@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on Di 16 Mär 2021 11:44:21 CET by Eclipse SUMO netedit Version v1_7_0+1228-0b1a97d77e
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/netconvertConfiguration.xsd">
+
+    <output>
+        <output-file value="/home/kons/GIT/sumo/traci_test/traci_dummy.net.xml"/>
+        <output.street-names value="true"/>
+    </output>
+
+    <processing>
+        <offset.disable-normalization value="true"/>
+    </processing>
+
+    <junctions>
+        <no-turnarounds value="true"/>
+    </junctions>
+
+    <netedit>
+        <route-files value="/home/kons/GIT/sumo/traci_test/asd.rou.xml"/>
+    </netedit>
+
+    <report>
+        <aggregate-warnings value="5"/>
+    </report>
+
+</configuration>
+-->
+
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/routes_file.xsd">
+
+    <vTypeDistribution id="vehDist">
+        <vType id="vehDist0" accel="0.831" maxSpeed="7.609" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist1" accel="0.786" maxSpeed="9.557" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist2" accel="0.456" maxSpeed="10.054" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist3" accel="0.860" maxSpeed="8.194" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist4" accel="0.697" maxSpeed="6.381" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist5" accel="0.996" maxSpeed="8.363" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist6" accel="0.573" maxSpeed="8.002" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist7" accel="0.498" maxSpeed="5.902" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist8" accel="0.641" maxSpeed="7.372" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist9" accel="0.423" maxSpeed="7.120" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist10" accel="0.883" maxSpeed="9.128" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist11" accel="0.605" maxSpeed="6.401" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist12" accel="0.663" maxSpeed="8.531" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist13" accel="0.536" maxSpeed="8.234" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist14" accel="0.717" maxSpeed="6.673" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist15" accel="0.558" maxSpeed="7.305" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist16" accel="1.109" maxSpeed="7.332" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist17" accel="0.729" maxSpeed="7.458" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist18" accel="0.818" maxSpeed="6.624" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist19" accel="0.736" maxSpeed="8.066" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist20" accel="0.441" maxSpeed="7.783" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist21" accel="1.189" maxSpeed="6.101" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist22" accel="0.514" maxSpeed="6.865" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist23" accel="0.577" maxSpeed="5.774" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist24" accel="0.460" maxSpeed="9.006" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist25" accel="0.738" maxSpeed="8.743" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist26" accel="0.557" maxSpeed="9.649" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist27" accel="0.975" maxSpeed="8.855" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist28" accel="0.934" maxSpeed="6.670" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist29" accel="0.599" maxSpeed="8.508" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist30" accel="0.698" maxSpeed="8.489" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist31" accel="0.592" maxSpeed="9.125" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist32" accel="0.451" maxSpeed="8.371" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist33" accel="0.465" maxSpeed="7.485" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist34" accel="0.539" maxSpeed="7.986" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist35" accel="0.533" maxSpeed="6.273" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist36" accel="1.029" maxSpeed="7.171" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist37" accel="0.855" maxSpeed="7.678" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist38" accel="0.438" maxSpeed="7.665" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist39" accel="1.216" maxSpeed="9.330" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist40" accel="0.546" maxSpeed="9.207" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist41" accel="0.715" maxSpeed="8.376" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist42" accel="0.549" maxSpeed="7.898" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist43" accel="0.499" maxSpeed="8.512" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist44" accel="0.663" maxSpeed="8.110" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist45" accel="0.624" maxSpeed="9.400" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist46" accel="0.377" maxSpeed="7.786" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist47" accel="0.786" maxSpeed="8.521" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist48" accel="0.525" maxSpeed="7.021" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist49" accel="0.759" maxSpeed="6.108" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist50" accel="0.847" maxSpeed="9.035" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist51" accel="0.422" maxSpeed="8.546" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist52" accel="0.404" maxSpeed="7.481" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist53" accel="0.667" maxSpeed="6.693" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist54" accel="0.719" maxSpeed="7.680" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist55" accel="0.865" maxSpeed="7.809" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist56" accel="0.611" maxSpeed="9.682" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist57" accel="0.804" maxSpeed="7.205" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist58" accel="0.635" maxSpeed="7.272" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist59" accel="0.727" maxSpeed="6.747" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist60" accel="0.454" maxSpeed="9.100" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist61" accel="0.819" maxSpeed="9.047" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist62" accel="0.824" maxSpeed="8.429" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist63" accel="0.417" maxSpeed="7.870" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist64" accel="0.530" maxSpeed="7.210" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist65" accel="0.499" maxSpeed="8.200" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist66" accel="0.871" maxSpeed="9.699" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist67" accel="0.729" maxSpeed="6.426" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist68" accel="0.775" maxSpeed="7.622" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist69" accel="0.675" maxSpeed="9.568" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist70" accel="0.902" maxSpeed="8.126" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist71" accel="0.577" maxSpeed="8.532" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist72" accel="0.904" maxSpeed="8.502" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist73" accel="0.735" maxSpeed="6.055" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist74" accel="0.920" maxSpeed="6.507" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist75" accel="0.720" maxSpeed="5.734" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist76" accel="1.091" maxSpeed="6.208" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist77" accel="0.556" maxSpeed="8.341" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist78" accel="0.556" maxSpeed="9.411" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist79" accel="0.768" maxSpeed="8.059" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist80" accel="0.545" maxSpeed="5.983" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist81" accel="0.489" maxSpeed="7.929" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist82" accel="0.647" maxSpeed="6.285" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist83" accel="0.731" maxSpeed="6.401" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist84" accel="0.629" maxSpeed="7.895" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist85" accel="0.888" maxSpeed="8.652" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist86" accel="0.558" maxSpeed="9.226" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist87" accel="0.411" maxSpeed="7.635" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist88" accel="0.606" maxSpeed="7.212" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist89" accel="0.635" maxSpeed="6.814" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist90" accel="0.852" maxSpeed="6.713" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist91" accel="1.011" maxSpeed="8.173" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist92" accel="0.691" maxSpeed="6.879" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist93" accel="0.572" maxSpeed="9.030" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist94" accel="0.417" maxSpeed="7.255" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist95" accel="0.785" maxSpeed="6.200" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist96" accel="0.638" maxSpeed="8.469" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist97" accel="0.736" maxSpeed="8.590" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist98" accel="0.719" maxSpeed="8.563" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+        <vType id="vehDist99" accel="0.805" maxSpeed="9.161" speedDev="0.000" speedFactor="4.000" vClass="bicycle" carFollowModel="Krauss">
+            <param key="has.fcd.device" value="true"/>
+        </vType>
+    </vTypeDistribution>
+
+
+    <route edges="52578336#5 109612315#0 109612315#1 109612315#2 109612315#3 109612315#9" color="yellow" id="route_0"/>
+    <route edges="32909782#4 32909782#10 32909782#11 109612319#0 109612319#1 109612319#2" color="yellow" id="route_1"/>
+    <route edges="52578336#5 109612315#0 109612315#1 109612315#2 109612315#3 4490162#0 4490162#1 4490162#2 4490162#3 4490162#4 747453201 37036260#0 37036260#1" color="yellow" id="route_2"/>
+
+    <flow id="flow_0" type="vehDist" begin="0.00" route="route_2" end="7200.00" number="180"/>
+    <flow id="car_flow_1" begin="0.00" route="route_1" end="3600.00" number="200"/>
+    <flow id="car_flow_2" begin="0.00" route="route_2" end="3600.00" number="200"/>
+    
+</routes>

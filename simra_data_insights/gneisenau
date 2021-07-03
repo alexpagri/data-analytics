@@ -1,0 +1,2 @@
+SELECT * FROM public.ride WHERE st_intersects(geom, st_setsrid( st_makebox2d( st_makepoint(13.3877,52.4951), st_makepoint(13.3916,52.4968)), 4326)) 
+AND st_intersects(geom, st_setsrid( st_makebox2d( st_makepoint(13.3885,52.4923), st_makepoint(13.3897,52.4926)), 4326))

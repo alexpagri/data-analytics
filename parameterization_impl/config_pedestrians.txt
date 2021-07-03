@@ -1,0 +1,9 @@
+accel; exponnorm(0.98, 0.63, 0.19); [0.43, 1.27]
+maxSpeed; johnsonsu(-0.82, 2.61, 6.00, 3.73); [4.8, 10.07]
+decel; 3
+emergencyDecel; 7
+minGap; 0.5
+speedDev; 0
+param; has.fcd.device; true
+vClass; pedestrian
+

@@ -1,0 +1,11 @@
+<configuration>
+    <input>    
+        <net-file value="b1_exp.net.xml"/>
+        <route-files value="b1_default_ped.trips.xml"/>
+    </input>
+    <time>
+        <begin value="0"/>
+        <end value="10000"/>
+    </time>
+    <tls.actuated.show-detectors value="true"/>
+</configuration>
