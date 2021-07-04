@@ -16,3 +16,6 @@ Anleitung für SUMO-Szenario Evaluation (Intersection Model):
 10. python path/to/sumo/tools/xml/xml2csv.py fcd_out.xml
 11. mv fcd_out.csv im_eval/sim_data/XXX_default.csv
 12. Jupyter Notebook laufen lassen und sich die Boxplots anschauen :-)
+
+
+Für die Bestimmung der Hyperparameter kann die Flag $settings.eval_hyperparameters des Intersection Models auf True gesetzt werden. Es sollte darauf geachtet werden, in dem Fall die Simulationen nicht in einer IDE laufen zu lassen, sondern sie über python main.py zu starten. Hat auf meiner Maschine deutlich besser performt. Die Simulations results können dann als Bulk mit dem sim_results_parser.py in csv geparset werden und sind dann leichter über pandas (im_eval/hyperparameter.ipynb) auszuwerten. 
