@@ -1,0 +1,10 @@
+# OS, Python and IDE
+.DS_Store
+.idea/
+.vscode/
+.python-version
+__pycache__
+.ipynb_checkpoints/
+
+postgres-data/data/
+# simra_data_insights/images/*

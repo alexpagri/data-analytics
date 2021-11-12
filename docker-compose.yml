@@ -1,0 +1,22 @@
+version: '3.1'
+
+services:
+
+  db:
+    image: postgis/postgis
+    restart: always
+    environment:
+      POSTGRES_DB: ma_3
+      POSTGRES_USER: simra
+      POSTGRES_PASSWORD: simra12345simra
+    ports:
+      - 5432:5432
+    volumes:
+      - ./postgres-data/data:/var/lib/postgresql/data
+      - ./postgres-init/20_create-tables.sql:/docker-entrypoint-initdb.d/20_create-tables.sql
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080

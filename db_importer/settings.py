@@ -1,5 +1,5 @@
-IMPORT_DIRECTORY = "/home/kons/Documents/Regions"
-#IMPORT_DIRECTORY = "../simra_data/"
+IMPORT_DIRECTORY = "../data-analytics/datasets/01_01_21_to_01_29_21"
+# IMPORT_DIRECTORY = "../data-analytics/datasets/Berlin_06-19_2-20"
 DB_HOST = "127.0.0.1"
 DB_NAME = "ma_3"
 DB_USER = "simra"

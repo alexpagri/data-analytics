@@ -52,11 +52,12 @@ patsy==0.5.1
 pexpect==4.8.0
 pickleshare==0.7.5
 Pillow==8.3.0
-pkg-resources==0.0.0
+# pkg-resources==0.0.0
 postgis==1.0.4
 prometheus-client==0.11.0
 prompt-toolkit==3.0.19
-psycopg2==2.9.1
+# psycopg2==2.9.1
+psycopg2-binary==2.9.1
 ptyprocess==0.7.0
 pycparser==2.20
 Pygments==2.9.0

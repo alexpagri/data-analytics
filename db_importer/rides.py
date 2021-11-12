@@ -88,7 +88,12 @@ def handle_ride(data, filename, cur):
         cur.execute("""
             INSERT INTO public."ride" (geom_raw, geom, timestamps, filename, velos_raw, velos, durations, distances, "start", "end") VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s);
         """, [ls, ls_k, timestamps, filename, velos, velos_lp0, durations, distances, start, end])
-    except:
+    except Exception as e:
+        print("Values to insert:")
+        for value in [ls, ls_k, timestamps, filename, velos, velos_lp0, durations, distances, start, end]:
+            print(f"-----\n{value}")
+        
+        print(f"Original exception: {e}")
         print(f"Problem parsing {filename}")
         raise Exception("Can not parse ride!")
 
