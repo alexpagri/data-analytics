@@ -8,3 +8,4 @@ __pycache__
 
 postgres-data/data/
 # simra_data_insights/images/*
+.venv_3_7
