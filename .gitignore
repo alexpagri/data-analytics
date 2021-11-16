@@ -7,5 +7,5 @@ __pycache__
 .ipynb_checkpoints/
 
 postgres-data/data/
-# simra_data_insights/images/*
+simra_data_insights/images/*
 .venv_3_7
