@@ -1,32 +1,31 @@
-from datetime import datetime
-from settings import *
 import os
-from db_connection import DatabaseConnection
-import tqdm
-from pandas.core.common import SettingWithCopyWarning
-from multiprocessing.dummy import Pool as ThreadPool
-import profile, rides
 import warnings
 from datetime import datetime
+from pathlib import Path
+from multiprocessing import Pool
 
-def print_time():
-    now = datetime.now()
-    current_time = now.strftime("%H:%M:%S")
-    print("Current Time =", current_time)
+from pandas.core.common import SettingWithCopyWarning
+from tqdm import tqdm
+
+from db_connection import DatabaseConnection
+from settings import *
+import rides
+
 
 def get_file_paths(IMPORT_DIRECTORY):
     files = []
     for r, d, f in os.walk(IMPORT_DIRECTORY, followlinks=True):
         for file in f:
-            if '.' not in file:
+            # filter out profile folders and  hidden files (e.g.: '.DS_Store')
+            if '.' not in file and 'Profiles' not in r:
                 files.append(os.path.join(r, file))
-    return files   
+    return files
+
 
 def import_file(file):
-    if "Profiles" in file:
-        return
-    filename = file.split("/")[-1]
-    region = file.split("/")[-3]
+    filename = Path(file).name
+    region = Path(file).parents[2].name
+
     with DatabaseConnection() as cur:
         cur.execute("""
             SELECT * FROM public."parsedfiles" WHERE filename LIKE %s
@@ -35,17 +34,13 @@ def import_file(file):
             return
     try:
         with DatabaseConnection() as cur:   # new database connection for the whole transaction
-            if "Profiles" in file:
-                return
-            else:
-                print(file)
-                rides.handle_ride_file(file, cur)
+            print(file)
+            rides.handle_ride_file(file, cur)
 
             cur.execute("""
                 INSERT INTO public."parsedfiles" ("filename", "region", "importtimestamp") VALUES (%s, %s, %s)
             """, [filename, region, datetime.utcnow()])
     except Exception as e:
-        #raise e
         print(f"Skipped ride {filename} due to exception {e}")
 
 if __name__ == '__main__':
@@ -56,14 +51,10 @@ if __name__ == '__main__':
 
     print(f"Number of path entries in directory: {len(files)}")
 
-    print_time()
-    # Make the Pool of workers
-    pool = ThreadPool(8)
+    num_files = len(files)
 
-    # and return the results
-    pool.map(import_file, files)
+    with Pool() as p:
+        with tqdm(total=num_files) as pbar:
+            for i in p.imap_unordered(import_file, files):
+                pbar.update()
 
-    # Close the pool and wait for the work to finish
-    pool.close()
-    pool.join()
-    print_time()
