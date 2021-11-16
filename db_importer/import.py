@@ -6,11 +6,22 @@ from multiprocessing import Pool
 
 from pandas.core.common import SettingWithCopyWarning
 from tqdm import tqdm
+import psutil
+from sys import platform
 
 from db_connection import DatabaseConnection
 from settings import *
 import rides
 
+def limit_cpu():
+    '''This is called at every process call and deprioritizes the process according to the OS.
+    This way the machine stays usable during import'''
+    p = psutil.Process(os.getpid())
+    if platform == "darwin" or "linux": #OS X or Linux
+        p.nice(19)                                  # lowest priority class
+    elif platform == "win32": #Windows
+        p.nice(psutil.BELOW_NORMAL_PRIORITY_CLASS)  # below normal prioity
+    
 
 def get_file_paths(IMPORT_DIRECTORY):
     files = []
@@ -53,7 +64,7 @@ if __name__ == '__main__':
 
     num_files = len(files)
 
-    with Pool() as p:
+    with Pool(None, limit_cpu) as p:
         with tqdm(total=num_files) as pbar:
             for i in p.imap_unordered(import_file, files):
                 pbar.update()
