@@ -6,9 +6,9 @@ services:
     image: postgis/postgis
     restart: always
     environment:
-      POSTGRES_DB: ma_3
-      POSTGRES_USER: simra
-      POSTGRES_PASSWORD: simra12345simra
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
     ports:
       - 5432:5432
     volumes:

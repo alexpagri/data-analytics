@@ -1,9 +1,15 @@
+from dotenv import dotenv_values
+
+# take environment variables from .env and load into dict
+dotenv_values_dict = dotenv_values()  
+
+DB_HOST = dotenv_values_dict['DB_HOST']
+DB_NAME = dotenv_values_dict['DB_NAME']
+DB_USER = dotenv_values_dict['DB_USER']
+DB_PASSWORD = dotenv_values_dict['DB_PASSWORD']
+DB_PORT = dotenv_values_dict['DB_PORT']
+
 IMPORT_DIRECTORY = "../data-analytics/datasets/"
-DB_HOST = "127.0.0.1"
-DB_NAME = "ma_3"
-DB_USER = "simra"
-DB_PASSWORD = "simra12345simra"
-DB_PORT = 5432
 
 MIN_RIDE_DISTANCE = 200  # in meters
 MIN_RIDE_DURATION = 3 * 60  # in seconds
