@@ -8,6 +8,6 @@ __pycache__
 .venv*
 
 postgres-data/data/
-postgres-data/backup/
+postgres-data/backup/*
 simra_data_insights/images/*
 
