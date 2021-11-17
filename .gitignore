@@ -5,7 +5,9 @@
 .python-version
 __pycache__
 .ipynb_checkpoints/
+.venv*
 
 postgres-data/data/
+postgres-data/backup/
 simra_data_insights/images/*
-.venv_3_7
+

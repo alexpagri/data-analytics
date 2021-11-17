@@ -14,6 +14,7 @@ services:
     volumes:
       - ./postgres-data/data:/var/lib/postgresql/data
       - ./postgres-init/20_create-tables.sql:/docker-entrypoint-initdb.d/20_create-tables.sql
+      - ${DB_BACKUP_LOCAL}:${DB_BACKUP_DOCKER}
 
   adminer:
     image: adminer
