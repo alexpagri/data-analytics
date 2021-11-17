@@ -43,7 +43,7 @@ To dump the data to a TAR backup file, run:
 where `BACKUP_NAME` is the name the backup file should have (e.g. `Berlin`, no suffix!).
 
 To import the data from a database dump (in TAR format), place the respective backup file in `postgres-data/backup` and run:  
-```./scripts/restore_db_from_backup.sh BACKUP_FILE_NAME```  
+```./scripts/restore_db_from_backup.sh BACKUP_NAME```  
 where `BACKUP_NAME` is the name of the backup file (e.g. `Berlin`, no suffix!).
 
 ## Data analytics
