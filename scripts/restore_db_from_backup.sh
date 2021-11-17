@@ -7,6 +7,13 @@ if [[ -z "$1" ]]; then
   exit 1
 fi
 
-RESTORE_COMMANDS="set "PGPASSWORD=$DB_PASSWORD" && pg_restore -v -c -d "$DB_NAME" "$DB_BACKUP_DOCKER""$1" -U "$DB_USER""
+DB_CONTAINER_ID=$(docker-compose ps -q db)
 
-docker exec ma-db-1 bash -c "$RESTORE_COMMANDS"
+if [ -z "$DB_CONTAINER_ID" ] || [ -z "$(docker ps -q --no-trunc | grep $DB_CONTAINER_ID)" ]; then
+  echo "Database container is not running!"
+  exit 1
+fi
+
+RESTORE_COMMANDS="set "PGPASSWORD=$DB_PASSWORD" && pg_restore -v -c -d "$DB_NAME" "$DB_BACKUP_DOCKER""$1".tar -U "$DB_USER""
+
+docker exec "$DB_CONTAINER_ID" bash -c "$RESTORE_COMMANDS"

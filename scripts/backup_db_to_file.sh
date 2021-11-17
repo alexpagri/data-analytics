@@ -7,8 +7,13 @@ if [[ -z "$1" ]]; then
   exit 1
 fi
 
+DB_CONTAINER_ID=$(docker-compose ps -q db)
+
+if [ -z "$DB_CONTAINER_ID" ] || [ -z "$(docker ps -q --no-trunc | grep $DB_CONTAINER_ID)" ]; then
+  echo "Database container is not running!"
+  exit 1
+fi
+
 BACKUP_COMMANDS="set "PGPASSWORD="$DB_PASSWORD"" && pg_dump -v -U "$DB_USER" -F t "$DB_NAME" > "$DB_BACKUP_DOCKER""$1".tar"
 
-# echo "$BACKUP_COMMANDS"
-
-docker exec ma-db-1 bash -c "$BACKUP_COMMANDS"
+docker exec "$DB_CONTAINER_ID" bash -c "$BACKUP_COMMANDS"

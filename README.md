@@ -37,6 +37,14 @@ Before that you need to configure the location of the dataset(s) in the `setting
 ```IMPORT_DIRECTORY = "../datasets/"```  
 In this case the datasets would be expected in a directory on the same level as this repositories directory.
 
+## Backup and restore database
+To dump the data to a TAR backup file, run:
+```./scripts/backup_db_to_file.sh BACKUP_NAME```  
+where `BACKUP_NAME` is the name the backup file should have (e.g. `Berlin`, no suffix!).
+
+To import the data from a database dump (in TAR format), place the respective backup file in `postgres-data/backup` and run:  
+```./scripts/restore_db_from_backup.sh BACKUP_FILE_NAME```  
+where `BACKUP_NAME` is the name of the backup file (e.g. `Berlin`, no suffix!).
 
 ## Data analytics
 to be continued
