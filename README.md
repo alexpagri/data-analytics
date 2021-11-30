@@ -19,6 +19,10 @@ All commands are meant to be run in the root directory of this repository.
 ```pip install -U pip && pip install -U -r requirements.txt```  
 (with the respective virtual environment enabled)
 
+### Configure 'nb-clean'
+```nb-clean add-filter --remove-empty-cells```  
+This configures the `nb-clean` tool which cleans jupyter notebooks before they are staged in git (outputs, cell run count, cell metadata and empty cells will be removed).
+
 ### Run docker containers:  
 `docker compose up` starts a PostgreSQL/PostGIS container and a Adminer webinterface container. The latter can be reached at `localhost:8080` and can be used to get and overview of the database and to configure it manually.
 

@@ -32,7 +32,7 @@ def calc_dist(x1, y1, x2, y2):
 
 def find_velocity_spikes(df):
     threshold = df['a'].std() * 0.5
-    print(df['a'].std(), threshold)
+    print(f"acceleration std dev: {df['a'].std():.2f}, acceleration threshold: {threshold:.2f}")
 
     return ((df[~df.velo.isnull()]['a'] > threshold) & (df[~df.velo.isnull()].shift(-1)['a'] < -threshold)) | (df['a'] > 2)
 

@@ -74,7 +74,6 @@ def handle_ride(data, filename, cur):
     ls = LineString([tuple(x) for x in coords], srid=4326)
     ls_k = LineString([tuple(x) for x in coords_k], srid=4326)
 
-
     velos = list(ride_df.velo.values)
     velos_lp0 = list(ride_df.velo_lp0.values)
     durations = list(ride_df.duration.values)
@@ -82,7 +81,6 @@ def handle_ride(data, filename, cur):
 
     start = Point(tuple(coords_k[0]), srid=4326)
     end = Point(tuple(coords_k[-1]), srid=4326)
-
 
     try:
         cur.execute("""
@@ -98,15 +96,16 @@ def handle_ride(data, filename, cur):
         raise Exception("Can not parse ride!")
 
 
-if __name__ == '__main__':
-    filepath = "../csvdata/Berlin/Rides/VM2_-351907452"
-    with DatabaseConnection() as cur:
-        handle_ride_file(filepath, cur)
-
-
 def is_teleportation(timestamps):
     for i, t in enumerate(timestamps):
         if i + 1 < len(timestamps):
             if (timestamps[i + 1] - timestamps[i]).seconds > 20:
                 return True
     return False
+
+
+if __name__ == '__main__':
+    filepath = "/Users/max/Documents/Projects/Uni/ADSP/ma/datasets/Berlin/Rides/2021/11/VM2_-17358072"
+    with DatabaseConnection() as cur:
+        handle_ride_file(filepath, cur)
+

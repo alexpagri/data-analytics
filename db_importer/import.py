@@ -28,7 +28,7 @@ def get_file_paths(IMPORT_DIRECTORY):
     for r, d, f in os.walk(IMPORT_DIRECTORY, followlinks=True):
         for file in f:
             # filter out profile folders and  hidden files (e.g.: '.DS_Store')
-            if '.' not in file and 'Profiles' not in r:
+            if '.' not in file and 'Profiles' not in r and 'CRASH' not in r:
                 files.append(os.path.join(r, file))
     return files
 

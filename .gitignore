@@ -7,7 +7,11 @@ __pycache__
 .ipynb_checkpoints/
 .venv*
 
+datasets/
 postgres-data/data/
 postgres-data/backup/*
 simra_data_insights/images/*
+im_eval/qualitative/images/*
+im_eval/quantitative/images/*
+adsp/*.png
 
