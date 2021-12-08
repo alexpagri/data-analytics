@@ -48,7 +48,7 @@ def get_rect_to_rect_data(start_rect_coords: Tuple[float], end_rect_coords: Tupl
 
     res = build_and_execute_query(start_rect_coords, end_rect_coords, start_date, end_date)
         
-    df = pd.DataFrame(res, columns=['filename', 'coords', 'timestamps', 'velos'])
+    df = pd.DataFrame(res, columns=['filename', 'coords', 'timestamps', 'velos', 'distances'])
     df = df[df.coords.notnull()]
     
     if files_to_exclude: 
@@ -59,7 +59,11 @@ def get_rect_to_rect_data(start_rect_coords: Tuple[float], end_rect_coords: Tupl
     df.coords = df.coords.apply(lambda coord: literal_eval(coord))
     
     df_grouped = df.groupby('filename', as_index=False)
-    return df_grouped.apply(lambda group: crop_intersection_SimRa(group, start_rect_coords, end_rect_coords))
+    print(f"Number of rides BEFORE intersection checking and cropping: {len(df_grouped.groups)}")
+
+    df_cropped = df_grouped.apply(lambda group: crop_intersection_SimRa(group, start_rect_coords, end_rect_coords))
+    print(f"Number of rides AFTER intersection checking and cropping: {len(df_cropped.groupby('filename').groups)}")
+    return df_cropped
 
 
 def build_and_execute_query(start_rect_coords: Tuple[float], end_rect_coords: Tuple[float], 
@@ -70,7 +74,8 @@ def build_and_execute_query(start_rect_coords: Tuple[float], end_rect_coords: Tu
             SELECT filename,
                 json_array_elements_text(st_asgeojson(geom_raw) :: json -> 'coordinates') AS coordinates,
                 unnest(timestamps) timestamps,
-                unnest(velos) velos
+                unnest(velos) velos,
+                unnest(distances) distances
             FROM ride
             where st_intersects(geom, st_setsrid(
                     st_makebox2d(st_makepoint({start_rect_coords[0]}, {start_rect_coords[1]}), 
@@ -103,7 +108,8 @@ def crop_intersection_SimRa(group, start_rect_coords: Tuple[float], end_rect_coo
         last = mask_end[mask_end==True].index[-1]
         return group.loc[first:last]
     else:
-        print(f"No path intersections found for filename: '{group.filename.values[0]}'")
+        # print(f"No path intersections found for filename: '{group.filename.values[0]}'")
+        return None
 
 
 def get_rect_coords_from_center_point(point_coords: Tuple[float], rect_size: str = 'MEDIUM') -> Tuple[float]:
@@ -118,9 +124,9 @@ def get_rect_coords_from_center_point(point_coords: Tuple[float], rect_size: str
         print(f"'rect_size' must be one of {list(RECT_CORNER_OFFSETS.keys())}")
 
     if point_coords[0] < point_coords[1]:
-        print("Point interpreted as (longitude, latitude)")
+        print(f"Point {point_coords} interpreted as (longitude, latitude)")
     elif point_coords[0] > point_coords[1]:
-        print("Point interpreted as (latitude, longitude)")
+        print(f"Point {point_coords} interpreted as (latitude, longitude)")
         point_coords = (point_coords[1], point_coords[0])
     
     return (point_coords[0] - offset, point_coords[1] - offset, point_coords[0] + offset, point_coords[1] + offset)
