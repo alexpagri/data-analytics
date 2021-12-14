@@ -61,7 +61,9 @@ def get_rect_to_rect_data(start_rect_coords: Tuple[float], end_rect_coords: Tupl
     df_grouped = df.groupby('filename', as_index=False)
     print(f"Number of rides BEFORE intersection checking and cropping: {len(df_grouped.groups)}")
 
-    df_cropped = df_grouped.apply(lambda group: crop_intersection_SimRa(group, start_rect_coords, end_rect_coords))
+    bb_coords = (13.415823,52.521659,13.417045,52.522383)
+    df_cropped = df_grouped.apply(lambda group: crop_intersection_bigbox(group, bb_coords))
+    # df_cropped = df_grouped.apply(lambda group: crop_intersection_SimRa(group, start_rect_coords, end_rect_coords))
     print(f"Number of rides AFTER intersection checking and cropping: {len(df_cropped.groupby('filename').groups)}")
     return df_cropped
 
@@ -111,6 +113,17 @@ def crop_intersection_SimRa(group, start_rect_coords: Tuple[float], end_rect_coo
         # print(f"No path intersections found for filename: '{group.filename.values[0]}'")
         return None
 
+
+def crop_intersection_bigbox(group, big_box_coords: Tuple[float]):
+    big_box = box(*big_box_coords)
+
+    mask = group.coords.apply(lambda coords: big_box.contains(Point(coords)))
+
+    if any(mask):
+        masked = mask[mask == True]
+        return group.loc[masked.index[0]:masked.index[-1]]
+    
+    return None
 
 def get_rect_coords_from_center_point(point_coords: Tuple[float], rect_size: str = 'MEDIUM') -> Tuple[float]:
     try:
