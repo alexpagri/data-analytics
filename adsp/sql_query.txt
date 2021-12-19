@@ -7,9 +7,7 @@ FROM
 (
 	SELECT ride.filename, unnest(velos) v, unnest(durations) dur, unnest(distances) dist, unnest(timestamps) ts, min_ts, max_ts, (max_ts - min_ts) as diff 
 	FROM ride
-	
 	JOIN
-	
 	(
 		SELECT a.filename, min_ts, max_ts
 		FROM
