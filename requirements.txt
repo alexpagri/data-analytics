@@ -1,10 +1,13 @@
+appnope==0.1.2
 argon2-cffi==20.1.0
 async-generator==1.10
 attrs==21.2.0
 backcall==0.2.0
 bleach==3.3.0
+branca==0.4.2
 certifi==2021.5.30
 cffi==1.14.5
+charset-normalizer==2.0.7
 cycler==0.10.0
 Cython==0.29.23
 data==0.4
@@ -12,11 +15,14 @@ decorator==5.0.9
 defusedxml==0.7.1
 entrypoints==0.3
 filterpy==1.4.5
+folium==0.12.1.post1
+fonttools==4.28.2
 funcsigs==1.0.2
 future==0.18.2
 geographiclib==1.52
 geopy==2.1.0
 greenlet==1.1.0
+idna==3.3
 importlib-metadata==4.6.0
 ipykernel==5.5.5
 ipython==7.16.1
@@ -35,13 +41,13 @@ jupyterlab-widgets==1.0.0
 kiwisolver==1.3.1
 latex==0.7.0
 MarkupSafe==2.0.1
-matplotlib==3.3.4
+matplotlib==3.5.0
 mistune==0.8.4
 mplleaflet==0.0.5
+nb-clean==2.1.0
 nbclient==0.5.3
 nbconvert==6.0.7
 nbformat==5.1.3
-nb-clean==2.1.0
 nest-asyncio==1.5.1
 notebook==6.4.0
 numpy==1.19.5
@@ -53,12 +59,10 @@ patsy==0.5.1
 pexpect==4.8.0
 pickleshare==0.7.5
 Pillow==8.3.0
-# pkg-resources==0.0.0
 postgis==1.0.4
 prometheus-client==0.11.0
 prompt-toolkit==3.0.19
 psutil==5.8.0
-# psycopg2==2.9.1
 psycopg2-binary==2.9.1
 ptyprocess==0.7.0
 pycparser==2.20
@@ -72,9 +76,12 @@ pytz==2021.1
 pyzmq==22.1.0
 qtconsole==5.1.1
 QtPy==1.9.0
+requests==2.26.0
 scikit-learn==0.24.2
 scipy==1.5.4
+seaborn==0.11.2
 Send2Trash==1.7.1
+setuptools-scm==6.3.2
 Shapely==1.7.1
 shutilwhich==1.1.0
 six==1.16.0
@@ -85,10 +92,12 @@ tempdir==0.7.1
 terminado==0.10.1
 testpath==0.5.0
 threadpoolctl==2.1.0
+tomli==1.2.2
 tornado==6.1
 tqdm==4.61.1
 traitlets==4.3.3
 typing-extensions==3.10.0.0
+urllib3==1.26.7
 vg==1.10.0
 wcwidth==0.2.5
 webencodings==0.5.1
