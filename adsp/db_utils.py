@@ -42,10 +42,14 @@ def get_rect_to_rect_data(start_rect_coords: Tuple[float], end_rect_coords: Tupl
     start_date: datetime = None, end_date: datetime = None, files_to_exclude: List[str] = None) -> pd.DataFrame:
 
     res = build_and_execute_query(start_rect_coords, end_rect_coords, start_date, end_date)
-
     df = pd.DataFrame(res, columns=['filename', 'coords', 'velo', 'dur', 'dist', 'ts', 'min_ts', 'max_ts', 'time_diff'])
     
     df = df[df.coords.notnull()]
+
+    if not df.shape[0]:
+        print("Query has no results!")
+        return None
+
     df['lon'], df['lat'] = zip(*df.coords.values)
 
     if files_to_exclude: 
@@ -104,7 +108,7 @@ def build_and_execute_query(start_rect_coords: Tuple[float], end_rect_coords: Tu
                 ) c
                 ON ride.filename = c.filename
             ) tmp
-            WHERE ts >= min_ts AND ts <= max_ts
+            WHERE ts >= min_ts AND ts <= max_ts AND extract(epoch FROM time_diff) < 300
         """
 
         if start_date:
