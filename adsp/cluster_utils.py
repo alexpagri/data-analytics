@@ -84,9 +84,10 @@ def cluster_with_kmeans(features: Dict[str, np.ndarray], n_cluster: int = 2, plo
 
 def plot_ride_paths(df_simra: pd.DataFrame, cluster_labels: np.ndarray):
     fig, ax = plt.subplots(figsize=(12, 12))
-    ax.set_aspect('equal')
+    ax.set_aspect(1.5)
 
     colors = ['blue', 'orange']
+    # colors = ['green', 'green']
 
     df_simra_grouped = df_simra.groupby('filename')
     for i, ride_group_name in enumerate(df_simra_grouped.groups):
@@ -114,6 +115,7 @@ def plot_ride_paths(df_simra: pd.DataFrame, cluster_labels: np.ndarray):
     ax.set_xlabel('Longitude in decimal degrees')
     ax.set_ylabel('Latitude in decimal degrees')
 
+    plt.savefig('clustered_ride_path.png', transparent=True)
     plt.show()
 
 
