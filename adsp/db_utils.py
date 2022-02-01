@@ -108,7 +108,7 @@ def build_and_execute_query(start_rect_coords: Tuple[float], end_rect_coords: Tu
                 ) c
                 ON ride.filename = c.filename
             ) tmp
-            WHERE ts >= min_ts AND ts <= max_ts AND extract(epoch FROM time_diff) < 300
+            WHERE ts >= min_ts AND ts <= max_ts AND extract(epoch FROM time_diff) < 3000
         """
 
         if start_date:
