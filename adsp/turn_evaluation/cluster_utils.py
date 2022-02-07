@@ -1,4 +1,9 @@
+import sys
+# add parent directory and its parent to sys.path so that python finds the modules
+sys.path.append('..')
+
 from typing import Tuple, List, Dict
+from datetime import datetime
 
 import pandas as pd
 import numpy as np
@@ -7,6 +12,13 @@ from matplotlib import ticker
 import seaborn as sns
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import MinMaxScaler
+from db_utils import get_rect_to_rect_data
+
+plt.rcParams.update({
+    "figure.facecolor":  'white', 
+    "axes.facecolor":    'white', 
+    "savefig.facecolor": 'white', 
+})
 
 def get_path_rotated(df_simra: pd.DataFrame) -> Tuple[np.float, np.float]:
     # rotate vector by 90 degrees clockwise
@@ -87,11 +99,15 @@ def cluster_with_kmeans(features: Dict[str, np.ndarray], n_cluster: int = 2, plo
 
 
 def plot_ride_paths(df_simra: pd.DataFrame, cluster_labels: np.ndarray, **kwargs):
-    fig, ax = plt.subplots(figsize=(12, 12))
+
+    if 'figsize_paths' in kwargs:
+        figsize_paths = kwargs['figsize_paths']
+    else:
+        figsize_paths = (12, 12)
+    fig, ax = plt.subplots(figsize=figsize_paths)
     ax.set_aspect(1.5)
 
     colors = ['blue', 'orange']
-    # colors = ['green', 'green']
 
     df_simra_grouped = df_simra.groupby('filename')
     for i, ride_group_name in enumerate(df_simra_grouped.groups):
@@ -109,8 +125,8 @@ def plot_ride_paths(df_simra: pd.DataFrame, cluster_labels: np.ndarray, **kwargs
         # print(projection_point_lon, projection_point_lat)
         # ax.scatter([projection_point_lon], [projection_point_lat], color='red', s=50)
 
-    ax.set_xlim(min(df_simra.lon), max(df_simra.lon))
-    ax.set_ylim(min(df_simra.lat), max(df_simra.lat))
+    # ax.set_xlim(min(df_simra.lon), max(df_simra.lon))
+    # ax.set_ylim(min(df_simra.lat), max(df_simra.lat))
 
     ax.xaxis.set_major_locator(ticker.LinearLocator(4))
     ax.xaxis.set_major_formatter(ticker.ScalarFormatter(useOffset=False))
@@ -119,9 +135,8 @@ def plot_ride_paths(df_simra: pd.DataFrame, cluster_labels: np.ndarray, **kwargs
     ax.set_xlabel('Longitude in decimal degrees')
     ax.set_ylabel('Latitude in decimal degrees')
 
-    for key, value in kwargs.items():
-        if key == 'direction':
-            plt.title('Clustered ride paths\n' + value)
+    if 'direction' in kwargs:
+        plt.title('Clustered ride paths\n' + kwargs['direction'])
 
     plt.savefig('clustered_ride_path.png', transparent=True)
     plt.show()
@@ -140,11 +155,38 @@ def cluster_by_max_projection_and_distance(df_simra: pd.DataFrame, **kwargs):
     cluster_labels = cluster_with_kmeans(features_scaled, **kwargs)
     plot_ride_paths(df_simra, cluster_labels, **kwargs)
 
-    print(f"Perecentage of orange turns: {cluster_labels.sum() / len(cluster_labels)}")
-    print(f"Perecentage of blue turns: {(len(cluster_labels) - cluster_labels.sum()) / len(cluster_labels)}")
+    print(f"Percentage of orange turns: {round(cluster_labels.sum() / len(cluster_labels),2)}")
+    print(f"Percentage of blue turns: {round((len(cluster_labels) - cluster_labels.sum()) / len(cluster_labels),2)}")
 
 
+def analyse_df_for_faulty_entries(df_simra, show_faulty_entries = False):
+    
+    # Some entries contain nans, or no speed, even though a distance is given. Inspect further. Option for filtering or preprocessing.
 
+    faulty_entries = df_simra[((df_simra.velo == 0) | (df_simra.velo.isna())) & (df_simra.dist != 0.0)]
+
+    n_entries = len(df_simra)
+    n_faulty_entries = len(faulty_entries) 
+    percentage_faulty = n_faulty_entries / n_entries * 100
+
+    print(f'Number of faulty rows (velocity is nan or zero even though distance is given): {n_faulty_entries}')
+    print(f'Total rows: {n_entries}')
+    print(f'Share of faulty rows: {round(percentage_faulty,2)}%.')
+
+    if show_faulty_entries: display(faulty_entries)
+
+def cluster_and_plot_for_intersection(start_end_coords, end_date_str = '2099-01-01 00:00:00', files_to_exclude = None, **kwargs):
+    end_date = datetime.strptime(end_date_str, '%Y-%m-%d %H:%M:%S')
+    for direction, (start_coord, end_coord) in start_end_coords.items():
+        print('######## ' + direction + ' ########')
+        print('Start:', start_coord)
+        print('End:', end_coord)
+        df_simra = get_rect_to_rect_data(start_coord, end_coord, end_date=end_date, files_to_exclude=files_to_exclude)
+        for key, value in kwargs.items():
+            if key == 'analyse_for_faulty_entries':
+                analyse_df_for_faulty_entries(df_simra)
+        cluster_by_max_projection_and_distance(df_simra, direction = direction, **kwargs)
+        print('\n')
 
 
 
