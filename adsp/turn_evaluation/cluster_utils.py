@@ -55,7 +55,7 @@ def min_max_scale_features(features: Dict[str, np.ndarray]):
             for feature_name, feature_values in features.items()}
 
 
-def cluster_with_kmeans(features: Dict[str, np.ndarray], n_cluster: int = 2, plot: bool = True) -> np.ndarray:
+def cluster_with_kmeans(features: Dict[str, np.ndarray], n_cluster: int = 2, plot: bool = True, **kwargs) -> np.ndarray:
     kmeans = KMeans(n_clusters=n_cluster, random_state=0)
 
     feature_names = list(features.keys())
@@ -67,6 +67,10 @@ def cluster_with_kmeans(features: Dict[str, np.ndarray], n_cluster: int = 2, plo
     # does only work with n_cluster = 2
     colors = ['blue' if label == 0 else 'orange' for label in cluster_labels]
     
+    for key, value in kwargs.items():
+        if key == 'direction':
+            plt.title('k-means clustering\n' + value)
+            
     if plot and len(features) == 2:
         plt.scatter(features_combined[:,0], features_combined[:,1], c=colors)
         plt.scatter(cluster_centers[:,0], cluster_centers[:,1], color='red', s=100)
@@ -82,7 +86,7 @@ def cluster_with_kmeans(features: Dict[str, np.ndarray], n_cluster: int = 2, plo
 
 
 
-def plot_ride_paths(df_simra: pd.DataFrame, cluster_labels: np.ndarray):
+def plot_ride_paths(df_simra: pd.DataFrame, cluster_labels: np.ndarray, **kwargs):
     fig, ax = plt.subplots(figsize=(12, 12))
     ax.set_aspect(1.5)
 
@@ -92,7 +96,7 @@ def plot_ride_paths(df_simra: pd.DataFrame, cluster_labels: np.ndarray):
     df_simra_grouped = df_simra.groupby('filename')
     for i, ride_group_name in enumerate(df_simra_grouped.groups):
         df_ride_group = df_simra_grouped.get_group(ride_group_name)
-        ax.plot(df_ride_group.lon, df_ride_group.lat, color=colors[cluster_labels[i]], linewidth=1)
+        ax.plot(df_ride_group.lon, df_ride_group.lat, color=colors[cluster_labels[i]], linewidth=1, label = ride_group_name)
 
         # df_ride_group_vec = df_simra_grouped_vec[df_simra_grouped_vec.filename == ride_group_name]
         # vec_rot_lon = [lon_start, lon_start + path_rotated_lon]
@@ -115,11 +119,15 @@ def plot_ride_paths(df_simra: pd.DataFrame, cluster_labels: np.ndarray):
     ax.set_xlabel('Longitude in decimal degrees')
     ax.set_ylabel('Latitude in decimal degrees')
 
+    for key, value in kwargs.items():
+        if key == 'direction':
+            plt.title('Clustered ride paths\n' + value)
+
     plt.savefig('clustered_ride_path.png', transparent=True)
     plt.show()
 
 
-def cluster_by_max_projection_and_distance(df_simra: pd.DataFrame):
+def cluster_by_max_projection_and_distance(df_simra: pd.DataFrame, **kwargs):
     df_simra_grouped = df_simra.groupby('filename').agg({'dist': 'sum'})
     distances = np.array(df_simra_grouped.dist)
 
@@ -129,8 +137,8 @@ def cluster_by_max_projection_and_distance(df_simra: pd.DataFrame):
     features = {'max_projections': max_projections, 'distances': distances}
     features_scaled = min_max_scale_features(features)
 
-    cluster_labels = cluster_with_kmeans(features_scaled)
-    plot_ride_paths(df_simra, cluster_labels)
+    cluster_labels = cluster_with_kmeans(features_scaled, **kwargs)
+    plot_ride_paths(df_simra, cluster_labels, **kwargs)
 
     print(f"Perecentage of orange turns: {cluster_labels.sum() / len(cluster_labels)}")
     print(f"Perecentage of blue turns: {(len(cluster_labels) - cluster_labels.sum()) / len(cluster_labels)}")
