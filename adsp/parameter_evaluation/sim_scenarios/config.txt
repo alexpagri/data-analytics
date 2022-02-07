@@ -1,0 +1,7 @@
+accel; normal(0.81, 0.26); [0.38, 1.23]
+maxSpeed; normal(7.26, 1.63); [4.59, 9.94]
+speedDev; 0
+speedFactor; 4
+param; has.fcd.device; true
+vClass; bicycle
+
