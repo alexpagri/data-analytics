@@ -182,6 +182,7 @@ def cluster_and_plot_for_intersection(start_end_coords, end_date_str = '2099-01-
         print('Start:', start_coord)
         print('End:', end_coord)
         df_simra = get_rect_to_rect_data(start_coord, end_coord, end_date=end_date, files_to_exclude=files_to_exclude)
+        if df_simra is None: continue
         for key, value in kwargs.items():
             if key == 'analyse_for_faulty_entries':
                 analyse_df_for_faulty_entries(df_simra)
