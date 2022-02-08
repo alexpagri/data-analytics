@@ -79,9 +79,8 @@ def cluster_with_kmeans(features: Dict[str, np.ndarray], n_cluster: int = 2, plo
     # does only work with n_cluster = 2
     colors = ['blue' if label == 0 else 'orange' for label in cluster_labels]
     
-    for key, value in kwargs.items():
-        if key == 'direction':
-            plt.title('k-means clustering\n' + value)
+    if 'direction' in kwargs:
+        plt.title('k-means clustering\n' + kwargs['direction'])
             
     if plot and len(features) == 2:
         plt.scatter(features_combined[:,0], features_combined[:,1], c=colors)
