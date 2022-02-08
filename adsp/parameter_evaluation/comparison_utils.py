@@ -65,7 +65,8 @@ def calculate_and_plot_ride_durations(ride_data: Dict[str, pd.DataFrame]):
     _, ax = plt.subplots()
     ax.hist(sumo_path_durations, color='orange', alpha=0.5, density=True, bins=10)
     ax.hist(simra_path_durations, color='blue', alpha=0.5, density=True, bins=60)
-    ax.set_ylabel("duration")
+    ax.set_xlabel("duration in s")
+    ax.set_ylabel("normalized histogram")
     plt.xlim(0, 100)
     plt.show()
 
