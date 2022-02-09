@@ -66,7 +66,7 @@ def plot_ride_paths(ride_data: Dict[str, pd.DataFrame]):
     ax.set_xlabel('Longitude in decimal degrees')
     ax.set_ylabel('Latitude in decimal degrees')
 
-    # cx.add_basemap(ax, crs='EPSG:4326', source=cx.providers.Stamen.Toner)
+    cx.add_basemap(ax, crs='EPSG:4326', source=cx.providers.Stamen.Toner)
 
     # plt.savefig('simra_vs_sumo_ride_path.png', transparent=True)
     # plt.legend()
