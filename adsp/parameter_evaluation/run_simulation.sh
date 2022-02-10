@@ -1,5 +1,7 @@
 #! /usr/bin/env bash
 
+# ssh vagrant@localhost -p 2222 -i ../SUMO/Ubuntu20.04_SUMO_DevEnv/.vagrant/machines/SUMO_Dev/virtualbox/private_key
+
 SCENARIO_FOLDER="sim_scenarios"
 SIM_DATA_FOLDER="sim_data"
 
@@ -19,11 +21,10 @@ run_simulation() {
 }
 
 if [[ "$1" == "ALL" ]]; then
-    cd "$SCENARIO_FOLDER"
-    for SUB_FOLDER in */ ; do
-        SCENARIO_SUB_FOLDER=${SUB_FOLDER%/}
-        cd ..
+    for SUB_FOLDER in $SCENARIO_FOLDER/*/ ; do
         for SUFFIX in "${SCENARIO_NAME_SUFFIXES[@]}"; do
+            TMP=${SUB_FOLDER%/} 
+            SCENARIO_SUB_FOLDER="${TMP##*/}"
             SCENARIO_NAME="$SCENARIO_SUB_FOLDER"_"$SUFFIX"
             echo "Running scenario "$SCENARIO_NAME"..."
             run_simulation

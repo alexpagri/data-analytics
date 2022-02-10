@@ -30,7 +30,6 @@
 <routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/routes_file.xsd">
     
   <vTypeDistribution id="vehDist">
-        <vTypeDistribution id="vehDist">
       <vType accel="0.874" id="vehDist0" maxSpeed="6.450" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
          <param key="has.fcd.device" value="true"/>
       </vType>
