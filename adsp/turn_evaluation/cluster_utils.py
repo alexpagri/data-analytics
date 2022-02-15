@@ -13,6 +13,7 @@ import seaborn as sns
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import MinMaxScaler
 from db_utils import get_rect_to_rect_data
+import contextily as cx
 
 plt.rcParams.update({
     "figure.facecolor":  'white', 
@@ -96,7 +97,6 @@ def cluster_with_kmeans(features: Dict[str, np.ndarray], n_cluster: int = 2, plo
     return cluster_labels
 
 
-
 def plot_ride_paths(df_simra: pd.DataFrame, cluster_labels: np.ndarray, **kwargs):
 
     if 'figsize_paths' in kwargs:
@@ -134,6 +134,8 @@ def plot_ride_paths(df_simra: pd.DataFrame, cluster_labels: np.ndarray, **kwargs
     ax.set_xlabel('Longitude in decimal degrees')
     ax.set_ylabel('Latitude in decimal degrees')
 
+    cx.add_basemap(ax, crs='EPSG:4326', source=cx.providers.Stamen.Toner)
+
     if 'direction' in kwargs:
         plt.title('Clustered ride paths\n' + kwargs['direction'])
 
@@ -141,7 +143,7 @@ def plot_ride_paths(df_simra: pd.DataFrame, cluster_labels: np.ndarray, **kwargs
     plt.show()
 
 
-def cluster_by_max_projection_and_distance(df_simra: pd.DataFrame, **kwargs):
+def cluster(df_simra: pd.DataFrame, **kwargs):
     df_simra_grouped = df_simra.groupby('filename').agg({'dist': 'sum'})
     distances = np.array(df_simra_grouped.dist)
 
@@ -154,8 +156,13 @@ def cluster_by_max_projection_and_distance(df_simra: pd.DataFrame, **kwargs):
     cluster_labels = cluster_with_kmeans(features_scaled, **kwargs)
     plot_ride_paths(df_simra, cluster_labels, **kwargs)
 
-    print(f"Percentage of orange turns: {round(cluster_labels.sum() / len(cluster_labels),2)}")
-    print(f"Percentage of blue turns: {round((len(cluster_labels) - cluster_labels.sum()) / len(cluster_labels),2)}")
+    share_orange = round(cluster_labels.sum() / len(cluster_labels),2)
+    share_blue = round((len(cluster_labels) - cluster_labels.sum()) / len(cluster_labels),2)
+
+    print(f"Share of orange turns: {share_orange}")
+    print(f"Share of blue turns: {share_blue}")
+
+    return share_orange
 
 
 def analyse_df_for_faulty_entries(df_simra, show_faulty_entries = False):
@@ -174,19 +181,16 @@ def analyse_df_for_faulty_entries(df_simra, show_faulty_entries = False):
 
     if show_faulty_entries: display(faulty_entries)
 
-def cluster_and_plot_for_intersection(start_end_coords, end_date_str = '2099-01-01 00:00:00', files_to_exclude = None, **kwargs):
+
+def return_cluster_share_and_plot_path(turn_series, end_date_str = '2099-01-01 00:00:00', files_to_exclude = None, **kwargs):
     end_date = datetime.strptime(end_date_str, '%Y-%m-%d %H:%M:%S')
-    for direction, (start_coord, end_coord) in start_end_coords.items():
-        print('######## ' + direction + ' ########')
-        print('Start:', start_coord)
-        print('End:', end_coord)
-        df_simra = get_rect_to_rect_data(start_coord, end_coord, end_date=end_date, files_to_exclude=files_to_exclude)
-        if df_simra is None: continue
-        for key, value in kwargs.items():
-            if key == 'analyse_for_faulty_entries':
-                analyse_df_for_faulty_entries(df_simra)
-        cluster_by_max_projection_and_distance(df_simra, direction = direction, **kwargs)
-        print('\n')
+    df_simra = get_rect_to_rect_data(turn_series['start_rect_coords'], turn_series['end_rect_coords'], files_to_exclude=files_to_exclude)
+    if df_simra is None: return None
+    for key, value in kwargs.items():
+        if key == 'analyse_for_faulty_entries':
+            analyse_df_for_faulty_entries(df_simra)
+    share_orange = cluster(df_simra, direction = turn_series['direction'], **kwargs)
+    return share_orange
 
 
 
