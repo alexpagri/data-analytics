@@ -5,6 +5,7 @@ sys.path.append('..')
 from typing import List, Tuple
 from datetime import datetime
 from ast import literal_eval
+import functools
 
 import psycopg2
 from postgis.psycopg import register
@@ -38,6 +39,7 @@ class DatabaseConnection(object):
             self.cur.close()
             self.conn.close()
 
+@functools.lru_cache(maxsize=200)
 def get_rect_to_rect_data(start_rect_coords: Tuple[float], end_rect_coords: Tuple[float],
     start_date: datetime = None, end_date: datetime = None, files_to_exclude: List[str] = None) -> pd.DataFrame:
 
