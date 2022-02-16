@@ -2,10 +2,11 @@ import sys
 # add parent directory to sys.path so that python finds the modules
 sys.path.append('..')
 
-from typing import List, Tuple
+from typing import List, Tuple, Union
 from datetime import datetime
 from ast import literal_eval
 import functools
+import numpy as np
 
 import psycopg2
 from postgis.psycopg import register
@@ -41,9 +42,11 @@ class DatabaseConnection(object):
 
 @functools.lru_cache(maxsize=200)
 def get_rect_to_rect_data(start_rect_coords: Tuple[float], end_rect_coords: Tuple[float],
-    start_date: datetime = None, end_date: datetime = None, files_to_exclude: List[str] = None) -> pd.DataFrame:
-
-    res = build_and_execute_query(start_rect_coords, end_rect_coords, start_date, end_date)
+    start_date: datetime = None, end_date: datetime = None, files_to_exclude: List[str] = None,
+    exclude_coords: Union[Tuple[float],np.float64] = np.nan) -> pd.DataFrame:
+    if exclude_coords is np.nan:
+        exclude_coords = (0,0,0,0)
+    res = build_and_execute_query(start_rect_coords, end_rect_coords, exclude_coords, start_date, end_date)
     df = pd.DataFrame(res, columns=['filename', 'coords', 'velo', 'dur', 'dist', 'ts', 'min_ts', 'max_ts', 'time_diff'])
     
     df = df[df.coords.notnull()]
@@ -63,7 +66,7 @@ def get_rect_to_rect_data(start_rect_coords: Tuple[float], end_rect_coords: Tupl
 
 
 def build_and_execute_query(start_rect_coords: Tuple[float], end_rect_coords: Tuple[float], 
-    start_date: datetime = None, end_date: datetime = None):
+    exclude_coords: Tuple[float], start_date: datetime = None, end_date: datetime = None):
     
     with DatabaseConnection() as cur:
         query = f"""
@@ -106,7 +109,22 @@ def build_and_execute_query(start_rect_coords: Tuple[float], end_rect_coords: Tu
                         GROUP BY filename
                     ) b
                     ON a.filename = b.filename
-                    WHERE min_ts < max_ts
+                    WHERE (min_ts < max_ts) and
+                        (a.filename NOT IN
+                            (
+                                SELECT filename
+                                FROM (
+                                    SELECT *, ST_DumpPoints(geom::geometry) as dp, unnest(timestamps) ts
+                                    FROM ride
+                                    ) tmp
+                                WHERE st_intersects((tmp.dp).geom, ST_MakeEnvelope ({exclude_coords[0]}, {exclude_coords[1]}, 
+                                                                                    {exclude_coords[2]}, {exclude_coords[3]}, 
+                                                                                    {SRID}
+                                                                                    )
+                                )
+                                GROUP BY filename
+                            )
+                        )
                 ) c
                 ON ride.filename = c.filename
             ) tmp
