@@ -159,11 +159,12 @@ def cluster(df_simra: pd.DataFrame, **kwargs):
 
     share_orange = round(cluster_labels.sum() / len(cluster_labels),2)
     share_blue = round((len(cluster_labels) - cluster_labels.sum()) / len(cluster_labels),2)
+    n_rides = df_simra_grouped.shape[0]
 
     print(f"Share of orange turns: {share_orange}")
     print(f"Share of blue turns: {share_blue}")
 
-    return share_orange
+    return share_orange, n_rides
 
 
 def analyse_df_for_faulty_entries(df_simra, show_faulty_entries = False):
@@ -183,16 +184,16 @@ def analyse_df_for_faulty_entries(df_simra, show_faulty_entries = False):
     if show_faulty_entries: display(faulty_entries)
 
 
-def return_cluster_share_and_plot_path(turn_series, end_date_str = '2099-01-01 00:00:00', files_to_exclude = None, **kwargs):
+def return_cluster_results_and_plot_path(turn_series, end_date_str = '2099-01-01 00:00:00', files_to_exclude = None, **kwargs):
     end_date = datetime.strptime(end_date_str, '%Y-%m-%d %H:%M:%S')
     df_simra = get_rect_to_rect_data(turn_series['start_rect_coords'], turn_series['end_rect_coords'],
         exclude_coords = turn_series['exclude_coords'], files_to_exclude=files_to_exclude)
-    if df_simra is None: return None
+    if df_simra is None: return None, None
     for key, value in kwargs.items():
         if key == 'analyse_for_faulty_entries':
             analyse_df_for_faulty_entries(df_simra)
-    share_orange = cluster(df_simra, direction = turn_series['direction'], **kwargs)
-    return share_orange
+    share_orange, n_rides = cluster(df_simra, direction = turn_series['direction'], **kwargs)
+    return share_orange, n_rides
 
 
 
