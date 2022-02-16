@@ -104,7 +104,6 @@ def plot_ride_paths(df_simra: pd.DataFrame, cluster_labels: np.ndarray, **kwargs
     else:
         figsize_paths = (12, 12)
     fig, ax = plt.subplots(figsize=figsize_paths)
-    ax.set_aspect(1.5)
 
     colors = ['blue', 'orange']
 
@@ -138,6 +137,8 @@ def plot_ride_paths(df_simra: pd.DataFrame, cluster_labels: np.ndarray, **kwargs
 
     if 'direction' in kwargs:
         plt.title('Clustered ride paths\n' + kwargs['direction'])
+    
+    ax.set_aspect(1.7)
 
     plt.savefig('clustered_ride_path.png', transparent=True)
     plt.show()
