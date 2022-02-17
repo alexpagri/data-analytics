@@ -37,4 +37,3 @@ else
     echo "Running scenario "$SCENARIO_NAME"..."
     run_simulation
 fi
-

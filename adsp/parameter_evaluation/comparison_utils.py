@@ -10,6 +10,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib import ticker
+from scipy.spatial.distance import jensenshannon
 from shapely.geometry import box, Point
 import contextily as cx
 
@@ -24,6 +25,7 @@ plt_kwargs = dict(histtype='stepfilled', alpha=0.3, density=True, ec="k")
 
 COLORS = ['blue', 'orange', 'green']
 
+
 def analyze_and_plot_ride_data(ride_data: Dict[str, float]):
     print("Ride paths:")
     plot_ride_paths(ride_data)
@@ -32,11 +34,50 @@ def analyze_and_plot_ride_data(ride_data: Dict[str, float]):
     plot_velocity_histograms(ride_data)    
 
     print("Ride duration histograms (normalized):")
-    calculate_and_plot_ride_durations(ride_data)
+    durations = calculate_and_plot_ride_durations(ride_data)
+
+    return duration_js_divergence(durations)
+
 
 def get_hist_bins(data: List[List[float]], binwidth: float):
     data_flattened =  [item for sublist in data for item in sublist]
     return np.arange(min(data_flattened), max(data_flattened) + binwidth, binwidth)
+
+
+def duration_js_divergence(durations: Dict[str, List[float]]):
+    reference_data = durations['SimRa']
+    hist_bins = get_hist_bins(durations.values(), binwidth=10)
+    
+    reference_data_hist, _ = np.histogram(reference_data, bins=hist_bins, density=True)
+
+    divergences = {}
+    for data_name in [k for k in durations.keys() if k.startswith('SUMO_')]:
+        test_data_hist, _ = np.histogram(durations[data_name], bins=hist_bins, density=True)
+        divergences[data_name] = jensenshannon(reference_data_hist, test_data_hist)
+    
+    return divergences
+
+
+def calculate_and_plot_ride_durations(ride_data: Dict[str, pd.DataFrame]):
+    simra_path_durations = [td.total_seconds() for td in ride_data['SimRa'].groupby('ride_id').first().duration]
+    meta_path_durations = {'SimRa': simra_path_durations}
+
+    for ride_data_name in [k for k in ride_data.keys() if k.startswith('SUMO_')]:
+        meta_path_durations[ride_data_name] = list(ride_data[ride_data_name].groupby('ride_id').ts.agg(np.ptp))
+    
+    _, ax = plt.subplots()
+    hist_bins = get_hist_bins(list(meta_path_durations.values()), binwidth=5)
+    for idx, (ride_data_name, path_durations) in enumerate(meta_path_durations.items()):
+        ax.hist(path_durations, color=COLORS[idx], bins=hist_bins, label=ride_data_name, **plt_kwargs)   
+    
+    ax.set_xlabel("duration (in s)")
+    ax.set_ylabel("histogram normalization")
+    plt.legend()
+    plt.grid()
+    plt.show()
+
+    return meta_path_durations
+
 
 def plot_velocity_histograms(ride_data: Dict[str, pd.DataFrame]):
     hist_bins = get_hist_bins([list(d.velo) for d in ride_data.values()], binwidth=0.5)
@@ -46,6 +87,7 @@ def plot_velocity_histograms(ride_data: Dict[str, pd.DataFrame]):
     ax.set_ylabel("histogram normalization")
     plt.legend()
     plt.show()
+
 
 def plot_ride_paths(ride_data: Dict[str, pd.DataFrame]):
     fig, ax = plt.subplots(figsize=(12, 12))
@@ -72,26 +114,9 @@ def plot_ride_paths(ride_data: Dict[str, pd.DataFrame]):
     # plt.legend()
     plt.show()
 
-def calculate_and_plot_ride_durations(ride_data: Dict[str, pd.DataFrame]):
-    simra_path_durations = [td.total_seconds() for td in ride_data['SimRa'].groupby('ride_id').first().duration]
-    meta_path_durations = {'SimRa': simra_path_durations}
 
-    for ride_data_name in [k for k in ride_data.keys() if k.startswith('SUMO_')]:
-        meta_path_durations[ride_data_name] = list(ride_data[ride_data_name].groupby('ride_id').ts.agg(np.ptp))
-    
-    _, ax = plt.subplots()
-    hist_bins = get_hist_bins(list(meta_path_durations.values()), binwidth=5)
-    for idx, (ride_data_name, path_durations) in enumerate(meta_path_durations.items()):
-        ax.hist(path_durations, color=COLORS[idx], bins=hist_bins, label=ride_data_name, **plt_kwargs)   
-    ax.set_xlabel("duration (in s)")
-    ax.set_ylabel("histogram normalization")
-    plt.legend()
-    plt.grid()
-    plt.show()
-
-
-def get_ride_data(sumo_sim_data_folder: str, scenario_name: str, sumo_sim_files: List[str], 
-        start_rect_coords: Tuple[float, float], end_rect_coords: Tuple[float, float], **kwargs):
+def get_ride_data(sumo_sim_data_folder: str, sumo_sim_files: List[str], 
+        start_rect_coords: Tuple[float, float], end_rect_coords: Tuple[float, float]):
 
     sim_data_folder_path = Path(sumo_sim_data_folder)
     
