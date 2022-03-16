@@ -1,7 +1,6 @@
 # Origin of new SUMO parameters
 * Generally following approach of thesis
-* Deccel not transfered, because SUMO behaviour differs from real life
-    * No dwadling
+* Deceleration not transferred, because SUMO behavior differs from real life -> No dawdling
 
 
 * SimRa dataset is biased and has its flaws
@@ -9,7 +8,7 @@
 * V_max value from Bulla is kinda random
 
 ## Max. Acceleration
-* Accel manouvers and filtering as in thesis 
+* Accel maneuvers and filtering as in thesis 
 
 Median: 0.7866292458508883
 
@@ -29,5 +28,5 @@ var: 1.6255442347396598
 
 
 
-* In thesis best fitting distribution used for evaluation, but this changend with more data 
+* In thesis best fitting distribution used for evaluation, but this changed with more data 
 * Missing argument for specific distro --> therefore norm distro as baseline if distro can be implemented

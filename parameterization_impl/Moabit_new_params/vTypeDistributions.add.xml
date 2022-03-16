@@ -1,5 +1,30 @@
 <additional xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/additional_file.xsd">
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <vTypeDistribution id="vehDist">
         <vType id="vehDist0" accel="0.839" maxSpeed="6.542" speedDev="0.000" speedFactor="1000.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>

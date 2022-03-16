@@ -1,6 +1,6 @@
 import sys
 # add parent directory to sys.path so that python finds the modules
-sys.path.append('..')
+sys.path.extend(['..', '../..'])
 
 from typing import List, Tuple
 from datetime import datetime
