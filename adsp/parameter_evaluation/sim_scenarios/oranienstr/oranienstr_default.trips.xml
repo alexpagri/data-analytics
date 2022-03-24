@@ -1,39 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- generated on Fri Mar 12 10:59:33 2021 by Eclipse SUMO duarouter Version v1_7_0+1228-0b1a97d77e
-<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/duarouterConfiguration.xsd">
-
-    <input>
-        <net-file value="CHB/CHB.net.xml"/>
-        <route-files value="CHB/CHB.trips.xml"/>
-    </input>
-
-    <output>
-        <output-file value="CHB/CHB.trips.xml.tmp"/>
-        <write-trips value="true"/>
-    </output>
-
-    <time>
-        <begin value="0"/>
-        <end value="9998"/>
-    </time>
-
-    <report>
-        <no-warnings value="true"/>
-        <ignore-errors value="true"/>
-        <no-step-log value="true"/>
-    </report>
-
-</configuration>
--->
-
 <routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/routes_file.xsd">
     
-<vTypeDistribution id="vehDist">
+    <!-- <vTypeDistribution id="vehDist">
         <vType id="vehDist0" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-    </vTypeDistribution>
+    </vTypeDistribution> -->
+
+    <vType id="vehDist" vClass="bicycle">
+        <param key="has.fcd.device" value="true"/>
+    </vType>
     
     <route edges="172425925 241020237#0 241020237#1 241020237#2 241020237#3 -195337820#3 -195337820#2 -195337820#1 -195337820#0 -66514458#5 -66514458#0 -32977011#4 -32977011#3 -32977011#2 -4686498#0 370648473#0 370648473#1 370648473#2 -370648471 -4612758#3 -4612758#2 -4612758#1 -4612758#0 170780644 183419650 262117177 -95926536#11" color="yellow" id="route_0"/>
 

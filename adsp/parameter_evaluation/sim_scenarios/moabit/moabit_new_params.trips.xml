@@ -1,35 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- generated on Fri Mar 12 10:59:33 2021 by Eclipse SUMO duarouter Version v1_7_0+1228-0b1a97d77e
-<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/duarouterConfiguration.xsd">
-
-    <input>
-        <net-file value="CHB/CHB.net.xml"/>
-        <route-files value="CHB/CHB.trips.xml"/>
-    </input>
-
-    <output>
-        <output-file value="CHB/CHB.trips.xml.tmp"/>
-        <write-trips value="true"/>
-    </output>
-
-    <time>
-        <begin value="0"/>
-        <end value="9998"/>
-    </time>
-
-    <report>
-        <no-warnings value="true"/>
-        <ignore-errors value="true"/>
-        <no-step-log value="true"/>
-    </report>
-
-</configuration>
--->
-
 <routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/routes_file.xsd">
     
-    <vTypeDistribution id="vehDist">
+   <!-- <vTypeDistribution id="vehDist">
       <vType accel="0.874" id="vehDist0" maxSpeed="6.450" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
          <param key="has.fcd.device" value="true"/>
       </vType>
@@ -330,9 +303,25 @@
       <vType accel="0.934" id="vehDist99" maxSpeed="6.469" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
          <param key="has.fcd.device" value="true"/>
       </vType>
-   </vTypeDistribution>
+   </vTypeDistribution> -->
+   
+   <!-- 
+    Max Velo
+    Mean: 7.2466626213817396, Std: 1.6198253953138402
+    Lower cutoff (0.05 percentile): 4.582286944871666
+    Upper cutoff (0.95 percentile): 9.911038297891812
     
-    <route edges="482223508#0 4703556#1 203910785 -405894861 -29400740#5 -29400740#4 -29400740#3 -29400740#2 -29400740#1 -29400740#0 30189015#2 30189015#3 30189015#4 450985220" color="yellow" id="route_0"/>
+    Max Accel
+    Mean: 0.8046345728335441, Std: 0.2556433535741433
+    Lower cutoff (0.05 percentile): 0.3841386755010767
+    Upper cutoff (0.95 percentile): 1.2251304701660113
+    -->
+    
+    <vType id="vehDist" maxSpeed="normc(7.25,1.62,4.58,9.91)" accel="normc(0.80,0.26,0.38,1.23)" vClass="bicycle">
+        <param key="has.fcd.device" value="true"/>
+    </vType>
+
+   <route edges="482223508#0 4703556#1 203910785 -405894861 -29400740#5 -29400740#4 -29400740#3 -29400740#2 -29400740#1 -29400740#0 30189015#2 30189015#3 30189015#4 450985220" color="yellow" id="route_0"/>
 
     <flow id="flow_0" type="vehDist" begin="0.00" route="route_0" end="7200.00" number="150"/>
 

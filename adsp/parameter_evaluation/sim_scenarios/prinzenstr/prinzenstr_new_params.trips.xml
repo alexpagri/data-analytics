@@ -1,35 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- generated on Fri Mar 12 10:59:33 2021 by Eclipse SUMO duarouter Version v1_7_0+1228-0b1a97d77e
-<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/duarouterConfiguration.xsd">
-
-    <input>
-        <net-file value="CHB/CHB.net.xml"/>
-        <route-files value="CHB/CHB.trips.xml"/>
-    </input>
-
-    <output>
-        <output-file value="CHB/CHB.trips.xml.tmp"/>
-        <write-trips value="true"/>
-    </output>
-
-    <time>
-        <begin value="0"/>
-        <end value="9998"/>
-    </time>
-
-    <report>
-        <no-warnings value="true"/>
-        <ignore-errors value="true"/>
-        <no-step-log value="true"/>
-    </report>
-
-</configuration>
--->
-
 <routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/routes_file.xsd">
     
-<vTypeDistribution id="vehDist">
+<!-- <vTypeDistribution id="vehDist">
       <vType accel="0.874" id="vehDist0" maxSpeed="6.450" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
          <param key="has.fcd.device" value="true"/>
       </vType>
@@ -330,7 +303,23 @@
       <vType accel="0.934" id="vehDist99" maxSpeed="6.469" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
          <param key="has.fcd.device" value="true"/>
       </vType>
-   </vTypeDistribution>
+   </vTypeDistribution> -->
+
+   <!-- 
+    Max Velo
+    Mean: 7.2466626213817396, Std: 1.6198253953138402
+    Lower cutoff (0.05 percentile): 4.582286944871666
+    Upper cutoff (0.95 percentile): 9.911038297891812
+    
+    Max Accel
+    Mean: 0.8046345728335441, Std: 0.2556433535741433
+    Lower cutoff (0.05 percentile): 0.3841386755010767
+    Upper cutoff (0.95 percentile): 1.2251304701660113
+    -->
+    
+    <vType id="vehDist" maxSpeed="normc(7.25,1.62,4.58,9.91)" accel="normc(0.80,0.26,0.38,1.23)" vClass="bicycle">
+        <param key="has.fcd.device" value="true"/>
+    </vType>
 
     <route edges="-4612431#2 -4612431#1 -328426213#1 -328426213#0 -195418554#4 -195418554#3 -195418554#2 -195418554#1 -195418554#0 -902297515#2 -902297515#1 -902297515#0 -455097481#3 -455097481#2 -455097481#1 -455097481#0 -4612432 -4619374#2 -4619374#1 -4619374#0 31909839#0 31909839#1 262117177 51661483 53357051#0 53357051#1 53357051#2 53357051#3 53357051#4 53357051#5 -4612696#7 -4612696#6 -4612696#5 -4612696#3 -4612696#2 4686356#1 4686356#2 4686356#3 663193499#0 663193499#1" color="yellow" id="route_0"/>
 

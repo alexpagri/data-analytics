@@ -4,4 +4,3 @@ speedDev; 0
 speedFactor; 4
 param; has.fcd.device; true
 vClass; bicycle
-

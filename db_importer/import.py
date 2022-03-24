@@ -20,7 +20,7 @@ def limit_cpu():
     if platform == "darwin" or "linux": #OS X or Linux
         p.nice(19)                                  # lowest priority class
     elif platform == "win32": #Windows
-        p.nice(psutil.BELOW_NORMAL_PRIORITY_CLASS)  # below normal prioity
+        p.nice(psutil.BELOW_NORMAL_PRIORITY_CLASS)  # below normal priority
     
 
 def get_file_paths(IMPORT_DIRECTORY):
@@ -35,7 +35,7 @@ def get_file_paths(IMPORT_DIRECTORY):
 
 def import_file(file):
     filename = Path(file).name
-    region = Path(file).parents[2].name
+    region = Path(file).parents[3].name  # $REGION/$YEAR/Rides/...
 
     with DatabaseConnection() as cur:
         cur.execute("""

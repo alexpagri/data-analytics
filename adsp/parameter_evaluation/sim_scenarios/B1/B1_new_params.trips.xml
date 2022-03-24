@@ -1,35 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- generated on Fri Mar  5 11:36:19 2021 by Eclipse SUMO duarouter Version v1_7_0+1228-0b1a97d77e
-<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/duarouterConfiguration.xsd">
-
-    <input>
-        <net-file value="b1_exp.net.xml"/>
-        <route-files value="b1.trips.xml"/>
-    </input>
-
-    <output>
-        <output-file value="b1.trips.xml.tmp"/>
-        <write-trips value="true"/>
-    </output>
-
-    <time>
-        <begin value="0"/>
-        <end value="9998"/>
-    </time>
-
-    <report>
-        <no-warnings value="true"/>
-        <ignore-errors value="true"/>
-        <no-step-log value="true"/>
-    </report>
-
-</configuration>
--->
-
 <routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/routes_file.xsd"> 
     
-     <vTypeDistribution id="vehDist">
+     <!-- <vTypeDistribution id="vehDist">
         <vType id="vehDist0" accel="0.814" maxSpeed="6.308" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
@@ -330,7 +303,23 @@
         <vType id="vehDist99" accel="1.174" maxSpeed="5.969" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-    </vTypeDistribution>
+    </vTypeDistribution> -->
+
+    <!-- 
+    Max Velo
+    Mean: 7.2466626213817396, Std: 1.6198253953138402
+    Lower cutoff (0.05 percentile): 4.582286944871666
+    Upper cutoff (0.95 percentile): 9.911038297891812
+    
+    Max Accel
+    Mean: 0.8046345728335441, Std: 0.2556433535741433
+    Lower cutoff (0.05 percentile): 0.3841386755010767
+    Upper cutoff (0.95 percentile): 1.2251304701660113
+    -->
+    
+    <vType id="vehDist" maxSpeed="normc(7.25,1.62,4.58,9.91)" accel="normc(0.80,0.26,0.38,1.23)" vClass="bicycle">
+        <param key="has.fcd.device" value="true"/>
+    </vType>
 
 	<route edges="318276285#0 318276285#1 6277270 37226971#0 37226971#1 46839074#0 46839074#1 41424988 60769283#0 39351130#0 311849673#1 311849674#1 311849674#2 311849674#3 311849674#4 311849674#5 311849674#6 310172801#0 122048055#1 122048055#3 122048055#6 122048055#7 122048055#8 122048055#9 310172805#0 6263126#1 6263126#2 37226919#0 37226919#1 37226919#2 267234132#1 59636543#0 59636543#1 59636543#2 310172797#0 310172797#1 814315511#1 814315511#2 310172795#0 310172795#1 310172795#2 310172795#3 310172795#6 318282842#0 318282842#1 318282844#0 318282844#1 318282844#2 310172803#0 310172803#1 24540244#0 24540244#1 24540244#2 310172810#0 4782480#1" color="yellow" id="route_0"/>
     
