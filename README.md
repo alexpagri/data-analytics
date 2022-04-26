@@ -50,5 +50,20 @@ To import the data from a database dump (in TAR format), place the respective ba
 ```./scripts/restore_db_from_backup.sh BACKUP_NAME```  
 where `BACKUP_NAME` is the name of the backup file (e.g. `Berlin`, no suffix!).
 
-## Data analytics
-to be continued
+## Data analysis
+All data analysis which was performed by the project group can be found in the directory `adsp`.
+
+The main contributions are organised as follows:
+* `parameter_analysis`
+    * contains Jupyter notebooks for the analysis of the velocity and acceleration parameters
+    * distributions are fitted here, their parameters are extracted and the respective plots are created
+* `parameter_evaluation`
+    * subdirectory `sim_scenarios` contains SUMO files which describe the five meta-scenarios, based on which the simpler other scenarios are created
+    * the Juypyter notebook `simple-path_comparison.ipynb` in which those simpler, straight-path scenarios are described and which can be run to generate the scenario specific evaluation plots as well as the JS-divergence plot
+    * the script `run_simulations.sh` can be run to run the actual simulations in SUMO and takes as single parameter either `ALL` or the name of the meta-scenario (eg. `B1`)
+        * it is expected to be run in a VM as it is set up in this repository: https://github.com/ADSP-Cyclist-Model-for-SUMO/Ubuntu20.04_SUMO_DevEnv
+* `turn_analyis`
+    * TO BE DONE
+
+
+
