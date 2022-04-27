@@ -63,7 +63,10 @@ The main contributions are organised as follows:
     * the script `run_simulations.sh` can be run to run the actual simulations in SUMO and takes as single parameter either `ALL` or the name of the meta-scenario (eg. `B1`)
         * it is expected to be run in a VM as it is set up in this repository: https://github.com/ADSP-Cyclist-Model-for-SUMO/Ubuntu20.04_SUMO_DevEnv
 * `turn_analyis`
-    * TO BE DONE
-
+    * the Jupyter notebook `turn_eval.ipynb` contains the analysis of the turn behaviour (direct or indirect turn) at 6 intersections in Berlin with the following steps 
+        * input data of the intersections (location & lanes)
+        * unsupervised clustering using k-means
+        * post-processing of results via visual inspection
+        * regress share of direct turn on the number of lanes using logistic regression
 
 
