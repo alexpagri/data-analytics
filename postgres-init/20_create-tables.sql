@@ -29,3 +29,8 @@ CREATE TABLE ride (
     "start" geography(POINT), 
     "end" geography(POINT)
 );
+
+ALTER TABLE "ride"
+ADD "accels_raw" double precision[] NULL,
+ADD "accels" double precision[] NULL;
+COMMENT ON TABLE "ride" IS '';

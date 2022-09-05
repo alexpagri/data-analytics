@@ -72,7 +72,7 @@ def calculate_and_plot_ride_durations(ride_data: Dict[str, pd.DataFrame], scenar
         meta_path_durations[ride_data_name] = list(ride_data[ride_data_name].groupby('ride_id').ts.agg(np.ptp))
     
     _, ax = plt.subplots()
-    hist_bins = get_hist_bins(list(meta_path_durations.values()), binwidth=5)
+    hist_bins = get_hist_bins(list(meta_path_durations.values()), binwidth=2)
     for idx, (ride_data_name, path_durations) in enumerate(meta_path_durations.items()):
         ax.hist(path_durations, color=COLORS[idx], bins=hist_bins, label=ride_data_name, **plt_kwargs)   
     
@@ -93,7 +93,7 @@ def plot_velocity_histograms(ride_data: Dict[str, pd.DataFrame], scenario_name: 
     #     print(f"{data_name} - min: {min(ride_data_.velo)} | max: {max(ride_data_.velo)}")
     #     display(ride_data_)
     
-    hist_bins = get_hist_bins([list(d.velo) for d in ride_data.values()], binwidth=0.5)
+    hist_bins = get_hist_bins([list(d.velo) for d in ride_data.values()], binwidth=0.2)
     for idx, (ride_data_name, ride_data_) in enumerate(ride_data.items()):
         ax = ride_data_.velo.hist(color=COLORS[idx], bins=hist_bins, label=ride_data_name, **plt_kwargs)
     ax.set_xlabel("velocity (in m/s)")
@@ -129,7 +129,7 @@ def plot_ride_paths(ride_data: Dict[str, pd.DataFrame], scenario_name: str):
     ax.set_xlabel('Longitude in decimal degrees')
     ax.set_ylabel('Latitude in decimal degrees')
 
-    cx.add_basemap(ax, crs='EPSG:4326', source=cx.providers.Stamen.Toner)
+    cx.add_basemap(ax, crs='EPSG:4326', source=cx.providers.OpenStreetMap.BZH)
     ax.set_aspect(1.7)
 
     plt.title(f"{scenario_name}")

@@ -50,7 +50,7 @@ def apply_low_pass_velocity(ride_df):
     lp_order = 1
     lp_filter_value = 0.12
     tmp['velo_lp0'] = np.where(tmp.velo < threshold, 0, low_pass(tmp.velo, lp_order, lp_filter_value))
-    ride_df['velo_lp0'] = tmp['velo_lp0']
+    ride_df['velo_lp0'] = tmp['velo_lp0'] # compute AVG for NaN values
     return ride_df
 
 

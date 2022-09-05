@@ -35,7 +35,7 @@ def get_file_paths(IMPORT_DIRECTORY):
 
 def import_file(file):
     filename = Path(file).name
-    region = Path(file).parents[3].name  # $REGION/$YEAR/Rides/...
+    #region = Path(file).parents[3].name  # $REGION/$YEAR/Rides/...
 
     with DatabaseConnection() as cur:
         cur.execute("""
@@ -48,9 +48,9 @@ def import_file(file):
             print(file)
             rides.handle_ride_file(file, cur)
 
-            cur.execute("""
-                INSERT INTO public."parsedfiles" ("filename", "region", "importtimestamp") VALUES (%s, %s, %s)
-            """, [filename, region, datetime.utcnow()])
+            #cur.execute("""
+            #    INSERT INTO public."parsedfiles" ("filename", "region", "importtimestamp") VALUES (%s, %s, %s)
+            #""", [filename, region, datetime.utcnow()])
     except Exception as e:
         print(f"Skipped ride {filename} due to exception {e}")
 

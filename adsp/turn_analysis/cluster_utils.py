@@ -1,3 +1,5 @@
+from array import array
+import math
 import sys
 # add parent directory and its parent to sys.path so that python finds the modules
 sys.path.append('..')
@@ -15,6 +17,8 @@ from sklearn.cluster import KMeans
 from sklearn.preprocessing import MinMaxScaler
 from db_utils import get_rect_to_rect_data
 import contextily as cx
+from geopy.distance import great_circle
+from pyproj import Proj
 
 plt.rcParams.update({
     "figure.facecolor":  'white', 
@@ -118,10 +122,20 @@ def plot_ride_paths(df_simra: pd.DataFrame, cluster_labels: np.ndarray, turn_ser
         figsize_rides = (12, 12)
     fig, ax = plt.subplots(figsize=figsize_rides)
 
+    if 'group_name' in kwargs:
+        group_name = f"{kwargs['group_name']}-"
+    else:
+        group_name = ""
+
     colors = ['blue', 'orange']
 
-    df_simra_grouped = df_simra.groupby('filename')
+    if cluster_labels is None:
+        cluster_labels = [0]
+
+    df_simra_grouped = df_simra.groupby('filename', sort=False)
     for i, ride_group_name in enumerate(df_simra_grouped.groups):
+        # if i > 0:
+        #     break
         df_ride_group = df_simra_grouped.get_group(ride_group_name)
         ax.plot(df_ride_group.lon, df_ride_group.lat, color=colors[cluster_labels[i]], linewidth=1)
 
@@ -146,19 +160,19 @@ def plot_ride_paths(df_simra: pd.DataFrame, cluster_labels: np.ndarray, turn_ser
     ax.set_xlabel('Longitude in decimal degrees')
     ax.set_ylabel('Latitude in decimal degrees')
 
-    cx.add_basemap(ax, crs='EPSG:4326', source=cx.providers.Stamen.Toner)
+    cx.add_basemap(ax, crs='EPSG:4326', source=cx.providers.OpenStreetMap.BZH)
 
     fraction_cluster_1_percentage = round(100*fraction_cluster_1,2)
     lines = [Line2D([0],[0], color = colors[0]),
                 Line2D([0],[0], color = colors[1])]
-    labels = ['cluster 1: '+ str(fraction_cluster_1_percentage)+'\%',
-                'cluster 2: '+ str(round(100-fraction_cluster_1_percentage,2))+'\%']
+    labels = [f'{group_name}cluster 1: '+ str(fraction_cluster_1_percentage)+'\%',
+                f'{group_name}cluster 2: '+ str(round(100-fraction_cluster_1_percentage,2))+'\%']
     plt.legend(lines, labels)
 
     ax.set_aspect(1.7)
 
-    plt.title(f'intersection {intersection_number}:\n{name} \ndirection: {direction}')
-    plt.savefig(f'images/clustered_rides_{intersection_number}_{direction}.png', transparent=True)    
+    plt.title(f'{group_name}intersection {intersection_number}:\n{name} \ndirection: {direction}')
+    plt.savefig(f'images/{group_name}clustered_rides_{intersection_number}_{direction}.png', transparent=True)    
     plt.show()
 
 
@@ -182,6 +196,58 @@ def cluster(df_simra: pd.DataFrame, turn_series, **kwargs):
 
     return fraction_cluster_1, rides
 
+def cluster_return(df_simra: pd.DataFrame, turn_series):
+    df_simra_grouped = df_simra.groupby('filename', sort=False).agg({'dist': 'sum'})
+    distances = np.array(df_simra_grouped.dist)
+
+    path_rotated = get_path_rotated(df_simra)
+    off_center = get_off_center(df_simra_grouped, df_simra, path_rotated)
+
+    features = {'off center': off_center, 'distances': distances}
+    features_scaled = min_max_scale_features(features)
+
+    cluster_labels = cluster_with_kmeans(features_scaled, turn_series)
+    
+    fraction_cluster_1 = cluster_labels.sum()
+
+    rides = df_simra_grouped.shape[0]
+
+    return fraction_cluster_1, rides, cluster_labels
+
+def testf(df_simra: pd.DataFrame, cluster_labels):
+    
+    proj = Proj('epsg:5243')
+
+    proj_coords = df_simra.apply(lambda x: proj(x['lon'], x['lat']), axis=1)
+    df_simra.loc[:, ['x', 'y']] = list(map(list, proj_coords))
+
+    df_simra_s = df_simra.shift(1)
+    df_simra['l_x'] = df_simra_s['x']
+    df_simra['l_y'] = df_simra_s['y']
+    df_simra['l_lon'] = df_simra_s['lon']
+    df_simra['l_lat'] = df_simra_s['lat']
+    df_simra = df_simra[~df_simra['l_lon'].isnull()]
+    #df_simra['dist'] = df_simra.apply(lambda x: great_circle([x['l_lat'], x['l_lon']], [x['lat'], x['lon']]).meters, axis=1)
+
+    df_simra['ang'] = df_simra.apply(lambda x: math.degrees(math.atan2(x['y'] - x['l_y'], x['x'] - x['l_x'])), axis=1)
+
+    df_simra['ang_w'] = df_simra.apply(lambda x: {'ang': x['ang'], 'dist': x['dist']}, axis=1)
+
+    df_g = df_simra[['filename', 'ang_w']].groupby('filename').aggregate(lambda x: np.average(pd.DataFrame(list(x))[['ang']], weights=pd.DataFrame(list(x))[['dist']])).rename(columns={'ang_w': 'ang_avg'})
+    df_simra = df_simra.merge(df_g, how='inner', on='filename')
+
+    df_simra['ang'] = df_simra.apply(lambda x: x['ang'] - x['ang_avg'], axis=1).apply(lambda x: x if x < 180.0 else (x - 360.0)).apply(lambda x: x if x > -180.0 else (x + 360.0))
+
+    colors = ['blue', 'orange']
+    df_simra_grouped = df_simra.groupby('filename', sort=False)
+    for i, ride_group_name in enumerate(df_simra_grouped.groups):
+        # if i > 0:
+        #     break
+        df_ride_group = df_simra_grouped.get_group(ride_group_name)
+        plt.xlim(-180, 180)
+        plt.hist(df_ride_group['ang'], 45, density=True, weights=df_ride_group['dist'], color=colors[cluster_labels[i]])
+        plt.show()
+
 
 def analyse_df_for_faulty_entries(df_simra, show_faulty_entries = False):
     
@@ -204,7 +270,9 @@ def return_cluster_results_and_plot_path(turn_series, end_date_str = '2099-01-01
     end_date = datetime.strptime(end_date_str, '%Y-%m-%d %H:%M:%S')
     df_simra = get_rect_to_rect_data(turn_series['start_rect_coords'], turn_series['end_rect_coords'],
         exclude_coords = turn_series['exclude_coords'])
-    if df_simra is None:
+    if (df_simra is not None) and ('group' in kwargs):
+        df_simra = df_simra.query(f"group == {kwargs['group']}")
+    if (df_simra is None) or (len(df_simra) == 0):
         print('No rides')
         return None, None
     # if only 1 ride, not possible to cluster
@@ -216,8 +284,54 @@ def return_cluster_results_and_plot_path(turn_series, end_date_str = '2099-01-01
     share_cluster_1, rides = cluster(df_simra, turn_series, **kwargs)
     return share_cluster_1, rides
 
+def cluster_one(turn_series, end_date_str = '2099-01-01 00:00:00', **kwargs):
+    end_date = datetime.strptime(end_date_str, '%Y-%m-%d %H:%M:%S')
+    df_simra = get_rect_to_rect_data(turn_series['start_rect_coords'], turn_series['end_rect_coords'],
+        exclude_coords = turn_series['exclude_coords'])
+    if (df_simra is not None) and ('group' in kwargs):
+        df_simra = df_simra.query(f"group == {kwargs['group']}")
+    if (df_simra is None) or (len(df_simra) == 0):
+        print('No rides')
+        return None, None, 0, 0
+    # if only 1 ride, not possible to cluster
+    if len(set(df_simra['filename'])) == 1:
+        fraction_cluster_1 = 1
+        #plot_ride_paths(df_simra, [0], fraction_cluster_1=fraction_cluster_1, rides=1, turn_series = turn_series, **kwargs)
+        return df_simra, [0], 1, 1
+    if 'analyse_for_faulty_entries' in kwargs: analyse_df_for_faulty_entries(df_simra)
+    share_cluster_1, rides, cluster_labels = cluster_return(df_simra, turn_series)
+    #testf(df_simra, cluster_labels)
+    return df_simra, cluster_labels, share_cluster_1, rides
 
+def return_cluster_results_and_plot_path_grouped(turn_series_grp, end_date_str = '2099-01-01 00:00:00', **kwargs):
+    turn_series_g = turn_series_grp.iloc[0]
+    turn_series_g['direction'] = 'all'
+    df_simra_g = cluster_labels_g = share_cluster_g = rides_g = None
+    for turn_series in turn_series_grp.iloc:
+        df_simra, cluster_labels, share_cluster, rides = cluster_one(turn_series, **kwargs)
 
+        if df_simra_g is None:
+            df_simra_g = df_simra
+        else:
+            df_simra_g = pd.concat([df_simra_g, df_simra])
+        
+        if cluster_labels_g is None:
+            cluster_labels_g = cluster_labels
+        elif cluster_labels is not None:
+            cluster_labels_g = np.append(cluster_labels_g, cluster_labels)
+
+        if share_cluster_g is None:
+            share_cluster_g = share_cluster
+        else:
+            share_cluster_g = share_cluster_g + share_cluster
+
+        if rides_g is None:
+            rides_g = rides
+        else:
+            rides_g += rides
+    
+    if df_simra_g is not None:
+        plot_ride_paths(df_simra_g.reset_index(), cluster_labels_g, turn_series_g, rides_g, (rides_g - share_cluster_g) / rides_g, **kwargs)
 
 
 

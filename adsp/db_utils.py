@@ -47,7 +47,7 @@ def get_rect_to_rect_data(start_rect_coords: Tuple[float], end_rect_coords: Tupl
     if exclude_coords is np.nan:
         exclude_coords = (0,0,0,0)
     res = build_and_execute_query(start_rect_coords, end_rect_coords, exclude_coords, start_date, end_date)
-    df = pd.DataFrame(res, columns=['filename', 'coords', 'velo', 'dur', 'dist', 'ts', 'min_ts', 'max_ts', 'time_diff'])
+    df = pd.DataFrame(res, columns=['filename', 'coords', 'velo', 'dur', 'dist', 'ts', 'min_ts', 'max_ts', 'time_diff', 'avg_v', 'group'])
     
     df = df[df.coords.notnull()]
 
@@ -69,13 +69,14 @@ def build_and_execute_query(start_rect_coords: Tuple[float], end_rect_coords: Tu
     exclude_coords: Tuple[float], start_date: datetime = None, end_date: datetime = None):
     
     with DatabaseConnection() as cur:
+        avg_filter = lambda name: f"{name} > 0.2 AND {name} != 'NaN' AND {name} < 15"
         query = f"""
-        SELECT *
+        SELECT *, CASE WHEN tmp.avg_v < 4.3638 THEN 0 ELSE CASE WHEN tmp.avg_v < 5.6694 THEN 1 ELSE 2 END END as group
             FROM
             (
-                SELECT ride.filename, json_array_elements(st_asgeojson(geom_raw) :: json -> 'coordinates') AS coords,
+                SELECT ride.filename as abc, json_array_elements(st_asgeojson(geom_raw) :: json -> 'coordinates') AS coords,
                         unnest(velos) velo, unnest(durations) dur, unnest(distances) dist, unnest(timestamps) ts, 
-                        min_ts, max_ts, (max_ts - min_ts) as time_diff 
+                        min_ts, max_ts, (max_ts - min_ts) as time_diff, (SELECT AVG(avg_v) FROM unnest(velos) avg_v WHERE {avg_filter("avg_v")}) as avg_v
                 FROM ride
                 JOIN
                 (

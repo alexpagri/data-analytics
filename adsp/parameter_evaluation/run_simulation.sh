@@ -5,15 +5,15 @@
 SCENARIO_FOLDER="sim_scenarios"
 SIM_DATA_FOLDER="sim_data"
 
-SCENARIO_NAME_SUFFIXES=("default" "new_params")
+SCENARIO_NAME_SUFFIXES=("default")
 
 run_simulation() {
     mkdir tmp_sim
 
-    /sumo/bin/sumo -c "$SCENARIO_FOLDER"/"$SCENARIO_SUB_FOLDER"/"$SCENARIO_NAME".sumocfg \
+    /bin/sumo -c "$SCENARIO_FOLDER"/"$SCENARIO_SUB_FOLDER"/"$SCENARIO_NAME".sumocfg \
         --fcd-output tmp_sim/fcd_out.xml --device.fcd.explicit vehDist --fcd-output.geo 
 
-    python /sumo/tools/xml/xml2csv.py tmp_sim/fcd_out.xml
+    python3 /usr/share/sumo/tools/xml/xml2csv.py tmp_sim/fcd_out.xml
 
     mv tmp_sim/fcd_out.csv "$SIM_DATA_FOLDER"/"$SCENARIO_NAME".csv
 
