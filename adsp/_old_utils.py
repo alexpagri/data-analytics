@@ -12,7 +12,7 @@ def crop_intersection_SimRa(group, start_rect_coords: Tuple[float], end_rect_coo
     if any(mask_first) and any(mask_end):
         first = mask_first[mask_first==True].index[0]
         last = mask_end[mask_end==True].index[-1]
-        return group.loc[first:last]
+        return group.loc0[first:last]
     else:
         # print(f"No path intersections found for filename: '{group.filename.values[0]}'")
         return None
@@ -25,7 +25,7 @@ def crop_intersection_bigbox(group, big_box_coords: Tuple[float]):
 
     if any(mask):
         masked = mask[mask == True]
-        return group.loc[masked.index[0]:masked.index[-1]]
+        return group.loc0[masked.index[0]:masked.index[-1]]
     
     return None
 

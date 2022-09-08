@@ -172,12 +172,28 @@ class PowerNormDistribution(FixDistribution):
         return scipy.stats.powernorm(self._params[0], self._params[1], self._params[2]).rvs()
 
 
+class NonCentralTDistribution(FixDistribution):
+    def __init__(self, mean, var, skew, kurt):
+        FixDistribution.__init__(self, (mean, var, skew, kurt))
+
+    def _sampleValue(self):
+        return scipy.stats.nct(self._params[0], self._params[1], self._params[2], self._params[3]).rvs()
+
+
+class FiskDistribution(FixDistribution):
+    def __init__(self, loc, scale, lamb):
+        FixDistribution.__init__(self, (loc, scale, lamb))
+
+    def _sampleValue(self):
+        return scipy.stats.fisk(self._params[0], self._params[1], self._params[2]).rvs()
+
+
 class JohnsonSuDistribution(FixDistribution):
     def __init__(self, a, b, loc, scale):
         FixDistribution.__init__(self, (a, b, loc, scale))
 
     def _sampleValue(self):
-        return scipy.stats.johnsonsu(self._params[0], self._params[1], self._params[2]).rvs()
+        return scipy.stats.johnsonsu(self._params[0], self._params[1], self._params[2], self._params[3]).rvs()
 
 
 def get_options(args=None):
@@ -186,18 +202,18 @@ def get_options(args=None):
         "configFile", help="file path of the config file which defines the car-following parameter distributions")
     argParser.add_argument(
         "-o", "--output-file", dest="outputFile", default="vTypeDistributions.add.xml", help="file path of the " +
-        "output file (if the file already exists, the script tries to insert the distribution node into it)")
+                                                                                             "output file (if the file already exists, the script tries to insert the distribution node into it)")
     argParser.add_argument(
         "-n", "--name", dest="vehDistName", default="vehDist", help="alphanumerical ID used for the created " +
-        "vehicle type distribution")
+                                                                    "vehicle type distribution")
     argParser.add_argument(
         "-s", "--size", type=int, default=100, dest="vehicleCount", help="number of vTypes in the distribution")
     argParser.add_argument(
         "-d", "--decimal-places", type=int, default=3, dest="decimalPlaces", help="number of decimal places for " +
-        "numeric attribute values")
+                                                                                  "numeric attribute values")
     argParser.add_argument(
         "--resampling", type=int, default=100, dest="nrSamplingAttempts", help="number of attempts to resample a " +
-        "value until it lies in the specified bounds")
+                                                                               "value until it lies in the specified bounds")
     argParser.add_argument("--seed", type=int, help="random seed", default=42)
 
     options = argParser.parse_args()
@@ -216,7 +232,9 @@ def readConfigFile(options):
                     'exponnorm': r'exponnorm\(%s\)' % (",".join(3 * floatRegex)),
                     'powernorm': r'powernorm\(%s\)' % (",".join(3 * floatRegex)),
                     'burr12': r'burr12\(%s\)' % (",".join(4 * floatRegex)),
-                    'johnsonsu': r'johnsonsu\(%s\)' % (",".join(4 * floatRegex))
+                    'johnsonsu': r'johnsonsu\(%s\)' % (",".join(4 * floatRegex)),
+                    'nct': r'nct\(%s\)' % (",".join(4 * floatRegex)),
+                    'fisk': r'fisk\(%s\)' % (",".join(3 * floatRegex))
                     }
 
     with open(filePath) as f:
@@ -263,20 +281,27 @@ def readConfigFile(options):
                                 value = UniformDistribution(distPar1, distPar2)
                             elif distName == 'gamma':
                                 value = GammaDistribution(distPar1, distPar2)
-                            elif distName =='exponnorm':
+                            elif distName == 'exponnorm':
                                 distPar3 = float(items[0][4])
                                 value = ExponNormDistribution(distPar1, distPar2, distPar3)
-                            elif distName =='powernorm':
+                            elif distName == 'powernorm':
                                 distPar3 = float(items[0][4])
                                 value = PowerNormDistribution(distPar1, distPar2, distPar3)
-                            elif distName =='burr12':
+                            elif distName == 'burr12':
                                 distPar3 = float(items[0][4])
                                 distPar4 = float(items[0][6])
                                 value = Burr12Distribution(distPar1, distPar2, distPar3, distPar4)
-                            elif distName =='johnsonsu':
+                            elif distName == 'johnsonsu':
                                 distPar3 = float(items[0][4])
                                 distPar4 = float(items[0][6])
                                 value = JohnsonSuDistribution(distPar1, distPar2, distPar3, distPar4)
+                            elif distName == 'nct':
+                                distPar3 = float(items[0][4])
+                                distPar4 = float(items[0][6])
+                                value = NonCentralTDistribution(distPar1, distPar2, distPar3, distPar4)
+                            elif distName == 'fisk':
+                                distPar3 = float(items[0][4])
+                                value = FiskDistribution(distPar1, distPar2, distPar3)
                             break
 
                     if not distFound:

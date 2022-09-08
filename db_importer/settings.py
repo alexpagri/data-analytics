@@ -9,7 +9,7 @@ DB_USER = dotenv_values_dict['DB_USER']
 DB_PASSWORD = dotenv_values_dict['DB_PASSWORD']
 DB_PORT = dotenv_values_dict['DB_PORT']
 
-IMPORT_DIRECTORY = "../testinput"
+IMPORT_DIRECTORY = "/media/askarakaya/storage/tubCloud/Regions"
 
 MIN_RIDE_DISTANCE = 200  # in meters
 MIN_RIDE_DURATION = 3 * 60  # in seconds

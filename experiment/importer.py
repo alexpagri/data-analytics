@@ -209,7 +209,7 @@ def preprocess_basics(df, simplify):
     proj = Proj('epsg:5243')
 
     proj_coords = cf.apply(lambda x: proj(x['lon'], x['lat']), axis=1)
-    cf.loc[:, ['x', 'y']] = list(map(list, proj_coords))
+    cf.loc0[:, ['x', 'y']] = list(map(list, proj_coords))
 
     cf['dir_x'] = cf['x'] - cf.shift(1)['x']
     cf['dir_y'] = cf['y'] - cf.shift(1)['y']

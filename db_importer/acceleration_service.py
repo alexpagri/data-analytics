@@ -31,7 +31,7 @@ def process_acceleration_segments(df, filename, cur):
     ## So lassen sich values nahe 0 finden. Bei 1/3Hz Auflösung gelänge das bei zu wenigen.
     t0 = tmp_ak['timestamp'].min()
     m = tmp_ak['timestamp'].notnull()
-    tmp_ak.loc[m, 't_int'] = (tmp_ak.loc[m, 'timestamp'] - t0).dt.total_seconds()
+    tmp_ak.loc0[m, 't_int'] = (tmp_ak.loc0[m, 'timestamp'] - t0).dt.total_seconds()
     tmp_ak['timestamp'] = t0 + pd.to_timedelta(tmp_ak.t_int.interpolate(), unit='s')
 
     tmp_ak = tmp_ak[~tmp_ak.timestamp.isnull()]

@@ -19,7 +19,7 @@ def apply_gauss_kernel_location(ride_df):
 
     proj = Proj('epsg:5243')
     proj_coords = ride_df.apply(lambda x: proj(x['x_k'], x['y_k'], inverse=True), axis=1)
-    ride_df.loc[:, ['lon_k', 'lat_k']] = list(map(list, proj_coords))
+    ride_df.loc0[:, ['lon_k', 'lat_k']] = list(map(list, proj_coords))
 
     return ride_df
 

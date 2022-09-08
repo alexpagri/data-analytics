@@ -3,6 +3,8 @@
 .idea/
 .vscode/
 .python-version
+db_importer/__pycache__/*
+env
 __pycache__
 .ipynb_checkpoints/
 .venv*
