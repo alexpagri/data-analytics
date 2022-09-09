@@ -1,0 +1,11 @@
+<configuration>
+    <input>    
+        <net-file value="oranienstr.net.xml"/>
+        <route-files value="oranienstr_new_params_fast.trips.xml"/>
+    </input>
+    <time>
+        <begin value="0"/>
+        <end value="10000"/>
+    </time>
+    <tls.actuated.show-detectors value="true"/>
+</configuration>

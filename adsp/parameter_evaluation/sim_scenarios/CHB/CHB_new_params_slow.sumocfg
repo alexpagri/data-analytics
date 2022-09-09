@@ -1,0 +1,11 @@
+<configuration>
+    <input>    
+        <net-file value="CHB.net.xml"/>
+        <route-files value="CHB_new_params_slow.trips.xml"/>
+    </input>
+    <time>
+        <begin value="0"/>
+        <end value="20000"/>
+    </time>
+    <tls.actuated.show-detectors value="true"/>
+</configuration>

@@ -1,0 +1,11 @@
+<configuration>
+    <input>    
+        <net-file value="prinzenstr.net.xml"/>
+        <route-files value="prinzenstr_new_params_fast.trips.xml"/>
+    </input>
+    <time>
+        <begin value="0"/>
+        <end value="10000"/>
+    </time>
+    <tls.actuated.show-detectors value="true"/>
+</configuration>
