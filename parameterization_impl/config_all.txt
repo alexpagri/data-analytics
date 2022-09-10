@@ -1,0 +1,8 @@
+accel; johnsonsu(0.26, 1.64, 0.98, 0.47); [0.43, 1.30]
+maxSpeed; burr(7.77, 0.91, 0.08, 7.46); [4.8, 10.07]
+decel; nct(1.75, -1.89, -0.11, 0.07); [0.05, 0.8]
+speedDev; 0
+speedFactor; 4
+param; has.fcd.device; true
+vClass; bicycle
+

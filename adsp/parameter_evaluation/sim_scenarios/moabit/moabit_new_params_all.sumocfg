@@ -1,0 +1,11 @@
+<configuration>
+    <input>    
+        <net-file value="moabit.net.xml"/>
+        <route-files value="moabit_new_params_all.trips.xml"/>
+    </input>
+    <time>
+        <begin value="0"/>
+        <end value="10000"/>
+    </time>
+    <tls.actuated.show-detectors value="true"/>
+</configuration>

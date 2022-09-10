@@ -156,6 +156,14 @@ class ExponNormDistribution(FixDistribution):
         return scipy.stats.exponnorm(self._params[0], self._params[1], self._params[2]).rvs()
 
 
+class BurrDistribution(FixDistribution):
+    def __init__(self, c, d, loc, scale):
+        FixDistribution.__init__(self, (c, d, loc, scale))
+
+    def _sampleValue(self):
+        return scipy.stats.burr(self._params[0], self._params[1], self._params[2], self._params[3]).rvs()
+
+
 class Burr12Distribution(FixDistribution):
     def __init__(self, c, d, loc, scale):
         FixDistribution.__init__(self, (c, d, loc, scale))
@@ -231,6 +239,7 @@ def readConfigFile(options):
                     'gamma': r'gamma\(%s\)' % (",".join(2 * floatRegex)),
                     'exponnorm': r'exponnorm\(%s\)' % (",".join(3 * floatRegex)),
                     'powernorm': r'powernorm\(%s\)' % (",".join(3 * floatRegex)),
+                    'burr': r'burr\(%s\)' % (",".join(4 * floatRegex)),
                     'burr12': r'burr12\(%s\)' % (",".join(4 * floatRegex)),
                     'johnsonsu': r'johnsonsu\(%s\)' % (",".join(4 * floatRegex)),
                     'nct': r'nct\(%s\)' % (",".join(4 * floatRegex)),
@@ -287,6 +296,10 @@ def readConfigFile(options):
                             elif distName == 'powernorm':
                                 distPar3 = float(items[0][4])
                                 value = PowerNormDistribution(distPar1, distPar2, distPar3)
+                            elif distName == 'burr':
+                                distPar3 = float(items[0][4])
+                                distPar4 = float(items[0][6])
+                                value = BurrDistribution(distPar1, distPar2, distPar3, distPar4)
                             elif distName == 'burr12':
                                 distPar3 = float(items[0][4])
                                 distPar4 = float(items[0][6])

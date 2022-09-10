@@ -1,0 +1,11 @@
+<configuration>
+    <input>    
+        <net-file value="b1_exp.net.xml"/>
+        <route-files value="b1_trips_new_params.xml"/>
+    </input>
+    <time>
+        <begin value="0"/>
+        <end value="20000"/>
+    </time>
+    <tls.actuated.show-detectors value="true"/>
+</configuration>
