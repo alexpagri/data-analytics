@@ -1,6 +1,6 @@
-accel; johnsonsu(0.078, 1.34, 0.73, 0.31); [0.1, 1.3]
-maxSpeed; nct(3.56, 0.85, 4.97, 0.9); [3, 9]
-decel; johnsonsu(1.13, 0.89, -0.16, 0.06); [0.05, 0.8]
+accel; nct(5.84, 0.42, 0.60, 0.2); [0.41,1.09]
+maxSpeed; johnsonsu(0.17, 2.01, 5.24, 1.95); [3.22,6.8]
+decel; johnsonsu(1.48, 2.86, -0.35, 0.54); [0.32, 1.05]
 
 speedDev; 0
 speedFactor; 4

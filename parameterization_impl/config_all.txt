@@ -1,6 +1,6 @@
-accel; johnsonsu(0.26, 1.64, 0.98, 0.47); [0.43, 1.30]
-maxSpeed; burr(7.77, 0.91, 0.08, 7.46); [4.8, 10.07]
-decel; nct(1.75, -1.89, -0.11, 0.07); [0.05, 0.8]
+accel; burr12(3.71, 2.89, 0.15, 1.12); [0.52,1.45]
+maxSpeed; gennorm(1.64, 6.77, 1.95); [4.21,9.34]
+decel; johnsonsu(1.13, 3.07, -0.55, 0.85); [0.4,1.43]
 speedDev; 0
 speedFactor; 4
 param; has.fcd.device; true

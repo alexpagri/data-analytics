@@ -188,9 +188,25 @@ class NonCentralTDistribution(FixDistribution):
         return scipy.stats.nct(self._params[0], self._params[1], self._params[2], self._params[3]).rvs()
 
 
+class TDistribution(FixDistribution):
+    def __init__(self, v, loc, scale):
+        FixDistribution.__init__(self, (v, loc, scale))
+
+    def _sampleValue(self):
+        return scipy.stats.nct(self._params[0], self._params[1], self._params[2]).rvs()
+
+
 class FiskDistribution(FixDistribution):
     def __init__(self, loc, scale, lamb):
         FixDistribution.__init__(self, (loc, scale, lamb))
+
+    def _sampleValue(self):
+        return scipy.stats.fisk(self._params[0], self._params[1], self._params[2]).rvs()
+
+
+class GenNormDistribution(FixDistribution):
+    def __init__(self, loc, scale, shape):
+        FixDistribution.__init__(self, (loc, scale, shape))
 
     def _sampleValue(self):
         return scipy.stats.fisk(self._params[0], self._params[1], self._params[2]).rvs()
@@ -243,6 +259,8 @@ def readConfigFile(options):
                     'burr12': r'burr12\(%s\)' % (",".join(4 * floatRegex)),
                     'johnsonsu': r'johnsonsu\(%s\)' % (",".join(4 * floatRegex)),
                     'nct': r'nct\(%s\)' % (",".join(4 * floatRegex)),
+                    'gennorm': r'gennorm\(%s\)' % (",".join(3 * floatRegex)),
+                    't': r't\(%s\)' % (",".join(3 * floatRegex)),
                     'fisk': r'fisk\(%s\)' % (",".join(3 * floatRegex))
                     }
 
@@ -315,6 +333,12 @@ def readConfigFile(options):
                             elif distName == 'fisk':
                                 distPar3 = float(items[0][4])
                                 value = FiskDistribution(distPar1, distPar2, distPar3)
+                            elif distName == 'gennorm':
+                                distPar3 = float(items[0][4])
+                                value = GenNormDistribution(distPar1, distPar2, distPar3)
+                            elif distName == 't':
+                                distPar3 = float(items[0][4])
+                                value = TDistribution(distPar1, distPar2, distPar3)
                             break
 
                     if not distFound:
