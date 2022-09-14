@@ -30,304 +30,304 @@
 <routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/routes_file.xsd">
     
     <vTypeDistribution id="vehDist">
-        <vType id="vehDist0" accel="1.380" maxSpeed="7.308" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist0" accel="0.724" maxSpeed="6.602" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist1" accel="1.380" maxSpeed="7.548" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist1" accel="0.670" maxSpeed="5.992" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist2" accel="1.380" maxSpeed="5.620" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist2" accel="0.653" maxSpeed="5.613" decel="0.569" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist3" accel="1.380" maxSpeed="6.484" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist3" accel="0.858" maxSpeed="6.395" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist4" accel="1.380" maxSpeed="6.984" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist4" accel="0.735" maxSpeed="6.168" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist5" accel="1.380" maxSpeed="7.474" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist5" accel="0.636" maxSpeed="6.736" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist6" accel="1.380" maxSpeed="5.494" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist6" accel="0.844" maxSpeed="6.645" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist7" accel="1.380" maxSpeed="7.012" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist7" accel="0.832" maxSpeed="5.657" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist8" accel="1.380" maxSpeed="7.043" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist8" accel="0.633" maxSpeed="7.538" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist9" accel="1.380" maxSpeed="5.670" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist9" accel="0.871" maxSpeed="7.979" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist10" accel="1.380" maxSpeed="7.905" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist10" accel="1.036" maxSpeed="6.844" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist11" accel="1.380" maxSpeed="6.404" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist11" accel="0.931" maxSpeed="7.330" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist12" accel="1.380" maxSpeed="5.933" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist12" accel="0.903" maxSpeed="5.908" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist13" accel="1.380" maxSpeed="7.045" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist13" accel="1.209" maxSpeed="5.587" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist14" accel="1.380" maxSpeed="7.802" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist14" accel="1.220" maxSpeed="7.071" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist15" accel="1.380" maxSpeed="6.543" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist15" accel="0.663" maxSpeed="6.447" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist16" accel="1.380" maxSpeed="7.116" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist16" accel="1.048" maxSpeed="7.074" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist17" accel="1.380" maxSpeed="7.998" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist17" accel="0.707" maxSpeed="6.870" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist18" accel="1.380" maxSpeed="5.974" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist18" accel="1.303" maxSpeed="7.203" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist19" accel="1.380" maxSpeed="5.870" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist19" accel="1.235" maxSpeed="6.177" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist20" accel="1.380" maxSpeed="6.436" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist20" accel="0.827" maxSpeed="7.923" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist21" accel="1.380" maxSpeed="7.204" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist21" accel="1.166" maxSpeed="7.837" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist22" accel="1.380" maxSpeed="7.262" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist22" accel="0.825" maxSpeed="6.364" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist23" accel="1.380" maxSpeed="7.830" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist23" accel="1.174" maxSpeed="7.637" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist24" accel="1.380" maxSpeed="6.800" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist24" accel="1.018" maxSpeed="7.252" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist25" accel="1.380" maxSpeed="6.495" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist25" accel="1.150" maxSpeed="6.347" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist26" accel="1.380" maxSpeed="7.200" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist26" accel="1.042" maxSpeed="5.980" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist27" accel="1.380" maxSpeed="6.381" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist27" accel="0.970" maxSpeed="6.192" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist28" accel="1.380" maxSpeed="6.971" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist28" accel="0.747" maxSpeed="7.286" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist29" accel="1.380" maxSpeed="6.115" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist29" accel="1.007" maxSpeed="7.488" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist30" accel="1.380" maxSpeed="7.801" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist30" accel="0.938" maxSpeed="6.120" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist31" accel="1.380" maxSpeed="5.732" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist31" accel="0.703" maxSpeed="6.769" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist32" accel="1.380" maxSpeed="7.411" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist32" accel="1.246" maxSpeed="6.459" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist33" accel="1.380" maxSpeed="8.153" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist33" accel="1.120" maxSpeed="7.159" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist34" accel="1.380" maxSpeed="6.563" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist34" accel="1.114" maxSpeed="6.908" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist35" accel="1.380" maxSpeed="7.009" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist35" accel="1.052" maxSpeed="6.269" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist36" accel="1.380" maxSpeed="7.413" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist36" accel="1.194" maxSpeed="6.244" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist37" accel="1.380" maxSpeed="7.423" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist37" accel="0.662" maxSpeed="6.851" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist38" accel="1.380" maxSpeed="6.299" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist38" accel="1.073" maxSpeed="6.418" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist39" accel="1.380" maxSpeed="7.474" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist39" accel="0.910" maxSpeed="6.989" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist40" accel="1.380" maxSpeed="6.585" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist40" accel="1.181" maxSpeed="7.395" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist41" accel="1.380" maxSpeed="7.762" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist41" accel="0.799" maxSpeed="6.584" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist42" accel="1.380" maxSpeed="5.841" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist42" accel="1.050" maxSpeed="7.904" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist43" accel="1.380" maxSpeed="7.230" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist43" accel="0.833" maxSpeed="7.627" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist44" accel="1.380" maxSpeed="6.507" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist44" accel="0.899" maxSpeed="6.296" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist45" accel="1.380" maxSpeed="7.658" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist45" accel="0.992" maxSpeed="6.691" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist46" accel="1.380" maxSpeed="6.638" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist46" accel="1.224" maxSpeed="7.026" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist47" accel="1.380" maxSpeed="6.766" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist47" accel="1.095" maxSpeed="5.608" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist48" accel="1.380" maxSpeed="6.743" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist48" accel="0.657" maxSpeed="7.866" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist49" accel="1.380" maxSpeed="5.858" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist49" accel="1.343" maxSpeed="6.492" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist50" accel="1.380" maxSpeed="7.804" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist50" accel="0.758" maxSpeed="8.209" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist51" accel="1.380" maxSpeed="6.414" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist51" accel="0.903" maxSpeed="6.122" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist52" accel="1.380" maxSpeed="5.876" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist52" accel="0.765" maxSpeed="7.322" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist53" accel="1.380" maxSpeed="6.190" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist53" accel="0.758" maxSpeed="7.843" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist54" accel="1.380" maxSpeed="6.223" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist54" accel="0.798" maxSpeed="6.996" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist55" accel="1.380" maxSpeed="5.820" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist55" accel="1.272" maxSpeed="6.876" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist56" accel="1.380" maxSpeed="5.818" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist56" accel="0.834" maxSpeed="6.979" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist57" accel="1.380" maxSpeed="7.169" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist57" accel="0.854" maxSpeed="6.947" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist58" accel="1.380" maxSpeed="8.103" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist58" accel="1.325" maxSpeed="7.216" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist59" accel="1.380" maxSpeed="6.527" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist59" accel="0.913" maxSpeed="7.902" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist60" accel="1.380" maxSpeed="6.799" decel="0.502" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist60" accel="0.768" maxSpeed="6.722" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist61" accel="1.380" maxSpeed="5.888" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist61" accel="1.161" maxSpeed="7.455" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist62" accel="1.380" maxSpeed="6.664" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist62" accel="0.851" maxSpeed="6.580" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist63" accel="1.380" maxSpeed="6.500" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist63" accel="0.887" maxSpeed="6.575" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist64" accel="1.380" maxSpeed="6.313" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist64" accel="1.184" maxSpeed="6.463" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist65" accel="1.380" maxSpeed="6.552" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist65" accel="0.847" maxSpeed="6.080" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist66" accel="1.380" maxSpeed="7.960" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist66" accel="0.726" maxSpeed="7.724" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist67" accel="1.380" maxSpeed="6.630" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist67" accel="0.839" maxSpeed="5.948" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist68" accel="1.380" maxSpeed="6.839" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist68" accel="0.985" maxSpeed="6.758" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist69" accel="1.380" maxSpeed="6.124" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist69" accel="0.971" maxSpeed="6.789" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist70" accel="1.380" maxSpeed="6.155" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist70" accel="0.668" maxSpeed="7.307" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist71" accel="1.380" maxSpeed="7.904" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist71" accel="0.822" maxSpeed="8.004" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist72" accel="1.380" maxSpeed="6.161" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist72" accel="1.158" maxSpeed="6.848" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist73" accel="1.380" maxSpeed="6.111" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist73" accel="0.938" maxSpeed="5.888" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist74" accel="1.380" maxSpeed="5.725" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist74" accel="1.266" maxSpeed="6.267" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist75" accel="1.380" maxSpeed="5.769" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist75" accel="1.181" maxSpeed="7.079" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist76" accel="1.380" maxSpeed="5.959" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist76" accel="0.981" maxSpeed="6.841" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist77" accel="1.380" maxSpeed="6.657" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist77" accel="1.150" maxSpeed="7.403" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist78" accel="1.380" maxSpeed="5.660" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist78" accel="1.297" maxSpeed="7.116" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist79" accel="1.380" maxSpeed="7.550" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist79" accel="1.122" maxSpeed="6.749" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist80" accel="1.380" maxSpeed="7.637" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist80" accel="0.971" maxSpeed="6.290" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist81" accel="1.380" maxSpeed="6.213" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist81" accel="0.815" maxSpeed="7.274" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist82" accel="1.380" maxSpeed="6.954" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist82" accel="1.069" maxSpeed="6.972" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist83" accel="1.380" maxSpeed="6.475" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist83" accel="1.194" maxSpeed="6.786" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist84" accel="1.380" maxSpeed="5.671" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist84" accel="1.023" maxSpeed="7.234" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist85" accel="1.380" maxSpeed="6.559" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist85" accel="0.917" maxSpeed="7.018" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist86" accel="1.380" maxSpeed="6.042" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist86" accel="1.336" maxSpeed="6.800" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist87" accel="1.380" maxSpeed="7.017" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist87" accel="0.915" maxSpeed="8.303" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist88" accel="1.380" maxSpeed="7.004" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist88" accel="1.078" maxSpeed="6.236" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist89" accel="1.380" maxSpeed="7.542" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist89" accel="1.199" maxSpeed="7.721" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist90" accel="1.380" maxSpeed="8.502" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist90" accel="0.645" maxSpeed="5.712" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist91" accel="1.380" maxSpeed="6.647" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist91" accel="0.674" maxSpeed="6.292" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist92" accel="1.380" maxSpeed="6.011" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist92" accel="0.986" maxSpeed="7.678" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist93" accel="1.380" maxSpeed="7.885" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist93" accel="1.007" maxSpeed="6.878" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist94" accel="1.380" maxSpeed="5.857" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist94" accel="1.297" maxSpeed="7.383" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist95" accel="1.380" maxSpeed="6.679" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist95" accel="1.106" maxSpeed="6.555" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist96" accel="1.380" maxSpeed="6.951" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist96" accel="1.103" maxSpeed="6.599" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist97" accel="1.380" maxSpeed="7.681" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist97" accel="0.795" maxSpeed="6.912" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist98" accel="1.380" maxSpeed="6.843" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist98" accel="0.895" maxSpeed="6.511" decel="0.516" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
-        <vType id="vehDist99" accel="1.380" maxSpeed="5.948" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
+        <vType id="vehDist99" accel="0.898" maxSpeed="7.250" decel="0.480" speedDev="0.000" speedFactor="4.000" vClass="bicycle">
             <param key="has.fcd.device" value="true"/>
         </vType>
     </vTypeDistribution>
