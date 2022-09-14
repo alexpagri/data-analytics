@@ -177,7 +177,7 @@ def plot_ride_paths(df_simra: pd.DataFrame, cluster_labels: np.ndarray, turn_ser
 
 
 def cluster(df_simra: pd.DataFrame, turn_series, **kwargs):
-    df_simra_grouped = df_simra.groupby('filename').agg({'dist': 'sum'})
+    df_simra_grouped = df_simra.groupby('filename', sort = False).agg({'dist': 'sum'})
     distances = np.array(df_simra_grouped.dist)
 
     path_rotated = get_path_rotated(df_simra)
@@ -278,7 +278,7 @@ def return_cluster_results_and_plot_path(turn_series, end_date_str = '2099-01-01
     # if only 1 ride, not possible to cluster
     if len(set(df_simra['filename'])) == 1:
         fraction_cluster_1 = 1
-        plot_ride_paths(df_simra, [0], fraction_cluster_1=fraction_cluster_1, rides=1, turn_series = turn_series, **kwargs)
+        plot_ride_paths(df_simra.reset_index(), [0], fraction_cluster_1=fraction_cluster_1, rides=1, turn_series = turn_series, **kwargs)
         return 1, 1
     if 'analyse_for_faulty_entries' in kwargs: analyse_df_for_faulty_entries(df_simra)
     share_cluster_1, rides = cluster(df_simra, turn_series, **kwargs)

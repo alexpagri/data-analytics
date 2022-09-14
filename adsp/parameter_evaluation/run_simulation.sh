@@ -5,7 +5,7 @@
 SCENARIO_FOLDER="sim_scenarios"
 SIM_DATA_FOLDER="sim_data"
 
-SCENARIO_NAME_SUFFIXES=("new_params_all" "new_params_fast")
+SCENARIO_NAME_SUFFIXES=("new_params_all" "new_params_slow" "new_params_medium" "new_params_fast")
 
 run_simulation() {
     mkdir tmp_sim

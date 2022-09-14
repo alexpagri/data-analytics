@@ -180,6 +180,14 @@ class PowerNormDistribution(FixDistribution):
         return scipy.stats.powernorm(self._params[0], self._params[1], self._params[2]).rvs()
 
 
+class MielkeBetaKappa(FixDistribution):
+    def __init__(self, k, s, loc, scale):
+        FixDistribution.__init__(self, (k, s, loc, scale))
+
+    def _sampleValue(self):
+        return scipy.stats.mielke(self._params[0], self._params[1], self._params[2], self._params[3]).rvs()
+
+
 class NonCentralTDistribution(FixDistribution):
     def __init__(self, mean, var, skew, kurt):
         FixDistribution.__init__(self, (mean, var, skew, kurt))
@@ -193,7 +201,7 @@ class TDistribution(FixDistribution):
         FixDistribution.__init__(self, (v, loc, scale))
 
     def _sampleValue(self):
-        return scipy.stats.nct(self._params[0], self._params[1], self._params[2]).rvs()
+        return scipy.stats.t(self._params[0], self._params[1], self._params[2]).rvs()
 
 
 class FiskDistribution(FixDistribution):
@@ -209,7 +217,7 @@ class GenNormDistribution(FixDistribution):
         FixDistribution.__init__(self, (loc, scale, shape))
 
     def _sampleValue(self):
-        return scipy.stats.fisk(self._params[0], self._params[1], self._params[2]).rvs()
+        return scipy.stats.gennorm(self._params[0], self._params[1], self._params[2]).rvs()
 
 
 class JohnsonSuDistribution(FixDistribution):
@@ -255,6 +263,7 @@ def readConfigFile(options):
                     'gamma': r'gamma\(%s\)' % (",".join(2 * floatRegex)),
                     'exponnorm': r'exponnorm\(%s\)' % (",".join(3 * floatRegex)),
                     'powernorm': r'powernorm\(%s\)' % (",".join(3 * floatRegex)),
+                    'mielke': r'mielke\(%s\)' % (",".join(4 * floatRegex)),
                     'burr': r'burr\(%s\)' % (",".join(4 * floatRegex)),
                     'burr12': r'burr12\(%s\)' % (",".join(4 * floatRegex)),
                     'johnsonsu': r'johnsonsu\(%s\)' % (",".join(4 * floatRegex)),
@@ -314,6 +323,10 @@ def readConfigFile(options):
                             elif distName == 'powernorm':
                                 distPar3 = float(items[0][4])
                                 value = PowerNormDistribution(distPar1, distPar2, distPar3)
+                            elif distName == 'mielke':
+                                distPar3 = float(items[0][4])
+                                distPar4 = float(items[0][6])
+                                value = MielkeBetaKappa(distPar1, distPar2, distPar3, distPar4)
                             elif distName == 'burr':
                                 distPar3 = float(items[0][4])
                                 distPar4 = float(items[0][6])

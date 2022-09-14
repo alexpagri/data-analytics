@@ -28,7 +28,7 @@ plt_kwargs = dict(histtype='stepfilled', alpha=0.3, density=True, ec="k")
 rc('font', **{'family': 'serif', 'serif': ['Computer Modern'], 'size': 16})
 rc('text', usetex=True)
 
-COLORS = ['blue', 'orange', 'green']
+COLORS = ['blue', 'orange', 'green', 'grey', 'brown', 'white', 'black']
 IMAGE_DIR = './images/'
 
 
@@ -92,8 +92,10 @@ def plot_velocity_histograms(ride_data: Dict[str, pd.DataFrame], scenario_name: 
     # for data_name, ride_data_ in ride_data.items():
     #     print(f"{data_name} - min: {min(ride_data_.velo)} | max: {max(ride_data_.velo)}")
     #     display(ride_data_)
-    
+    fig, ax = plt.subplots(figsize=(10, 20))
+
     hist_bins = get_hist_bins([list(d.velo) for d in ride_data.values()], binwidth=0.2)
+    # hist_bins = 10
     for idx, (ride_data_name, ride_data_) in enumerate(ride_data.items()):
         ax = ride_data_.velo.hist(color=COLORS[idx], bins=hist_bins, label=ride_data_name, **plt_kwargs)
     ax.set_xlabel("velocity (in m/s)")
