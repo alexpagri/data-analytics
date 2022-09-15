@@ -28,7 +28,7 @@ plt_kwargs = dict(histtype='stepfilled', alpha=0.3, density=True, ec="k")
 rc('font', **{'family': 'serif', 'serif': ['Computer Modern'], 'size': 16})
 rc('text', usetex=True)
 
-COLORS = ['blue', 'orange', 'green', 'grey', 'brown', 'white', 'black']
+COLORS = ['blue', 'cyan', 'blueviolet', 'orange', 'green', 'grey', 'brown', 'white', 'black']
 IMAGE_DIR = './images/'
 
 
@@ -65,13 +65,16 @@ def duration_js_divergence(durations: Dict[str, List[float]]):
 
 
 def calculate_and_plot_ride_durations(ride_data: Dict[str, pd.DataFrame], scenario_name: str):
-    simra_path_durations = [td.total_seconds() for td in ride_data['SimRa'].groupby('ride_id').first().duration]
-    meta_path_durations = {'SimRa': simra_path_durations}
+    
+    meta_path_durations = {}
+
+    for key in [k for k in ride_data.keys() if k.startswith('SimRa_')]:
+        meta_path_durations[key] = [td.total_seconds() for td in ride_data[key].groupby('ride_id').first().duration]
 
     for ride_data_name in [k for k in ride_data.keys() if k.startswith('SUMO_')]:
         meta_path_durations[ride_data_name] = list(ride_data[ride_data_name].groupby('ride_id').ts.agg(np.ptp))
     
-    _, ax = plt.subplots()
+    _, ax = plt.subplots(figsize=(20, 10))
     hist_bins = get_hist_bins(list(meta_path_durations.values()), binwidth=2)
     for idx, (ride_data_name, path_durations) in enumerate(meta_path_durations.items()):
         ax.hist(path_durations, color=COLORS[idx], bins=hist_bins, label=ride_data_name, **plt_kwargs)   
@@ -92,7 +95,7 @@ def plot_velocity_histograms(ride_data: Dict[str, pd.DataFrame], scenario_name: 
     # for data_name, ride_data_ in ride_data.items():
     #     print(f"{data_name} - min: {min(ride_data_.velo)} | max: {max(ride_data_.velo)}")
     #     display(ride_data_)
-    fig, ax = plt.subplots(figsize=(10, 20))
+    fig, ax = plt.subplots(figsize=(20, 10))
 
     hist_bins = get_hist_bins([list(d.velo) for d in ride_data.values()], binwidth=0.2)
     # hist_bins = 10
@@ -142,7 +145,7 @@ def plot_ride_paths(ride_data: Dict[str, pd.DataFrame], scenario_name: str):
 
 
 def get_ride_data(sumo_sim_data_folder: str, sumo_sim_files: List[str], scenario_name: str,
-    start_rect_coords: Tuple[float, float], end_rect_coords: Tuple[float, float]):
+    start_rect_coords: Tuple[float, float], end_rect_coords: Tuple[float, float], groups: List[int]):
 
     sim_data_folder_path = Path(sumo_sim_data_folder)
     
@@ -150,13 +153,22 @@ def get_ride_data(sumo_sim_data_folder: str, sumo_sim_files: List[str], scenario
     print("SimRa\n---")
     print(f"Color: {COLORS[0]}")
     df_simra = remove_simra_distance_outliers(get_rect_to_rect_data(start_rect_coords, end_rect_coords))
-    df_simra_paths = df_simra[['filename', 'ts', 'lon', 'lat', 'velo', 'time_diff']]
+    df_simra_paths = df_simra[['filename', 'ts', 'lon', 'lat', 'velo', 'time_diff', 'group']]
     df_simra_paths.rename({'filename': 'ride_id', 'time_diff': 'duration'}, axis='columns', inplace=True)
     # filter out nans for velo (probably someone started ride exactly in start rect)
     df_simra_paths = df_simra_paths[df_simra_paths.velo.notnull()]
     print("-----")
     
-    ride_data = {'SimRa': df_simra_paths}
+    ride_data = {}
+
+    if(-1 in groups):
+        ride_data['SimRa_all'] = df_simra_paths
+    if(0 in groups):
+        ride_data['SimRa_slow'] = df_simra_paths.query('group == 0')
+    if(1 in groups):
+        ride_data['SimRa_medium'] = df_simra_paths.query('group == 1')
+    if(2 in groups):
+        ride_data['SimRa_fast'] = df_simra_paths.query('group == 2')
 
     for idx, sumo_sim_file in enumerate(sumo_sim_files):
         param_type = '-'.join(sumo_sim_file[:-len('.csv')].split('_')[1:])

@@ -70,13 +70,14 @@ def build_and_execute_query(start_rect_coords: Tuple[float], end_rect_coords: Tu
     
     with DatabaseConnection() as cur:
         avg_filter = lambda name: f"{name} > 0.2 AND {name} != 'NaN' AND {name} < 15"
+        group_q = lambda perc: f"""SELECT percentile_cont({perc}) WITHIN GROUP (ORDER BY one.avg_v) FROM (SELECT AVG(velo) as avg_v FROM accels WHERE velo > 0.2 AND velo != 'NaN' AND velo < 15 GROUP BY filename) as one"""
         query = f"""
-        SELECT *, CASE WHEN tmp.avg_v < 4.3638 THEN 0 ELSE CASE WHEN tmp.avg_v < 5.6694 THEN 1 ELSE 2 END END as group
+        SELECT *, CASE WHEN tmp.avg_v < ({group_q("0.25")}) THEN 0 ELSE CASE WHEN tmp.avg_v < ({group_q("0.75")}) THEN 1 ELSE 2 END END as group
             FROM
             (
                 SELECT ride.filename as abc, json_array_elements(st_asgeojson(geom_raw) :: json -> 'coordinates') AS coords,
                         unnest(velos) velo, unnest(durations) dur, unnest(distances) dist, unnest(timestamps) ts, 
-                        min_ts, max_ts, (max_ts - min_ts) as time_diff, (SELECT AVG(avg_v) FROM unnest(velos) avg_v WHERE {avg_filter("avg_v")}) as avg_v
+                        min_ts, max_ts, (max_ts - min_ts) as time_diff, (SELECT AVG(avg_v) FROM unnest(velos) avg_v WHERE avg_v != 'NaN') as avg_v
                 FROM ride
                 JOIN
                 (
@@ -129,7 +130,7 @@ def build_and_execute_query(start_rect_coords: Tuple[float], end_rect_coords: Tu
                 ) c
                 ON ride.filename = c.filename
             ) tmp
-            WHERE ts >= min_ts AND ts <= max_ts AND extract(epoch FROM time_diff) < 3000
+            WHERE ts >= min_ts AND ts <= max_ts AND extract(epoch FROM time_diff) < 3000 AND {avg_filter("avg_v")}
         """
 
         if start_date:
