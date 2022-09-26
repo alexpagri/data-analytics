@@ -1,6 +1,6 @@
 accel; burr(5.56, 0.35, 0.29, 0.57); [0.41,1.09]
 maxSpeed; johnsonsu(0.17, 2.01, 5.24, 1.95); [3.22,6.8]
-decel; johnsonsu(1.48, 2.86, -0.35, 0.54); [0.32, 1.05]
+decel; mielke(2.90, 6.80, 0.04, 0.75); [0.32, 1.05]
 
 speedDev; 0
 speedFactor; 4
