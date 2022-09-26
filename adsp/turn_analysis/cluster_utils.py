@@ -123,11 +123,14 @@ def plot_ride_paths(df_simra: pd.DataFrame, cluster_labels: np.ndarray, turn_ser
     fig, ax = plt.subplots(figsize=figsize_rides)
 
     if 'group_name' in kwargs:
-        group_name = f"{kwargs['group_name']}-"
+        group_name = f"{kwargs['group_name']} "
     else:
         group_name = ""
 
     colors = ['blue', 'orange']
+
+    if 'no_labels' in kwargs and kwargs['no_labels'] is True:
+        colors = ['blue', 'blue']
 
     if cluster_labels is None:
         cluster_labels = [0]
@@ -165,13 +168,19 @@ def plot_ride_paths(df_simra: pd.DataFrame, cluster_labels: np.ndarray, turn_ser
     fraction_cluster_1_percentage = round(100*fraction_cluster_1,2)
     lines = [Line2D([0],[0], color = colors[0]),
                 Line2D([0],[0], color = colors[1])]
-    labels = [f'{group_name}cluster 1: '+ str(fraction_cluster_1_percentage)+'\%',
-                f'{group_name}cluster 2: '+ str(round(100-fraction_cluster_1_percentage,2))+'\%']
-    plt.legend(lines, labels)
+    labels = [f'{group_name}({np.sum(cluster_labels == 0)}) - indirect left turns: '+ str(fraction_cluster_1_percentage)+'\%',
+                f'{group_name}({np.sum(cluster_labels == 1)}) - direct left turns: '+ str(round(100-fraction_cluster_1_percentage,2))+'\%']
+    
+    if 'no_labels' in kwargs and kwargs['no_labels'] is True:
+        plt.legend([Line2D([0],[0], color = colors[0])], [f'{group_name}({len(cluster_labels)}) - indirect left turns: 100\%'])
+    else:
+        plt.legend(lines, labels)
+
+
 
     ax.set_aspect(1.7)
 
-    plt.title(f'{group_name}intersection {intersection_number}:\n{name} \ndirection: {direction}')
+    plt.title(f'{group_name}Intersection {intersection_number}:\n{name} \nDirection: {direction}')
     plt.savefig(f'images/{group_name}clustered_rides_{intersection_number}_{direction}.png', transparent=True)    
     plt.show()
 

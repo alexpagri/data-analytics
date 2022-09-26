@@ -67,18 +67,16 @@ def build_and_execute_query(rect_coords: Tuple[float], limit_rows: int):
     with DatabaseConnection() as cur:
         query = f"""
 
-                SELECT filename, to_json(st_asgeojson(dp) :: json -> 'geometry' -> 'coordinates') AS coords,
+                SELECT filename, to_json((ST_DumpPoints(geom::geometry)).geom :: json -> 'coordinates') AS coords,
                     unnest(velos) velo, unnest(durations) dur, unnest(distances) dist, unnest(timestamps) ts
                 FROM (
-                    SELECT *, ST_DumpPoints(geom::geometry) as dp
+                    SELECT *
                     FROM ride
+                    WHERE st_intersects(geom,
+                    st_setsrid( st_makebox2d( st_makepoint(13.4112,52.5031), st_makepoint(13.4117,52.5039)), 4326))
+                AND st_intersects(geom,
+                    st_setsrid( st_makebox2d( st_makepoint(13.426,52.4991), st_makepoint(13.4264,52.4998)), 4326))
                 ) tmp
-                WHERE st_intersects((tmp.dp).geom, ST_MakeEnvelope ({rect_coords[0]}, {rect_coords[1]}, 
-                                                                {rect_coords[2]}, {rect_coords[3]},
-                                                                {SRID}
-                    )
-                )
-                LIMIT {limit_rows}
                 """
 
         cur.execute(query)
