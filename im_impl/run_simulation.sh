@@ -1,0 +1,39 @@
+#! /usr/bin/env bash
+
+# ssh vagrant@localhost -p 2222 -i ../SUMO/Ubuntu20.04_SUMO_DevEnv/.vagrant/machines/SUMO_Dev/virtualbox/private_key
+
+SCENARIO_FOLDER="."
+SIM_DATA_FOLDER="../im_eval/sim_data"
+
+SCENARIO_NAME_SUFFIXES=("new_params_all" "new_params_medium" "new_params_fast" "new_params_slow")
+
+run_simulation() {
+    mkdir tmp_sim
+
+    /bin/sumo -c "$SCENARIO_FOLDER"/"$SCENARIO_SUB_FOLDER"/"$SCENARIO_NAME".sumocfg \
+        --fcd-output tmp_sim/fcd_out.xml --device.fcd.explicit vehDist --fcd-output.geo 
+
+    python3 /usr/share/sumo/tools/xml/xml2csv.py tmp_sim/fcd_out.xml
+
+    mv tmp_sim/fcd_out.csv "$SIM_DATA_FOLDER"/"$SCENARIO_NAME".csv
+
+    rm -rf tmp_sim
+}
+
+if [[ "$1" == "ALL" ]]; then
+    for SUB_FOLDER in $SCENARIO_FOLDER/*/ ; do
+        for SUFFIX in "${SCENARIO_NAME_SUFFIXES[@]}"; do
+            TMP=${SUB_FOLDER%/} 
+            SCENARIO_SUB_FOLDER="${TMP##*/}"
+            SCENARIO_NAME="$SCENARIO_SUB_FOLDER"_"$SUFFIX"
+            echo "Running scenario "$SCENARIO_NAME"..."
+            run_simulation
+        done
+    done
+else
+    SCENARIO_SUB_FOLDER="$1"
+    SCENARIO_NAME_SUFFIX="$2"
+    SCENARIO_NAME="$SCENARIO_SUB_FOLDER"_"$SCENARIO_NAME_SUFFIX"
+    echo "Running scenario "$SCENARIO_NAME"..."
+    run_simulation
+fi

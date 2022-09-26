@@ -1,0 +1,10 @@
+<configuration>
+    <input>    
+        <net-file value="alex_2_blunt.net.xml"/>
+        <route-files value="alex_new_params_medium.trips.xml"/>
+    </input>
+    <time>
+        <begin value="0"/>
+        <end value="8000"/>
+    </time>
+</configuration>
