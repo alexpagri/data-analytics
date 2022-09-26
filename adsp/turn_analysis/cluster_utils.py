@@ -103,7 +103,7 @@ def cluster_with_kmeans(features: Dict[str, np.ndarray], turn_series: pd.Series,
     
     
     plt.title(f'intersection {intersection_number}: \n{name} \ndirection: {direction}')
-    plt.savefig(f'images/k-means_{intersection_number}_{direction}.png', transparent=True, bbox_inches='tight')
+    plt.savefig(f'images/k-means_{intersection_number}_{direction}.pdf', transparent=True, bbox_inches='tight')
     
     plt.show()
 
@@ -163,13 +163,13 @@ def plot_ride_paths(df_simra: pd.DataFrame, cluster_labels: np.ndarray, turn_ser
     ax.set_xlabel('Longitude in decimal degrees')
     ax.set_ylabel('Latitude in decimal degrees')
 
-    cx.add_basemap(ax, crs='EPSG:4326', source=cx.providers.OpenStreetMap.BZH)
+    cx.add_basemap(ax, crs='EPSG:4326', source=cx.providers.Esri.WorldImagery)
 
     fraction_cluster_1_percentage = round(100*fraction_cluster_1,2)
     lines = [Line2D([0],[0], color = colors[0]),
                 Line2D([0],[0], color = colors[1])]
-    labels = [f'{group_name}({np.sum(cluster_labels == 0)}) - direct left turns: '+ str(fraction_cluster_1_percentage)+'\%',
-                f'{group_name}({np.sum(cluster_labels == 1)}) - indirect left turns: '+ str(round(100-fraction_cluster_1_percentage,2))+'\%']
+    labels = [f'{group_name}({np.sum(cluster_labels == 0)}) - indirect left turns: '+ str(fraction_cluster_1_percentage)+'\%',
+                f'{group_name}({np.sum(cluster_labels == 1)}) - direct left turns: '+ str(round(100-fraction_cluster_1_percentage,2))+'\%']
     
     if 'no_labels' in kwargs and kwargs['no_labels'] is True:
         plt.legend([Line2D([0],[0], color = colors[0])], [f'{group_name}({len(cluster_labels)}) - indirect left turns: 100\%'])
@@ -181,7 +181,7 @@ def plot_ride_paths(df_simra: pd.DataFrame, cluster_labels: np.ndarray, turn_ser
     ax.set_aspect(1.7)
 
     plt.title(f'{group_name}Intersection {intersection_number}:\n{name} \nDirection: {direction}')
-    plt.savefig(f'images/{group_name}clustered_rides_{intersection_number}_{direction}.png', transparent=True)    
+    plt.savefig(f'images/{group_name}clustered_rides_{intersection_number}_{direction}.pdf', transparent=True)
     plt.show()
 
 
