@@ -156,14 +156,15 @@ def plot_ride_paths(df_simra: pd.DataFrame, cluster_labels: np.ndarray, turn_ser
     # ax.set_xlim(min(df_simra.lon), max(df_simra.lon))
     # ax.set_ylim(min(df_simra.lat), max(df_simra.lat))
 
-    ax.xaxis.set_major_locator(ticker.LinearLocator(4))
-    ax.xaxis.set_major_formatter(ticker.ScalarFormatter(useOffset=False))
-    ax.yaxis.set_major_locator(ticker.LinearLocator(4))
-    ax.yaxis.set_major_formatter(ticker.ScalarFormatter(useOffset=False))
-    ax.set_xlabel('Longitude in decimal degrees')
-    ax.set_ylabel('Latitude in decimal degrees')
+    ax.xaxis.set_major_locator(ticker.NullLocator())
+    ax.xaxis.set_major_formatter(ticker.NullFormatter())
+    ax.yaxis.set_major_locator(ticker.NullLocator())
+    ax.yaxis.set_major_formatter(ticker.NullFormatter())
+    # ax.set_xlabel('Longitude in decimal degrees')
+    # ax.set_ylabel('Latitude in decimal degrees')
 
-    cx.add_basemap(ax, crs='EPSG:4326', source=cx.providers.Esri.WorldImagery)
+    # cx.add_basemap(ax, crs='EPSG:4326', source=cx.providers.Esri.WorldImagery)
+    cx.add_basemap(ax, crs='EPSG:4326', source=cx.providers.OpenStreetMap.Mapnik)
 
     fraction_cluster_1_percentage = round(100*fraction_cluster_1,2)
     lines = [Line2D([0],[0], color = colors[0]),
@@ -172,16 +173,16 @@ def plot_ride_paths(df_simra: pd.DataFrame, cluster_labels: np.ndarray, turn_ser
                 f'{group_name}({np.sum(cluster_labels == 1)}) - direct left turns: '+ str(round(100-fraction_cluster_1_percentage,2))+'\%']
     
     if 'no_labels' in kwargs and kwargs['no_labels'] is True:
-        plt.legend([Line2D([0],[0], color = colors[0]), Line2D([0],[0], color = 'orange', alpha=.7, linewidth=0.7)], [f'{group_name} - Our Approach',f'{group_name} - SimRa'])
+        plt.legend([Line2D([0],[0], color = colors[0]), Line2D([0],[0], color = 'orange')], [f'{group_name} - Our Approach',f'{group_name} - SimRa'])
     else:
         plt.legend(lines, labels)
     for ride in kwargs['sumo_data']:
-        plt.plot(ride[:, 0], ride[:, 1], c='orange', alpha=.7, linewidth=0.7)
+        plt.plot(ride[:, 0], ride[:, 1], c='orange')
 
     ax.set_aspect(1.7)
 
-    plt.title(f'{group_name}Intersection {intersection_number}:\n{name} \nDirection: {direction}')
-    plt.savefig(f'images/{group_name}clustered_rides_{intersection_number}_{direction}.pdf', transparent=True)
+    # plt.title(f'{group_name}Intersection {intersection_number}:\n{name} \nDirection: {direction}')
+    plt.savefig(f'images/{group_name}clustered_rides_{intersection_number}_{direction}.pdf', transparent=True, bbox_inches='tight', dpi=300)
     plt.show()
 
 
