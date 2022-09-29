@@ -172,11 +172,11 @@ def plot_ride_paths(df_simra: pd.DataFrame, cluster_labels: np.ndarray, turn_ser
                 f'{group_name}({np.sum(cluster_labels == 1)}) - direct left turns: '+ str(round(100-fraction_cluster_1_percentage,2))+'\%']
     
     if 'no_labels' in kwargs and kwargs['no_labels'] is True:
-        plt.legend([Line2D([0],[0], color = colors[0])], [f'{group_name}({len(cluster_labels)}) - indirect left turns: 100\%'])
+        plt.legend([Line2D([0],[0], color = colors[0]), Line2D([0],[0], color = 'orange', alpha=.7, linewidth=0.7)], [f'{group_name} - Our Approach',f'{group_name} - SimRa'])
     else:
         plt.legend(lines, labels)
-
-
+    for ride in kwargs['sumo_data']:
+        plt.plot(ride[:, 0], ride[:, 1], c='orange', alpha=.7, linewidth=0.7)
 
     ax.set_aspect(1.7)
 
