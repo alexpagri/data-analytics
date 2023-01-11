@@ -21,9 +21,9 @@ from geopy.distance import great_circle
 from pyproj import Proj
 
 plt.rcParams.update({
-    "figure.facecolor":  'white', 
-    "axes.facecolor":    'white', 
-    "savefig.facecolor": 'white', 
+    "figure.facecolor":  'white',
+    "axes.facecolor":    'white',
+    "savefig.facecolor": 'white',
 })
 
 def get_path_rotated(df_simra: pd.DataFrame) -> Tuple[np.float, np.float]:
@@ -77,8 +77,8 @@ def cluster_with_kmeans(features: Dict[str, np.ndarray], turn_series: pd.Series,
     intersection_number = turn_series['intersection number']
     name = turn_series['name']
     direction = turn_series['direction']
-    
-    
+
+
     kmeans = KMeans(n_clusters=n_cluster, random_state=0)
 
     feature_names = list(features.keys())
@@ -89,7 +89,7 @@ def cluster_with_kmeans(features: Dict[str, np.ndarray], turn_series: pd.Series,
 
     # does only work with n_cluster = 2
     colors = ['blue' if label == 0 else 'orange' for label in cluster_labels]
-            
+
     if plot and len(features) == 2:
         plt.scatter(features_combined[:,0], features_combined[:,1], c=colors)
         plt.scatter(cluster_centers[:,0], cluster_centers[:,1], color='red', s=100)
@@ -100,27 +100,63 @@ def cluster_with_kmeans(features: Dict[str, np.ndarray], turn_series: pd.Series,
         sns.stripplot(x=[x_ for x_, label in zip(features[0], cluster_labels) if label == 1], color='orange')
         sns.stripplot(x=cluster_centers, color='red', size=10, jitter=False)
         plt.xlabel(f'{feature_names[0]} (min-max-scaled)')
-    
-    
+
+
     plt.title(f'intersection {intersection_number}: \n{name} \ndirection: {direction}')
     plt.savefig(f'images/k-means_{intersection_number}_{direction}.pdf', transparent=True, bbox_inches='tight')
-    
+
     plt.show()
 
     return cluster_labels
 
 
 def plot_ride_paths(df_simra: pd.DataFrame, cluster_labels: np.ndarray, turn_series: pd.Series, rides: int, fraction_cluster_1: np.ndarray, **kwargs):
-    
+    # plotting config
+    columnwidth = 3.5
+    textwidth = 3.5 * 2 + 0.25
+    figsize = (columnwidth * 0.97, 2.25)
+    params = {
+        "pdf.fonttype": 42,
+        "font.family": "serif",
+        "font.serif": "Linux Libertine",
+        "font.sans-serif": [],
+        "font.monospace": [],
+        # Make the legend/label fonts a little smaller
+        "font.size": 8,
+        "axes.labelsize": 8,
+        "axes.titlesize": 8,
+        "legend.fontsize": 6,
+        "legend.title_fontsize": 8,
+        "xtick.labelsize": 7,
+        "ytick.labelsize": 7,
+        "figure.figsize": figsize,
+        "figure.autolayout": True,
+        # save some space around figures when saving
+        "savefig.bbox": "tight",
+        "savefig.pad_inches": 0.025,
+    }
+    pdf_params = {
+        "text.usetex": True,
+        "pgf.texsystem": "pdflatex",
+        "pgf.rcfonts": False,
+        "pgf.preamble": "\n".join(
+            [
+                # put LaTeX preamble declarations here
+                r"\usepackage[utf8x]{inputenc}",
+                r"\usepackage[T1]{fontenc}",
+            ]
+        ),
+    }
+
     intersection_number = turn_series['intersection number']
     name = turn_series['name']
     direction = turn_series['direction']
 
-    if 'figsize_rides' in kwargs:
-        figsize_rides = kwargs['figsize_rides']
-    else:
-        figsize_rides = (12, 12)
-    fig, ax = plt.subplots(figsize=figsize_rides)
+    # if 'figsize_rides' in kwargs:
+    #     figsize_rides = kwargs['figsize_rides']
+    # else:
+    #     figsize_rides = (12, 12)
+    fig, ax = plt.subplots(figsize=figsize)
 
     if 'group_name' in kwargs:
         group_name = f"{kwargs['group_name']} "
@@ -135,12 +171,15 @@ def plot_ride_paths(df_simra: pd.DataFrame, cluster_labels: np.ndarray, turn_ser
     if cluster_labels is None:
         cluster_labels = [0]
 
+    colors = [u'#1f77b4', u'#ff7f0e', u'#2ca02c']
+
     df_simra_grouped = df_simra.groupby('filename', sort=False)
     for i, ride_group_name in enumerate(df_simra_grouped.groups):
         # if i > 0:
         #     break
         df_ride_group = df_simra_grouped.get_group(ride_group_name)
-        ax.plot(df_ride_group.lon, df_ride_group.lat, color=colors[cluster_labels[i]], linewidth=1)
+        # ax.plot(df_ride_group.lon, df_ride_group.lat, color=colors[cluster_labels[i]], linewidth=1)
+        ax.plot(df_ride_group.lon, df_ride_group.lat, color=colors[0], linewidth=1, alpha=0.3)
 
         # df_ride_group_vec = df_simra_grouped_vec[df_simra_grouped_vec.filename == ride_group_name]
         # vec_rot_lon = [lon_start, lon_start + path_rotated_lon]
@@ -167,22 +206,24 @@ def plot_ride_paths(df_simra: pd.DataFrame, cluster_labels: np.ndarray, turn_ser
     cx.add_basemap(ax, crs='EPSG:4326', source=cx.providers.OpenStreetMap.Mapnik)
 
     fraction_cluster_1_percentage = round(100*fraction_cluster_1,2)
-    lines = [Line2D([0],[0], color = colors[0]),
-                Line2D([0],[0], color = colors[1])]
+    lines = [Line2D([0],[0], color = colors[0], alpha=0.3),
+                Line2D([0],[0], color = colors[1], alpha=0.7)]
     labels = [f'{group_name}({np.sum(cluster_labels == 0)}) - indirect left turns: '+ str(fraction_cluster_1_percentage)+'\%',
                 f'{group_name}({np.sum(cluster_labels == 1)}) - direct left turns: '+ str(round(100-fraction_cluster_1_percentage,2))+'\%']
-    
+
     if 'no_labels' in kwargs and kwargs['no_labels'] is True:
-        plt.legend([Line2D([0],[0], color = colors[0]), Line2D([0],[0], color = 'orange')], [f'{group_name} - Our Approach',f'{group_name} - SimRa'])
+        plt.legend([Line2D([0],[0], color = colors[0], alpha=0.3), Line2D([0],[0], color = colors[1], alpha=0.7)], [f'{group_name} - Our Approach',f'{group_name} - SimRa'])
     else:
         plt.legend(lines, labels)
     for ride in kwargs['sumo_data']:
-        plt.plot(ride[:, 0], ride[:, 1], c='orange')
+        plt.plot(ride[:, 0], ride[:, 1], c=colors[1], alpha=0.7)
 
-    ax.set_aspect(1.7)
+    # ax.set_aspect(1.7)
 
     # plt.title(f'{group_name}Intersection {intersection_number}:\n{name} \nDirection: {direction}')
-    plt.savefig(f'images/{group_name}clustered_rides_{intersection_number}_{direction}.pdf', transparent=True, bbox_inches='tight', dpi=300)
+    params.update(**pdf_params)
+    plt.rcParams.update(params)
+    plt.savefig(f'images/{group_name}clustered_rides_{intersection_number}_{direction}.pdf', transparent=True, bbox_inches='tight', dpi=600)
     plt.show()
 
 
@@ -197,7 +238,7 @@ def cluster(df_simra: pd.DataFrame, turn_series, **kwargs):
     features_scaled = min_max_scale_features(features)
 
     cluster_labels = cluster_with_kmeans(features_scaled, turn_series)
-    
+
     fraction_cluster_1 = 1 - cluster_labels.sum() / len(cluster_labels)
 
     rides = df_simra_grouped.shape[0]
@@ -217,7 +258,7 @@ def cluster_return(df_simra: pd.DataFrame, turn_series):
     features_scaled = min_max_scale_features(features)
 
     cluster_labels = cluster_with_kmeans(features_scaled, turn_series)
-    
+
     fraction_cluster_1 = cluster_labels.sum()
 
     rides = df_simra_grouped.shape[0]
@@ -225,7 +266,7 @@ def cluster_return(df_simra: pd.DataFrame, turn_series):
     return fraction_cluster_1, rides, cluster_labels
 
 def testf(df_simra: pd.DataFrame, cluster_labels):
-    
+
     proj = Proj('epsg:5243')
 
     proj_coords = df_simra.apply(lambda x: proj(x['lon'], x['lat']), axis=1)
@@ -260,13 +301,13 @@ def testf(df_simra: pd.DataFrame, cluster_labels):
 
 
 def analyse_df_for_faulty_entries(df_simra, show_faulty_entries = False):
-    
+
     # Some entries contain nans, or no speed, even though a distance is given. Inspect further. Option for filtering or preprocessing.
 
     faulty_entries = df_simra[((df_simra.velo == 0) | (df_simra.velo.isna())) & (df_simra.dist != 0.0)]
 
     n_entries = len(df_simra)
-    n_faulty_entries = len(faulty_entries) 
+    n_faulty_entries = len(faulty_entries)
     percentage_faulty = n_faulty_entries / n_entries * 100
 
     print(f'Number of faulty rows (velocity is nan or zero even though distance is given): {n_faulty_entries}')
@@ -324,7 +365,7 @@ def return_cluster_results_and_plot_path_grouped(turn_series_grp, end_date_str =
             df_simra_g = df_simra
         else:
             df_simra_g = pd.concat([df_simra_g, df_simra])
-        
+
         if cluster_labels_g is None:
             cluster_labels_g = cluster_labels
         elif cluster_labels is not None:
@@ -339,7 +380,7 @@ def return_cluster_results_and_plot_path_grouped(turn_series_grp, end_date_str =
             rides_g = rides
         else:
             rides_g += rides
-    
+
     if df_simra_g is not None:
         plot_ride_paths(df_simra_g.reset_index(), cluster_labels_g, turn_series_g, rides_g, (rides_g - share_cluster_g) / rides_g, **kwargs)
 
