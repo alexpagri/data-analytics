@@ -14,12 +14,14 @@ def apply_gauss_kernel_location(ride_df):
     win_type = 'gaussian'
     window_size = 22
     std = 2.5
-    ride_df['x_k'] = ride_df.x.rolling(window=window_size, win_type=win_type, center=True, min_periods=1).mean(std=std)
-    ride_df['y_k'] = ride_df.y.rolling(window=window_size, win_type=win_type, center=True, min_periods=1).mean(std=std)
+    max_bad_acc = 100
+    normalized_acc = np.power(ride_df.accuracy, 2.0/5) / np.power(max_bad_acc, 2.0/5)
+    ride_df['x_k'] = ride_df.x.rolling(window=window_size, win_type=win_type, center=True, min_periods=1).mean(std=std) * (normalized_acc) + ride_df.x * (1 - normalized_acc)
+    ride_df['y_k'] = ride_df.y.rolling(window=window_size, win_type=win_type, center=True, min_periods=1).mean(std=std) * (normalized_acc) + ride_df.y * (1 - normalized_acc)
 
     proj = Proj('epsg:5243')
     proj_coords = ride_df.apply(lambda x: proj(x['x_k'], x['y_k'], inverse=True), axis=1)
-    ride_df.loc0[:, ['lon_k', 'lat_k']] = list(map(list, proj_coords))
+    ride_df.loc[:, ['lon_k', 'lat_k']] = list(map(list, proj_coords))
 
     return ride_df
 

@@ -1,0 +1,12 @@
+<configuration>
+    <input>    
+        <net-file value="#scenario#.net.xml"/>
+        <route-files value="#scenario#_stripped.trips.xml"/>
+        <additional-files value="#sub#"/>
+    </input>
+    <time>
+        <begin value="0"/>
+        <end value="#seconds#"/>
+    </time>
+    <tls.actuated.show-detectors value="true"/>
+</configuration>

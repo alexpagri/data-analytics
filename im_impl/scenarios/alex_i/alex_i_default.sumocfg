@@ -1,0 +1,12 @@
+<configuration>
+    <input>    
+        <net-file value="alex_i.net.xml"/>
+        <route-files value="alex_i_stripped.trips.xml"/>
+        <additional-files value="../../../parameterization_impl/vTypeDistributions_default.add.xml"/>
+    </input>
+    <time>
+        <begin value="0"/>
+        <end value="8000"/>
+    </time>
+    <tls.actuated.show-detectors value="true"/>
+</configuration>

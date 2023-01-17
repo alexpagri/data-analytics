@@ -1,0 +1,12 @@
+<configuration>
+    <input>    
+        <net-file value="mehringdamm_i.net.xml"/>
+        <route-files value="mehringdamm_i_stripped.trips.xml"/>
+        <additional-files value="../../../parameterization_impl/vTypeDistributions_new_params_all.add.xml"/>
+    </input>
+    <time>
+        <begin value="0"/>
+        <end value="8000"/>
+    </time>
+    <tls.actuated.show-detectors value="true"/>
+</configuration>

@@ -40,7 +40,7 @@ class DatabaseConnection(object):
             self.cur.close()
             self.conn.close()
 
-@functools.lru_cache(maxsize=200)
+#@functools.lru_cache(maxsize=200)
 def get_rect_to_rect_data(start_rect_coords: Tuple[float], end_rect_coords: Tuple[float],
     start_date: datetime = None, end_date: datetime = None, files_to_exclude: List[str] = None,
     exclude_coords: Union[Tuple[float],np.float64] = np.nan) -> pd.DataFrame:
@@ -66,7 +66,7 @@ def get_rect_to_rect_data(start_rect_coords: Tuple[float], end_rect_coords: Tupl
 
 
 def build_and_execute_query(start_rect_coords: Tuple[float], end_rect_coords: Tuple[float], 
-    exclude_coords: Tuple[float], start_date: datetime = None, end_date: datetime = None):
+    exclude_coords: Tuple[float] = (0, 0, 0, 0), start_date: datetime = None, end_date: datetime = None):
     
     with DatabaseConnection() as cur:
         velo_filter = lambda name: f"{name} > 0.2 AND {name} != 'NaN' AND {name} < 15"
@@ -75,7 +75,7 @@ def build_and_execute_query(start_rect_coords: Tuple[float], end_rect_coords: Tu
         SELECT *, CASE WHEN tmp.avg_v < ({group_q("0.25")}) THEN 0 ELSE CASE WHEN tmp.avg_v < ({group_q("0.75")}) THEN 1 ELSE 2 END END as group
             FROM
             (
-                SELECT ride.filename as abc, json_array_elements(st_asgeojson(geom_raw) :: json -> 'coordinates') AS coords,
+                SELECT ride.filename as abc, json_array_elements(st_asgeojson(geom) :: json -> 'coordinates') AS coords,
                         unnest(velos) velo, unnest(durations) dur, unnest(distances) dist, unnest(timestamps) ts, 
                         min_ts, max_ts, (max_ts - min_ts) as time_diff,
                         (SELECT AVG(velo2) FROM unnest(velos) velo2 WHERE {velo_filter("velo2")}) as avg_v
@@ -131,7 +131,7 @@ def build_and_execute_query(start_rect_coords: Tuple[float], end_rect_coords: Tu
                 ) c
                 ON ride.filename = c.filename
             ) tmp
-            WHERE ts >= min_ts AND ts <= max_ts AND extract(epoch FROM time_diff) < 3000 AND {velo_filter("velo")}
+            WHERE ts >= min_ts AND ts <= max_ts AND extract(epoch FROM time_diff) < 3000
         """
 
         if start_date:

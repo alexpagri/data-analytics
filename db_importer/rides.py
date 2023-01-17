@@ -7,23 +7,38 @@ import numpy as np
 import pandas as pd
 import preprocess_service
 import acceleration_service
+from adsp.visualization.view_rides import add_path, show_path
+from pyproj import Proj
 
+def show_path2():
+    show_path()
 
 def handle_ride_file(file, cur):
     with open(file, 'r') as f:
         ride_data = []
         split_found = False
+        bike_head = 0
         for line in f.readlines():
-            if "======" in line:
+            if split_found == False:
+                ride_data.append(line)
+            if "======" in line and split_found == False:
                 split_found = True
+                bike_head = handle_ride_head(ride_data)
+                ride_data = []
                 continue
             if split_found:
                 ride_data.append(line)
 
-        handle_ride(ride_data, file, cur)
+        handle_ride(ride_data, bike_head, file, cur)
 
+def handle_ride_head(data):
+    data = csv.DictReader(data[1:3], delimiter=",")
+    for i, row in enumerate(data):
+        if row["bike"]:
+            return row["bike"]
+    return 0
 
-def handle_ride(data, filename, cur):
+def handle_ride(data, bike_head, filename, cur):
     data = csv.DictReader(data[1:], delimiter=",")
 
     raw_coords = []
@@ -51,6 +66,13 @@ def handle_ride(data, filename, cur):
          'timestamp': timestamps
          })
 
+    indices = ride_df.index[ride_df.accuracy < 35.0]
+
+    ride_df = ride_df[indices[0]:indices[-1]] # cut constant low accuracy (> 15) head and tail
+
+    if ride_df.accuracy.mean() > 35.0:
+        return
+
     if len(ride_df) == 0:
         print("Ride is filtered due to len(ride_df) == 0")
         return
@@ -59,11 +81,18 @@ def handle_ride(data, filename, cur):
         print("Ride is filtered due to teleportation")
         return
 
+    #print("RIDE OK")
+    #return
+
     ride_df = preprocess_service.preprocess_basics(ride_df)
 
-    ride_df = filters.apply_smoothing_filters(ride_df)
     if filters.apply_removal_filters(ride_df):
         return
+    ride_df = filters.apply_smoothing_filters(ride_df)
+
+    #add_path(ride_df.rename(columns={'accuracy': 'rad'}))
+    #add_path(ride_df[['lat_k', 'lon_k', 'accuracy', 'timestamp']].rename(columns={'lat_k': 'lat', 'lon_k': 'lon', 'accuracy': 'rad'}), 'red', 1)
+    #return
 
     filename = filename.split("/")[-1]
     acceleration_service.process_acceleration_segments(ride_df, filename, cur)
@@ -78,17 +107,18 @@ def handle_ride(data, filename, cur):
     velos_lp0 = list(ride_df.velo_lp0.values)
     durations = list(ride_df.duration.values)
     distances = list(ride_df.dist.values)
+    accuracy = list(ride_df.accuracy.values)
 
     start = Point(tuple(coords_k[0]), srid=4326)
     end = Point(tuple(coords_k[-1]), srid=4326)
 
     try:
         cur.execute("""
-            INSERT INTO public."ride" (geom_raw, geom, timestamps, filename, velos_raw, velos, durations, distances, "start", "end") VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s);
-        """, [ls, ls_k, timestamps, filename, velos, velos_lp0, durations, distances, start, end])
+            INSERT INTO public."ride" (geom_raw, geom, timestamps, filename, velos_raw, velos, durations, distances, "start", "end", accuracy, bike) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);
+        """, [ls, ls_k, timestamps, filename, velos, velos_lp0, durations, distances, start, end, accuracy, bike_head])
     except Exception as e:
         print("Values to insert:")
-        for value in [ls, ls_k, timestamps, filename, velos, velos_lp0, durations, distances, start, end]:
+        for value in [ls, ls_k, timestamps, filename, velos, velos_lp0, durations, distances, start, end, accuracy, bike_head]:
             print(f"-----\n{value}")
         
         print(f"Original exception: {e}")

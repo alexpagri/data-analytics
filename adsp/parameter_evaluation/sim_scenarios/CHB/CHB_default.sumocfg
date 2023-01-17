@@ -1,11 +1,12 @@
 <configuration>
     <input>    
         <net-file value="CHB.net.xml"/>
-        <route-files value="CHB_default.trips.xml"/>
+        <route-files value="CHB_stripped.trips.xml"/>
+        <additional-files value="../../../../parameterization_impl/vTypeDistributions_default.add.xml"/>
     </input>
     <time>
         <begin value="0"/>
-        <end value="10000"/>
+        <end value="20000"/>
     </time>
     <tls.actuated.show-detectors value="true"/>
 </configuration>

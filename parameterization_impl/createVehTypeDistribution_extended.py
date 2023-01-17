@@ -227,6 +227,20 @@ class JohnsonSuDistribution(FixDistribution):
     def _sampleValue(self):
         return scipy.stats.johnsonsu(self._params[0], self._params[1], self._params[2], self._params[3]).rvs()
 
+class GenLogisticDistribution(FixDistribution):
+    def __init__(self, loc, scale, lamb):
+        FixDistribution.__init__(self, (loc, scale, lamb))
+
+    def _sampleValue(self):
+        return scipy.stats.genlogistic(self._params[0], self._params[1], self._params[2]).rvs()
+
+class TukeyLambdaDistribution(FixDistribution):
+    def __init__(self, loc, scale, lamb):
+        FixDistribution.__init__(self, (loc, scale, lamb))
+
+    def _sampleValue(self):
+        return scipy.stats.tukeylambda(self._params[0], self._params[1], self._params[2]).rvs()
+
 
 def get_options(args=None):
     argParser = argparse.ArgumentParser()
@@ -270,7 +284,9 @@ def readConfigFile(options):
                     'nct': r'nct\(%s\)' % (",".join(4 * floatRegex)),
                     'gennorm': r'gennorm\(%s\)' % (",".join(3 * floatRegex)),
                     't': r't\(%s\)' % (",".join(3 * floatRegex)),
-                    'fisk': r'fisk\(%s\)' % (",".join(3 * floatRegex))
+                    'fisk': r'fisk\(%s\)' % (",".join(3 * floatRegex)),
+                    'genlogistic': r'genlogistic\(%s\)' % (",".join(3 * floatRegex)),
+                    'tukeylambda': r'tukeylambda\(%s\)' % (",".join(3 * floatRegex))
                     }
 
     with open(filePath) as f:
@@ -352,6 +368,12 @@ def readConfigFile(options):
                             elif distName == 't':
                                 distPar3 = float(items[0][4])
                                 value = TDistribution(distPar1, distPar2, distPar3)
+                            elif distName == 'genlogistic':
+                                distPar3 = float(items[0][4])
+                                value = GenLogisticDistribution(distPar1, distPar2, distPar3)
+                            elif distName == 'tukeylambda':
+                                distPar3 = float(items[0][4])
+                                value = TukeyLambdaDistribution(distPar1, distPar2, distPar3)
                             break
 
                     if not distFound:
@@ -431,7 +453,7 @@ def main(options):
     domTree.documentElement.writexml(
         fileHandle, addindent="    ", newl="\n")
     fileHandle.close()
-    sys.stdout.write("Output written to %s" % options.outputFile)
+    sys.stdout.write("Output written to %s\n" % options.outputFile)
 
 
 if __name__ == "__main__":

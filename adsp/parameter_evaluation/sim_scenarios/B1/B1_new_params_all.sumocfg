@@ -1,7 +1,8 @@
 <configuration>
     <input>    
         <net-file value="B1.net.xml"/>
-        <route-files value="B1_new_params_all.trips.xml"/>
+        <route-files value="B1_stripped.trips.xml"/>
+        <additional-files value="../../../../parameterization_impl/vTypeDistributions_new_params_all.add.xml"/>
     </input>
     <time>
         <begin value="0"/>

@@ -1,7 +1,8 @@
 <configuration>
     <input>    
         <net-file value="prinzenstr.net.xml"/>
-        <route-files value="prinzenstr_new_params_medium.trips.xml"/>
+        <route-files value="prinzenstr_stripped.trips.xml"/>
+        <additional-files value="../../../../parameterization_impl/vTypeDistributions_new_params_medium.add.xml"/>
     </input>
     <time>
         <begin value="0"/>

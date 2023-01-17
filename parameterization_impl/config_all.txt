@@ -1,8 +1,7 @@
-accel; burr12(3.71, 2.89, 0.15, 1.12); [0.52,1.45]
-maxSpeed; gennorm(1.64, 6.77, 1.95); [4.21,9.34]
-decel; burr(7.40, 0.40, -0.01, 1.10); [0.4,1.43]
+accel; burr12(3.7075, 2.9647, 0.1501, 1.1270); [0.5283,1.4601]
+maxSpeed; gennorm(1.6531, 6.7619, 1.9603); [4.1862,9.3375]
+decel; mielke(3.1024, 7.6154, -0.0315, 1.1141); [0.3927,1.4188]
 speedDev; 0
 speedFactor; 4
 param; has.fcd.device; true
 vClass; bicycle
-

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on Di 16 Mär 2021 11:44:21 CET by Eclipse SUMO netedit Version v1_7_0+1228-0b1a97d77e
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/netconvertConfiguration.xsd">
+
+    <output>
+        <output-file value="/home/kons/GIT/sumo/traci_test/traci_dummy.net.xml"/>
+        <output.street-names value="true"/>
+    </output>
+
+    <processing>
+        <offset.disable-normalization value="true"/>
+    </processing>
+
+    <junctions>
+        <no-turnarounds value="true"/>
+    </junctions>
+
+    <netedit>
+        <route-files value="/home/kons/GIT/sumo/traci_test/asd.rou.xml"/>
+    </netedit>
+
+    <report>
+        <aggregate-warnings value="5"/>
+    </report>
+
+</configuration>
+-->
+
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/routes_file.xsd">
+
+
+    <route edges="24540242#1 188044903#0 188044903#1 47016365#1 301241483#0 301241483#1 301241483#2 301241483#3 728838409#0" color="yellow" id="route_0"/>
+    <route edges="24540242#1 188044903#0 188044903#1 47016365#1 301241483#0 301241483#1 301241483#2 301241483#3 728838409#0" color="yellow" id="route_car_left"/>
+    <route edges="47059460 288355301 288354369 288585010 288726033#0 47016365#1 301241483#0 301241483#1 301241483#2 301241483#3 728838409#0" color="yellow" id="route_X"/>
+    <route edges="288355301 288354369 288585010 288726033#0 19801548#1 19801548#2" color="yellow" id="route_1"/>
+    <route edges="301733776 301733777#0 19801618#1 19801618#2 19801618#3 19801618#4" color="yellow" id="route_2"/>
+    <route edges="24540242#1 188044903#0 188044903#1 19801618#1 19801618#2 19801618#3 19801618#4" color="yellow" id="route_car_straight"/>
+
+    <flow id="flow_2" type="vehDist" begin="0.00" route="route_0" end="7200.00" number="180"/>
+
+    
+</routes>

@@ -18,3 +18,5 @@ im_eval/quantitative/images/*
 adsp/*.png
 
 ecs-deployment
+
+**/tmp_sim

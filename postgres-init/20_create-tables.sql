@@ -27,7 +27,9 @@ CREATE TABLE ride (
     durations FLOAT[], 
     distances FLOAT[], 
     "start" geography(POINT), 
-    "end" geography(POINT)
+    "end" geography(POINT),
+    accuracy FLOAT[],
+    bike INT
 );
 
 ALTER TABLE "ride"

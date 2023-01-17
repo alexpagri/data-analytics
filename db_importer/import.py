@@ -1,13 +1,18 @@
+import sys
+# add directory to sys.path so that python finds the modules
+sys.path.append('.')
+
 import os
 import warnings
 from datetime import datetime
 from pathlib import Path
 from multiprocessing import Pool
 
-from pandas.core.common import SettingWithCopyWarning
 from tqdm import tqdm
 import psutil
 from sys import platform
+import pandas as pd
+pd.options.mode.chained_assignment = None
 
 from db_connection import DatabaseConnection
 from settings import *
@@ -35,7 +40,7 @@ def get_file_paths(IMPORT_DIRECTORY):
 
 def import_file(file):
     filename = Path(file).name
-    #region = Path(file).parents[3].name  # $REGION/$YEAR/Rides/...
+    ##region = Path(file).parents[3].name  # $REGION/$YEAR/Rides/...
 
     with DatabaseConnection() as cur:
         cur.execute("""
@@ -55,8 +60,6 @@ def import_file(file):
         print(f"Skipped ride {filename} due to exception {e}")
 
 if __name__ == '__main__':
-
-    warnings.simplefilter(action="ignore", category=SettingWithCopyWarning)
     
     files = get_file_paths(IMPORT_DIRECTORY)
 

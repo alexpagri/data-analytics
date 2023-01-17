@@ -15,7 +15,7 @@ def resize_vector_to_one(vec):
 def interpolate_dates(df, date_column):
     t0 = df[date_column].min()
     m = df[date_column].notnull()
-    df.loc0[m, 't_int'] = (df.loc0[m, date_column] - t0).dt.total_seconds()
+    df.loc[m, 't_int'] = (df.loc[m, date_column] - t0).dt.total_seconds()
 
     return t0 + pd.to_timedelta(df.t_int.interpolate(), unit='s')
 

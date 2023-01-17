@@ -1,24 +1,40 @@
-#! /usr/bin/env bash
+#!/bin/bash
 
 # ssh vagrant@localhost -p 2222 -i ../SUMO/Ubuntu20.04_SUMO_DevEnv/.vagrant/machines/SUMO_Dev/virtualbox/private_key
 
-SCENARIO_FOLDER="."
+SCENARIO_FOLDER="scenarios"
 SIM_DATA_FOLDER="../im_eval/sim_data"
 
-SCENARIO_NAME_SUFFIXES=("new_params_all" "new_params_medium" "new_params_fast" "new_params_slow")
+SCENARIO_NAME_SUFFIXES=("default" "new_params_all" "new_params_slow" "new_params_medium" "new_params_fast")
 
 run_simulation() {
-    mkdir tmp_sim
+    # mkdir tmp_sim
+
+    if [[ -e $SCENARIO_FOLDER/$SCENARIO_SUB_FOLDER/custom_seconds.txt ]]
+    then
+        local SECONDS=$(cat $SCENARIO_FOLDER/$SCENARIO_SUB_FOLDER/custom_seconds.txt)
+    else
+        local SECONDS=8000
+    fi
+
+    cat $SCENARIO_FOLDER/template.sumocfg | \
+        sed -e "s/#scenario#/$SCENARIO_SUB_FOLDER/g" | \
+        sed -e "s/#seconds#/$SECONDS/g" | \
+        sed -e "s/#sub#/..\/..\/..\/parameterization_impl\/vTypeDistributions_$SUFFIX.add.xml/g" > \
+        $SCENARIO_FOLDER/$SCENARIO_SUB_FOLDER/$SCENARIO_NAME.sumocfg
 
     /bin/sumo -c "$SCENARIO_FOLDER"/"$SCENARIO_SUB_FOLDER"/"$SCENARIO_NAME".sumocfg \
-        --fcd-output tmp_sim/fcd_out.xml --device.fcd.explicit vehDist --fcd-output.geo 
+        --fcd-output tmp_sim/"$SCENARIO_NAME".xml --device.fcd.explicit vehDist --fcd-output.geo 
 
-    python3 /usr/share/sumo/tools/xml/xml2csv.py tmp_sim/fcd_out.xml
+    python3 /usr/share/sumo/tools/xml/xml2csv.py tmp_sim/"$SCENARIO_NAME".xml
 
-    mv tmp_sim/fcd_out.csv "$SIM_DATA_FOLDER"/"$SCENARIO_NAME".csv
+    mv tmp_sim/"$SCENARIO_NAME".csv "$SIM_DATA_FOLDER"/"$SCENARIO_NAME".csv
 
-    rm -rf tmp_sim
+    # rm -rf tmp_sim
 }
+
+rm -rf tmp_sim
+mkdir tmp_sim
 
 if [[ "$1" == "ALL" ]]; then
     for SUB_FOLDER in $SCENARIO_FOLDER/*/ ; do
@@ -27,7 +43,7 @@ if [[ "$1" == "ALL" ]]; then
             SCENARIO_SUB_FOLDER="${TMP##*/}"
             SCENARIO_NAME="$SCENARIO_SUB_FOLDER"_"$SUFFIX"
             echo "Running scenario "$SCENARIO_NAME"..."
-            run_simulation
+            run_simulation &
         done
     done
 else

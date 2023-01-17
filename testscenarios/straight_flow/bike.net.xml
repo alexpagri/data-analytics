@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on 2023-01-15 17:41:16 by Eclipse SUMO netedit Version v1_15_0+1445-9ed6055add5
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/netconvertConfiguration.xsd">
+
+    <input>
+        <sumo-net-file value="/mnt/simra/data-analytics/testscenarios/straight_flow/bike.net.xml"/>
+    </input>
+
+    <output>
+        <output-file value="/mnt/simra/data-analytics/testscenarios/straight_flow/bike.net.xml"/>
+    </output>
+
+    <processing>
+        <offset.disable-normalization value="true"/>
+    </processing>
+
+    <junctions>
+        <no-turnarounds value="true"/>
+    </junctions>
+
+</configuration>
+-->
+
+<net version="1.9" junctionCornerDetail="5" limitTurnSpeed="5.50" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/net_file.xsd">
+
+    <location netOffset="0.00,0.00" convBoundary="-57.66,43.98,128.66,44.06" origBoundary="10000000000.00,10000000000.00,-10000000000.00,-10000000000.00" projParameter="!"/>
+
+    <edge id="E0" from="J0" to="J1" priority="-1">
+        <lane id="E0_0" index="0" speed="13.89" length="186.32" shape="-57.66,42.46 128.66,42.38"/>
+    </edge>
+
+    <junction id="J0" type="dead_end" x="-57.66" y="44.06" incLanes="" intLanes="" shape="-57.66,44.06 -57.66,40.86"/>
+    <junction id="J1" type="dead_end" x="128.66" y="43.98" incLanes="E0_0" intLanes="" shape="128.66,40.78 128.66,43.98"/>
+
+</net>

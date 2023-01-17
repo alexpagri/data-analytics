@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on Di 16 Mär 2021 11:44:21 CET by Eclipse SUMO netedit Version v1_7_0+1228-0b1a97d77e
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/netconvertConfiguration.xsd">
+
+    <output>
+        <output-file value="/home/kons/GIT/sumo/traci_test/traci_dummy.net.xml"/>
+        <output.street-names value="true"/>
+    </output>
+
+    <processing>
+        <offset.disable-normalization value="true"/>
+    </processing>
+
+    <junctions>
+        <no-turnarounds value="true"/>
+    </junctions>
+
+    <netedit>
+        <route-files value="/home/kons/GIT/sumo/traci_test/asd.rou.xml"/>
+    </netedit>
+
+    <report>
+        <aggregate-warnings value="5"/>
+    </report>
+
+</configuration>
+-->
+
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/routes_file.xsd">
+
+
+    <route edges="824274199#0 824274199#1 824274199#2 36920052#0 36920052#1 36920052#2 838658279 421557812#0 4686102#2 4686103" color="yellow" id="route_0"/>
+
+    <flow id="flow_0" type="vehDist" begin="0.00" route="route_0" end="7200.00" number="180"/>
+    
+    
+</routes>

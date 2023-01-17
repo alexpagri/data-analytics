@@ -1,9 +1,7 @@
-accel; burr(5.56, 0.35, 0.29, 0.57); [0.41,1.09]
-maxSpeed; johnsonsu(0.17, 2.01, 5.24, 1.95); [3.22,6.8]
-decel; mielke(2.90, 6.80, 0.04, 0.75); [0.32, 1.05]
-
+accel; mielke(1.9210, 5.6056, 0.2898, 0.5749); [0.4106,1.0856]
+maxSpeed; genlogistic(0.8957, 5.1471, 0.5780); [3.2347,6.7836]
+decel; burr(6.9185, 0.4282, 0.0348, 0.7550); [0.3095,1.0519]
 speedDev; 0
 speedFactor; 4
 param; has.fcd.device; true
 vClass; bicycle
-

@@ -1,0 +1,4 @@
+1. run adsp/work/group_new.ipynb -> generates parameterization_impl/config_*
+2. cd parameterization_impl and run gen_vTypeDists.sh -> generates parameterization_impl/vTypeDistributions_*
+3.1. cd adsp/parameter_evaluation and run run_simulation.sh ALL -> runs all simulations, generates sim_data and generates some files in sim_scenarios' folders
+3.2. cd im_impl and run run_simulation.sh ALL -> runs all simulations, generates ../im_eval/sim_data and generates some files in scenario folders

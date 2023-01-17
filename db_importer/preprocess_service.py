@@ -20,7 +20,7 @@ def preprocess_basics(df):
     proj = Proj('epsg:5243')
 
     proj_coords = df.apply(lambda x: proj(x['lon'], x['lat']), axis=1)
-    df.loc0[:, ['x', 'y']] = list(map(list, proj_coords))
+    df.loc[:, ['x', 'y']] = list(map(list, proj_coords))
 
     df['spike'] = utils.find_velocity_spikes(df)
 
