@@ -48,8 +48,19 @@ if [[ "$1" == "ALL" ]]; then
     done
 else
     SCENARIO_SUB_FOLDER="$1"
-    SCENARIO_NAME_SUFFIX="$2"
-    SCENARIO_NAME="$SCENARIO_SUB_FOLDER"_"$SCENARIO_NAME_SUFFIX"
-    echo "Running scenario "$SCENARIO_NAME"..."
-    run_simulation
+    if [[ "$2" == "ALL" ]]; then
+        for SUFFIX in "${SCENARIO_NAME_SUFFIXES[@]}"; do
+            TMP=${SCENARIO_SUB_FOLDER%/} 
+            SCENARIO_SUB_FOLDER="${TMP##*/}"
+            SCENARIO_NAME="$SCENARIO_SUB_FOLDER"_"$SUFFIX"
+            echo "Running scenario "$SCENARIO_NAME"..."
+            run_simulation &
+        done
+    else
+        SCENARIO_NAME_SUFFIX="$2"
+        SCENARIO_NAME="$SCENARIO_SUB_FOLDER"_"$SCENARIO_NAME_SUFFIX"
+        SUFFIX=$SCENARIO_NAME_SUFFIX
+        echo "Running scenario "$SCENARIO_NAME"..."
+        run_simulation
+    fi
 fi

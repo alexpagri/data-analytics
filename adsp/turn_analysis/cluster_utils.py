@@ -178,8 +178,8 @@ def plot_ride_paths(df_simra: pd.DataFrame, cluster_labels: np.ndarray, turn_ser
         # if i > 0:
         #     break
         df_ride_group = df_simra_grouped.get_group(ride_group_name)
-        # ax.plot(df_ride_group.lon, df_ride_group.lat, color=colors[cluster_labels[i]], linewidth=1)
-        ax.plot(df_ride_group.lon, df_ride_group.lat, color=colors[0], linewidth=1, alpha=0.3)
+        ax.plot(df_ride_group.lon, df_ride_group.lat, color=colors[cluster_labels[i]], linewidth=1)
+        #ax.plot(df_ride_group.lon, df_ride_group.lat, color=colors[0], linewidth=1, alpha=0.3)
 
         # df_ride_group_vec = df_simra_grouped_vec[df_simra_grouped_vec.filename == ride_group_name]
         # vec_rot_lon = [lon_start, lon_start + path_rotated_lon]
@@ -215,8 +215,8 @@ def plot_ride_paths(df_simra: pd.DataFrame, cluster_labels: np.ndarray, turn_ser
         plt.legend([Line2D([0],[0], color = colors[0], alpha=0.3), Line2D([0],[0], color = colors[1], alpha=0.7)], [f'{group_name} - Our Approach',f'{group_name} - SimRa'])
     else:
         plt.legend(lines, labels)
-    for ride in kwargs['sumo_data']:
-        plt.plot(ride[:, 0], ride[:, 1], c=colors[1], alpha=0.7)
+    # for ride in kwargs['sumo_data']:
+    #     plt.plot(ride[:, 0], ride[:, 1], c=colors[1], alpha=0.7)
 
     # ax.set_aspect(1.7)
 
