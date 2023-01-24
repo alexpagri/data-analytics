@@ -4,6 +4,7 @@ services:
 
   db:
     image: postgis/postgis
+    shm_size: 16g
     restart: always
     environment:
       POSTGRES_DB: ${DB_NAME}

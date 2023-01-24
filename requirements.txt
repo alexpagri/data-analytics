@@ -1,3 +1,10 @@
+--extra-index-url=https://pypi.ngc.nvidia.com
+cudf-cu11
+--extra-index-url=https://pypi.ngc.nvidia.com
+dask-cudf-cu11
+--extra-index-url=https://pypi.ngc.nvidia.com
+cuml-cu11
+
 altair
 appnope
 argon2-cffi
@@ -108,7 +115,3 @@ wcwidth
 webencodings
 widgetsnbextension
 zipp
---extra-index-url=https://pypi.ngc.nvidia.com
-cudf-cu11
---extra-index-url=https://pypi.ngc.nvidia.com
-dask-cudf-cu11

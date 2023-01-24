@@ -18,6 +18,8 @@ from db_connection import DatabaseConnection
 from settings import *
 import rides
 
+SILENT = True
+
 def limit_cpu():
     '''This is called at every process call and deprioritizes the process according to the OS.
     This way the machine stays usable during import'''
@@ -50,7 +52,7 @@ def import_file(file):
             return
     try:
         with DatabaseConnection() as cur:   # new database connection for the whole transaction
-            print(file)
+            if not SILENT: print(file)
             rides.handle_ride_file(file, cur)
 
             #cur.execute("""

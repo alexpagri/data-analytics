@@ -1,7 +1,5 @@
-accel; mielke(5.6678, 7.8736, 0.0471, 0.9538); [0.6104,1.3750]
-maxSpeed; exponnorm(1.1435, 6.1204, 0.6386); [5.4700,8.5870]
-decel; tukeylambda(-0.0573, 0.8962, 0.1346); [0.4631,1.3292]
-speedDev; 0
-speedFactor; 4
+accel; burr12(8.0158, 3.2050, -0.2083, 1.2598); [0.5446,1.1219]
+maxSpeed; burr(11.1443, 1.6374, -0.0249, 6.4414); [5.5277,8.7518]
+decel; johnsonsu(-0.6342, 1.5109, 0.8016, 0.4097); [0.5066,1.6821]
 param; has.fcd.device; true
 vClass; bicycle

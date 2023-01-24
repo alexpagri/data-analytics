@@ -1,7 +1,11 @@
-accel; exponnorm(0.98, 0.63, 0.19); [0.43, 1.27]
-maxSpeed; johnsonsu(-0.82, 2.61, 6.00, 3.73); [4.8, 10.07]
-speedDev; 0
-speedFactor; 4
+accel; gennorm(2.2318, 0.8440, 0.3379); [0.4721,1.2159]
+maxSpeed; 12
+desiredMaxSpeed; burr12(7.1462, 3.4961, -0.4256, 6.7117); [3.2959,6.5782]
+decel; fisk(7.4154, -0.6747, 1.6336); [0.4236,1.7552]
+carFollowModel; EIDM
+tau; 4
+delta; 1
+sigmaerror; 0.01
+ccoolness; 0
 param; has.fcd.device; true
 vClass; bicycle
-

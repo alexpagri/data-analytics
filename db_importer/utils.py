@@ -3,6 +3,7 @@ import pandas as pd
 from scipy.signal import butter, filtfilt
 import math
 
+SILENT = True
 
 def resize_vector_to_one(vec):
     length = np.linalg.norm(vec)
@@ -32,7 +33,7 @@ def calc_dist(x1, y1, x2, y2):
 
 def find_velocity_spikes(df):
     threshold = df['a'].std() * 0.5
-    print(f"acceleration std dev: {df['a'].std():.2f}, acceleration threshold: {threshold:.2f}")
+    if not SILENT: print(f"acceleration std dev: {df['a'].std():.2f}, acceleration threshold: {threshold:.2f}")
 
     return ((df[~df.velo.isnull()]['a'] > threshold) & (df[~df.velo.isnull()].shift(-1)['a'] < -threshold)) | (df['a'] > 2)
 

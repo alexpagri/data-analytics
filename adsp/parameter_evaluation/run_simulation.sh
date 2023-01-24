@@ -23,7 +23,7 @@ run_simulation() {
         sed -e "s/#sub#/..\/..\/..\/..\/parameterization_impl\/vTypeDistributions_$SUFFIX.add.xml/g" > \
         $SCENARIO_FOLDER/$SCENARIO_SUB_FOLDER/$SCENARIO_NAME.sumocfg
 
-    /bin/sumo -c "$SCENARIO_FOLDER"/"$SCENARIO_SUB_FOLDER"/"$SCENARIO_NAME".sumocfg \
+    /mnt/simra/sumo/sumo/bin/sumo -c "$SCENARIO_FOLDER"/"$SCENARIO_SUB_FOLDER"/"$SCENARIO_NAME".sumocfg \
         --fcd-output tmp_sim/"$SCENARIO_NAME".xml --device.fcd.explicit vehDist --fcd-output.geo 
 
     python3 /usr/share/sumo/tools/xml/xml2csv.py tmp_sim/"$SCENARIO_NAME".xml
@@ -33,7 +33,7 @@ run_simulation() {
     # rm -rf tmp_sim
 }
 
-rm -rf tmp_sim
+# rm -rf tmp_sim
 mkdir tmp_sim
 
 if [[ "$1" == "ALL" ]]; then

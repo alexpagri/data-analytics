@@ -1,7 +1,5 @@
-accel; mielke(1.9210, 5.6056, 0.2898, 0.5749); [0.4106,1.0856]
-maxSpeed; genlogistic(0.8957, 5.1471, 0.5780); [3.2347,6.7836]
-decel; burr(6.9185, 0.4282, 0.0348, 0.7550); [0.3095,1.0519]
-speedDev; 0
-speedFactor; 4
+accel; foldnorm(2.0821, 0.3003, 0.1554); [0.3757,0.8797]
+maxSpeed; logistic(5.1510, 0.5963); [3.3953,6.9068]
+decel; fisk(7.7526, -0.5567, 1.2572); [0.3033,1.2814]
 param; has.fcd.device; true
 vClass; bicycle

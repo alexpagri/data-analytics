@@ -241,6 +241,27 @@ class TukeyLambdaDistribution(FixDistribution):
     def _sampleValue(self):
         return scipy.stats.tukeylambda(self._params[0], self._params[1], self._params[2]).rvs()
 
+class LogLaplaceDistribution(FixDistribution):
+    def __init__(self, loc, scale, lamb):
+        FixDistribution.__init__(self, (loc, scale, lamb))
+
+    def _sampleValue(self):
+        return scipy.stats.loglaplace(self._params[0], self._params[1], self._params[2]).rvs()
+
+class FoldnormDistribution(FixDistribution):
+    def __init__(self, loc, scale, lamb):
+        FixDistribution.__init__(self, (loc, scale, lamb))
+
+    def _sampleValue(self):
+        return scipy.stats.foldnorm(self._params[0], self._params[1], self._params[2]).rvs()
+
+class LogisticDistribution(FixDistribution):
+    def __init__(self, a, b):
+        FixDistribution.__init__(self, (a, b))
+
+    def _sampleValue(self):
+        return scipy.stats.logistic(self._params[0], self._params[1]).rvs()
+
 
 def get_options(args=None):
     argParser = argparse.ArgumentParser()
@@ -286,7 +307,10 @@ def readConfigFile(options):
                     't': r't\(%s\)' % (",".join(3 * floatRegex)),
                     'fisk': r'fisk\(%s\)' % (",".join(3 * floatRegex)),
                     'genlogistic': r'genlogistic\(%s\)' % (",".join(3 * floatRegex)),
-                    'tukeylambda': r'tukeylambda\(%s\)' % (",".join(3 * floatRegex))
+                    'tukeylambda': r'tukeylambda\(%s\)' % (",".join(3 * floatRegex)),
+                    'loglaplace': r'loglaplace\(%s\)' % (",".join(3 * floatRegex)),
+                    'foldnorm': r'foldnorm\(%s\)' % (",".join(3 * floatRegex)),
+                    'logistic': r'logistic\(%s\)' % (",".join(2 * floatRegex))
                     }
 
     with open(filePath) as f:
@@ -374,6 +398,14 @@ def readConfigFile(options):
                             elif distName == 'tukeylambda':
                                 distPar3 = float(items[0][4])
                                 value = TukeyLambdaDistribution(distPar1, distPar2, distPar3)
+                            elif distName == 'loglaplace':
+                                distPar3 = float(items[0][4])
+                                value = LogLaplaceDistribution(distPar1, distPar2, distPar3)
+                            elif distName == 'foldnorm':
+                                distPar3 = float(items[0][4])
+                                value = FoldnormDistribution(distPar1, distPar2, distPar3)
+                            elif distName == 'logistic':
+                                value = LogisticDistribution(distPar1, distPar2)
                             break
 
                     if not distFound:
