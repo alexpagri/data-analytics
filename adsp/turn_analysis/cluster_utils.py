@@ -163,23 +163,26 @@ def plot_ride_paths(df_simra: pd.DataFrame, cluster_labels: np.ndarray, turn_ser
     else:
         group_name = ""
 
-    colors = ['blue', 'orange']
-
     if 'no_labels' in kwargs and kwargs['no_labels'] is True:
         colors = ['blue', 'blue']
+
+    if 'colors' in kwargs:
+        colors = kwargs['colors']
+    else:
+        colors = ['blue', 'orange']
 
     if cluster_labels is None:
         cluster_labels = [0]
 
-    colors = [u'#1f77b4', u'#ff7f0e', u'#2ca02c']
+    #colors = [u'#1f77b4', u'#ff7f0e', u'#2ca02c']
 
     df_simra_grouped = df_simra.groupby('filename', sort=False)
     for i, ride_group_name in enumerate(df_simra_grouped.groups):
         # if i > 0:
         #     break
         df_ride_group = df_simra_grouped.get_group(ride_group_name)
-        ax.plot(df_ride_group.lon, df_ride_group.lat, color=colors[cluster_labels[i]], linewidth=1)
-        #ax.plot(df_ride_group.lon, df_ride_group.lat, color=colors[0], linewidth=1, alpha=0.3)
+        #ax.plot(df_ride_group.lon, df_ride_group.lat, color=colors[cluster_labels[i]], linewidth=1)
+        ax.plot(df_ride_group.lon, df_ride_group.lat, color=colors[1], linewidth=1)
 
         # df_ride_group_vec = df_simra_grouped_vec[df_simra_grouped_vec.filename == ride_group_name]
         # vec_rot_lon = [lon_start, lon_start + path_rotated_lon]
@@ -203,7 +206,11 @@ def plot_ride_paths(df_simra: pd.DataFrame, cluster_labels: np.ndarray, turn_ser
     # ax.set_ylabel('Latitude in decimal degrees')
 
     # cx.add_basemap(ax, crs='EPSG:4326', source=cx.providers.Esri.WorldImagery)
-    cx.add_basemap(ax, crs='EPSG:4326', source=cx.providers.OpenStreetMap.Mapnik)
+    # cx.add_basemap(ax, crs='EPSG:4326', source=cx.providers.OpenStreetMap.Mapnik)
+    if 'cx_provider' in kwargs:
+        cx.add_basemap(ax, crs='EPSG:4326', source=kwargs['cx_provider'])
+    else:
+        cx.add_basemap(ax, crs='EPSG:4326', source=cx.providers.OpenStreetMap.Mapnik)
 
     fraction_cluster_1_percentage = round(100*fraction_cluster_1,2)
     lines = [Line2D([0],[0], color = colors[0], alpha=0.3),
@@ -212,13 +219,14 @@ def plot_ride_paths(df_simra: pd.DataFrame, cluster_labels: np.ndarray, turn_ser
                 f'{group_name}({np.sum(cluster_labels == 1)}) - direct left turns: '+ str(round(100-fraction_cluster_1_percentage,2))+'\%']
 
     if 'no_labels' in kwargs and kwargs['no_labels'] is True:
-        plt.legend([Line2D([0],[0], color = colors[0], alpha=0.3), Line2D([0],[0], color = colors[1], alpha=0.7)], [f'{group_name} - Our Approach',f'{group_name} - SimRa'])
+        plt.legend([Line2D([0],[0], color = colors[0], alpha=0.3), Line2D([0],[0], color = colors[1], alpha=0.7)], [f'Our Approach {group_name}',f'SimRa {group_name}'])
     else:
         plt.legend(lines, labels)
-    # for ride in kwargs['sumo_data']:
-    #     plt.plot(ride[:, 0], ride[:, 1], c=colors[1], alpha=0.7)
+    if 'sumo_data' in kwargs:
+        for ride in kwargs['sumo_data']:
+            plt.plot(ride[:, 0], ride[:, 1], c=colors[0])
 
-    # ax.set_aspect(1.7)
+    ax.set_aspect(1.7)
 
     # plt.title(f'{group_name}Intersection {intersection_number}:\n{name} \nDirection: {direction}')
     params.update(**pdf_params)
